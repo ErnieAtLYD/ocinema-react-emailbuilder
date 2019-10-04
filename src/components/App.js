@@ -56,13 +56,13 @@ const App = () => {
     >
       <CssBaseline />
       <Grid container className={classes.container}>
-        <Grid item lg={9} className={classes.render}>
+        <Grid item lg={8} className={classes.render}>
           <RenderPanel
             layout={rowValues}
             callbackFromParent={passEmailHTML}
           />
         </Grid>
-        <Grid item lg={3} className={classes.panel}>
+        <Grid item lg={4} className={classes.panel}>
           <ControlPanel
             values={values}
             emailHTML={emailHTML}

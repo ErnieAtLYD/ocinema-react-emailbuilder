@@ -11,7 +11,8 @@ const HTMLWidget = ({ isExporting, html }) => {
       <textarea
         style={{
           width: '100%',
-          height: '20vh'
+          height: '20vh',
+          visibility: 'hidden',
         }}
         readOnly
         value={html}
