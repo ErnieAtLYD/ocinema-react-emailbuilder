@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
-const PanelOn = ({ panelItem, handleChange, handleQuillDesc, handleQuillQuote, turnOff }) => {
+const PanelOn = ({ panelItem, editPanelField, editPanelQuill, hidePanel }) => {
   return (
     <>
       <TextField
@@ -14,28 +14,32 @@ const PanelOn = ({ panelItem, handleChange, handleQuillDesc, handleQuillQuote, t
       <TextField
         label="Content"
         value={panelItem.content}
-        onChange={handleChange('content')}
+        onChange={(event) => editPanelField(event, 'content')}
       />
       <ReactQuill
-        defaultValue={panelItem.htmldescription}
-        onChange={handleQuillDesc} />
-
+        value={panelItem.htmldescription}
+        onChange={(newValue, delta, source) => editPanelQuill(newValue, source)}
+      />
       <ReactQuill
-        defaultValue={panelItem.htmlquotes}
-        onChange={handleQuillQuote} />
-
+        value={panelItem.htmlquotes}
+        onChange={(newValue, delta, source) => editPanelQuill(
+          newValue, source, 'htmlquotes'
+        )}
+      />
       <TextField
         label="Poster thumbnail URL"
         value={panelItem.posterurl}
+        onChange={(event) => editPanelField(event, 'posterurl')}
       />
       <TextField
         label="Banner URL"
         value={panelItem.bannerurl}
+        onChange={(event) => editPanelField(event, 'bannerurl')}
       />
       <Button
         variant="contained"
         color="primary"
-        onClick={turnOff}>
+        onClick={hidePanel}>
         Save and close this
       </Button>
     </>
