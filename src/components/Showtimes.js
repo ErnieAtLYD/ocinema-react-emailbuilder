@@ -18,7 +18,7 @@ const Showtimes = ({ showtimes }) => {
 
   result.map((value, index) => <div>{value.showDate}</div>);
   return (
-    <Callout className="secondary">
+    <Callout className="primary">
       {result.map((value, index) => (
         <small>
           <strong>{value.showDate}: </strong>

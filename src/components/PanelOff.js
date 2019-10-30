@@ -29,8 +29,10 @@ const PanelOff = ({ createLayoutItem }) => {
       content: searchedfilm.title,
       htmldescription: searchedfilm.description,
       htmlquotes: searchedfilm.event_reviews,
-      posterurl: searchedfilm.image.sizes.medium.url
+      posterurl: searchedfilm.image.sizes.medium.url,
+      showtimes: searchedfilm.event_showtimes
     }
+    console.log(searchedfilm)
     createLayoutItem(temp);
   };
 

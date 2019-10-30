@@ -3,6 +3,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import React, { useRef } from 'react';
 import { useDrop, useDrag } from 'react-dnd';
 import ItemTypes from './ItemTypes'
+import LayoutTemplateWrapper from './LayoutTemplateWrapper'
 import './LayoutItem.scss';
 
 const LayoutItem = ({ id, index, item, deleteLayoutItem, editLayoutItem, moveLayoutItem }) => {
@@ -66,13 +67,11 @@ const LayoutItem = ({ id, index, item, deleteLayoutItem, editLayoutItem, moveLay
       <div className="layoutitem--no-hover">
         <div style={{
           backgroundColor: '#fff',
+          fontFamily: 'Helvetica, Arial, sans-serif',
           width: 580,
           margin: '0 auto'
         }}>
-          {item.posterurl && <img alt="Poster thumbnail" src={item.posterurl} />}
-            {id} - {item.layout} - {item.content}
-            - {item.htmldescription}
-             - {item.htmlquotes}
+          <LayoutTemplateWrapper item={item} />
         </div>
       </div>
       <div className="layoutitem--hover">
