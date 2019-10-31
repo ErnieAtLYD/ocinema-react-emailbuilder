@@ -4,6 +4,8 @@ import Showtimes from './Showtimes';
 import './LayoutTemplateWrapper.scss';
 import './LayoutTemplateFooter.scss';
 
+// import '../styles/newsletter.scss';
+
 const LayoutTemplateWrapper = obj => {
   const {
     agileurl, bannerurl, posterurl, layout, content, htmldescription, htmlquotes, showtimes

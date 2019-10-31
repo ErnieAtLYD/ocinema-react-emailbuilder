@@ -5,12 +5,13 @@
   "dependencies": {
     "@material-ui/core": "^4.4.2",
     "@material-ui/icons": "^4.5.1",
-    "immutability-helper": "^3.0.1",
+    "babel-core": "^6.26.3",
+    "foundation-emails": "^2.2.1",
     "inline-css": "^2.4.2",
     "juice": "^5.2.0",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.13.0",
     "quill-blot-formatter": "^1.0.5",
     "react": "^16.9.0",
     "react-api-cache": "^1.1.0",
@@ -22,7 +23,8 @@
     "react-redux": "^7.1.1",
     "react-scripts": "3.1.1",
     "redux": "^4.0.4",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "siphon-media-query": "^1.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

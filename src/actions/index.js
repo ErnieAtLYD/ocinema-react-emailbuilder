@@ -1,9 +1,4 @@
-import { renderToStaticMarkup } from 'react-dom/server';
-import React from 'react';
-import Inky from 'react-inky';
-import { inlineContent } from 'juice';
-import LayoutTemplateWrapper from '../components/LayoutTemplateWrapper';
-import newsletterStyles from '../components/LayoutTemplateWrapper.scss';
+import { getExportedHTML } from '../components/ExportTemplate';
 
 export const CREATE_LAYOUT_ITEM = 'CREATE_LAYOUT_ITEM';
 export const DELETE_LAYOUT_ITEM = 'DELETE_LAYOUT_ITEM';
@@ -87,23 +82,9 @@ export const editPanelQuill = (newValue, source, field='htmldescription') => {
   }
 }
 
-const getExportedHTML = state => {
-  const markup = renderToStaticMarkup(
-    <Inky>
-      <Inky.Head>
-      </Inky.Head>
-      <Inky.Body>
-        {state.layout.map((item, index) => <LayoutTemplateWrapper item={item} />)}
-      </Inky.Body>
-    </Inky>
-  );
-  console.log(newsletterStyles);
-
-  console.log( inlineContent(Inky.doctype + markup, '') )
-}
-
 export const exportAsHTML = () => (dispatch, getState) => {
-  getExportedHTML(getState());
+  const state = getState();
+  getExportedHTML(state.layout);
   dispatch({
     type: EXPORT_HTML,
   });

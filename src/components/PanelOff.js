@@ -4,6 +4,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Typography from '@material-ui/core/Typography';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import ExportTemplate from './ExportTemplate'
 import { useFetchOPosts } from './useFetch'
 
 const PanelOff = ({ createLayoutItem, exportAsHTML }) => {
@@ -75,10 +76,7 @@ const PanelOff = ({ createLayoutItem, exportAsHTML }) => {
         onClick={handleImport}>
         Import
       </Button>
-
-      <Button onClick={exportAsHTML}>
-        Export as HTML
-      </Button>
+      <ExportTemplate exportAsHTML={exportAsHTML} />
     </>
   )
 }
