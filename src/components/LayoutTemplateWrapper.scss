@@ -31,7 +31,7 @@
 
 /// Primary color for interactive components like links and buttons.
 /// @type Color
-$primary-color: #2199e8 !default;
+$primary-color: #ed008c !default;
 
 /// Secondary color, used with components that support the `.secondary` class.
 /// @type Color
@@ -115,6 +115,72 @@ $global-breakpoint: $global-width + $global-gutter !default;
 
 .wrapper {
   width: 100%;
+}
+
+// Foundation for Emails by ZURB
+// zurb.com/ink/
+// Licensed under MIT Open Source
+
+////
+/// @group normalize
+////
+
+#outlook a {
+  padding: 0;
+}
+
+body {
+  width: 100% !important;
+  min-width: 100%;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  margin: 0;
+  Margin: 0;
+  padding: 0;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.ExternalClass {
+  width: 100%;
+
+  &,
+  p,
+  span,
+  font,
+  td,
+  div {
+    line-height: 100%;
+  }
+}
+
+#backgroundTable {
+  margin: 0;
+  Margin: 0;
+  padding: 0;
+  width: 100% !important;
+  line-height: 100% !important;
+}
+
+img {
+  outline: none;
+  text-decoration: none;
+  -ms-interpolation-mode: bicubic;
+  width: auto;
+  max-width: 100%;
+  clear: both;
+  display: block;
+}
+
+// FIXME: this breaks callouts in the browser view.
+// center {
+//   width: 100%;
+//   min-width: $global-width;
+// }
+
+a img {
+  border: none;
 }
 
 table {
@@ -817,6 +883,319 @@ span.preheader {
 // Licensed under MIT Open Source
 
 ////
+/// @group button
+////
+
+/// Padding inside buttons at various sizes.
+/// @type Map
+$button-padding: (
+  tiny: 4px 8px 4px 8px,
+  small: 5px 10px 5px 10px,
+  default: 8px 16px 8px 16px,
+  large: 10px 20px 10px 20px,
+) !default;
+
+/// Font sizes of buttons at various sizes.
+/// @type Map
+$button-font-size: (
+  tiny: 10px,
+  small: 12px,
+  default: 16px,
+  large: 20px,
+) !default;
+
+/// Text color of buttons.
+/// @type Color
+$button-color: $white !default;
+
+/// Text color of buttons with a light background.
+/// @type Color
+$button-color-alt: $medium-gray !default;
+
+/// Font weight of buttons.
+/// @type Weight
+$button-font-weight: bold !default;
+
+/// Margin around buttons.
+/// @type List
+$button-margin: 0 0 $global-margin 0 !default;
+
+/// Background color of buttons.
+/// @type Color
+$button-background: $primary-color !default;
+
+/// Border around buttons.
+/// @type Border
+$button-border: 2px solid $button-background !default;
+
+/// Border radius of buttons. Not supported by all email clients.
+/// @type Number
+$button-radius: $global-radius !default;
+
+/// Border radius of rounded buttons. Not supported by all email clients.
+/// @type Number
+$button-rounded: $global-rounded !default;
+
+table.button {
+  width: auto;
+  margin: $button-margin;
+  Margin: $button-margin;
+
+  table {
+
+    td {
+      text-align: left;
+      color: $button-color;
+      background: $button-background;
+      border: $button-border;
+
+      a {
+        font-family: $body-font-family;
+        font-size: map-get($button-font-size, default);
+        font-weight: $button-font-weight;
+        color: $button-color;
+        text-decoration: none;
+        text-align: left;
+        display: inline-block;
+        padding: map-get($button-padding, default);
+        border: 0 solid $button-background;
+        border-radius: $button-radius;
+      }
+    }
+  }
+
+  &.radius table td {
+    border-radius: $button-radius;
+    border: none;
+  }
+
+  &.rounded table td {
+    border-radius: $button-rounded;
+    border: none;
+  }
+}
+
+table.button:hover table tr td a,
+table.button:active table tr td a,
+table.button table tr td a:visited,
+table.button.tiny:hover table tr td a,
+table.button.tiny:active table tr td a,
+table.button.tiny table tr td a:visited,
+table.button.small:hover table tr td a,
+table.button.small:active table tr td a,
+table.button.small table tr td a:visited,
+table.button.large:hover table tr td a,
+table.button.large:active table tr td a,
+table.button.large table tr td a:visited {
+  color: $button-color;
+}
+
+table.button.tiny {
+  table {
+    td,
+    a {
+      padding: map-get($button-padding, tiny);
+    }
+
+    a {
+      font-size: map-get($button-font-size, tiny);
+      font-weight: normal;
+    }
+  }
+}
+
+table.button.small {
+  table {
+    td,
+    a {
+      padding: map-get($button-padding, small);
+      font-size: map-get($button-font-size, small);
+    }
+  }
+}
+
+table.button.large {
+  table {
+    a {
+      padding: map-get($button-padding, large);
+      font-size: map-get($button-font-size, large);
+    }
+  }
+}
+
+table.button.expand,
+table.button.expanded {
+  width: 100%;
+
+  table {
+    width: 100%;
+
+    a {
+      text-align: center;
+      width: 100%;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  center {
+    min-width: 0;
+  }
+}
+
+table.button:hover,
+table.button:visited,
+table.button:active {
+  table {
+    td {
+      background: darken($button-background, 10%);
+      color: $button-color;
+    }
+  }
+}
+
+table.button:hover,
+table.button:visited,
+table.button:active {
+  table {
+    a {
+      border: 0 solid darken($button-background, 10%);
+    }
+  }
+}
+
+table.button.secondary {
+  table {
+    td {
+      background: $secondary-color;
+      color: $button-color;
+      border: 0px solid $secondary-color;
+    }
+
+    a {
+      color: $button-color;
+      border: 0 solid $secondary-color;
+    }
+  }
+}
+
+table.button.secondary:hover {
+  table {
+    td {
+      background: lighten($secondary-color, 10%);
+      color: $button-color;
+    }
+
+    a {
+      border: 0 solid lighten($secondary-color, 10%);
+    }
+  }
+}
+
+table.button.secondary:hover {
+  table {
+    td a {
+      color: $button-color;
+    }
+  }
+}
+
+table.button.secondary:active {
+  table {
+    td a {
+      color: $button-color;
+    }
+  }
+}
+
+table.button.secondary {
+  table {
+    td a:visited {
+      color: $button-color;
+    }
+  }
+}
+
+table.button.success {
+  table {
+    td {
+      background: $success-color;
+      border: 0px solid $success-color;
+    }
+
+    a {
+      border: 0 solid $success-color;
+    }
+  }
+}
+
+table.button.success:hover {
+  table {
+    td {
+      background: darken($success-color, 10%);
+    }
+
+    a {
+      border: 0 solid darken($success-color, 10%);
+    }
+  }
+}
+
+table.button.alert {
+  table {
+    td {
+      background: $alert-color;
+      border: 0px solid $alert-color;
+    }
+
+    a {
+      border: 0 solid $alert-color;
+    }
+  }
+}
+
+table.button.alert:hover {
+  table {
+    td {
+      background: darken($alert-color, 10%);
+    }
+
+    a {
+      border: 0 solid darken($alert-color, 10%);
+    }
+  }
+}
+
+table.button.warning {
+  table {
+    td {
+      background: $warning-color;
+      border: 0px solid $warning-color;
+    }
+
+    a {
+      border: 0px solid $warning-color;
+    }
+  }
+}
+
+table.button.warning:hover {
+  table {
+    td {
+      background: darken($warning-color, 10%);
+    }
+
+    a {
+      border: 0px solid darken($warning-color, 10%);
+    }
+  }
+}
+
+// Foundation for Emails by ZURB
+// zurb.com/ink/
+// Licensed under MIT Open Source
+
+////
 /// @group callout
 ////
 
@@ -859,42 +1238,168 @@ $callout-border-alert: 1px solid darken($alert-color, 20%) !default;
 table.callout {
   margin-bottom: $callout-margin-bottom;
   Margin-bottom: $callout-margin-bottom;
-}
 
-th.callout-inner {
-  width: 100%;
-  border: $callout-border;
-  padding: $callout-padding;
-  background: $callout-background;
+  th.callout-inner {
+    width: 100%;
+    border: $callout-border;
+    padding: $callout-padding;
+    background: $callout-background;
+  }
 
-  &.primary {
+  &.primary th.callout-inner {
     background: scale-color($primary-color, $lightness: $callout-background-fade);
     border: $callout-border-secondary;
     color: $black;
   }
 
-  &.secondary {
-    // background: scale-color($secondary-color, $lightness: $callout-background-fade);
-    background: #333;
+  &.secondary th.callout-inner {
+    background: scale-color($secondary-color, $lightness: $callout-background-fade);
     border: $callout-border-secondary;
     color: $black;
   }
 
-  &.success {
-    background: scale-color($success-color, $lightness: $callout-background-fade);
-    border: $callout-border-success;
-    color: $white;
-  }
-
-  &.warning {
+  &.warning th.callout-inner {
     background: scale-color($warning-color, $lightness: $callout-background-fade);
     border: $callout-border-warning;
     color: $white;
   }
+}
 
-  &.alert {
-    background: scale-color($alert-color, $lightness: $callout-background-fade);
-    border: $callout-border-alert;
-    color: $white;
+// Foundation for Emails by ZURB
+// zurb.com/ink/
+// Licensed under MIT Open Source
+
+////
+/// @group media-query
+////
+
+@media only screen and (max-width: #{$global-breakpoint}) {
+  table.body img {
+    width: auto;
+    height: auto;
+  }
+
+  table.body center {
+    min-width: 0 !important;
+  }
+
+  table.body .container {
+    width: $global-width-small !important;
+  }
+
+  //If it supports border-box, why not? Am I right?
+  //Also, by default pad that to the global-gutter variable
+  table.body .columns,
+  table.body .column {
+    height: auto !important;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding-left: $global-gutter !important;
+    padding-right: $global-gutter !important;
+
+    // Nested columns won't double the padding
+    .column,
+    .columns {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+  }
+
+  // Collpased columns have no gutter.
+  .collapse {
+    table.body & .columns,
+    table.body & .column {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+  }
+
+  // Basic grid rules
+  @for $i from 1 through $grid-column-count {
+    td.small-#{$i},
+    th.small-#{$i} {
+      display: inline-block !important;
+      width: -zf-grid-calc-pct($i, $grid-column-count) !important;
+    }
+  }
+
+  //If it's the last column in column count (12 by default),
+  //give it block and 100% width to knock down the wimpy columns to their own row.
+  .columns td.small-#{$grid-column-count},
+  .column td.small-#{$grid-column-count},
+  .columns th.small-#{$grid-column-count},
+  .column th.small-#{$grid-column-count} {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  @for $i from 1 through ($grid-column-count - 1) {
+    table.body td.small-offset-#{$i},
+    table.body th.small-offset-#{$i} {
+      //1.5 takes in effect a whole empty cell.
+      margin-left: -zf-grid-calc-pct($i, $grid-column-count) !important;
+      Margin-left: -zf-grid-calc-pct($i, $grid-column-count) !important;
+    }
+  }
+
+  table.body table.columns td.expander,
+  table.body table.columns th.expander {
+    display: none !important;
+  }
+
+  table.body .right-text-pad,
+  table.body .text-pad-right {
+    padding-left: $text-padding !important;
+  }
+
+  table.body .left-text-pad,
+  table.body .text-pad-left {
+    padding-right: $text-padding !important;
+  }
+
+  //menu
+  table.menu {
+    width: 100% !important;
+
+    td,
+    th {
+      width: auto !important;
+      display: inline-block !important;
+    }
+
+    &.vertical,
+    &.small-vertical {
+      td,
+      th {
+        display: block !important;
+      }
+    }
+  }
+
+  // Centers the menus!
+  table.menu[align="center"] {
+    width: auto !important;
+  }
+
+  // expands buttons for small only
+  table.button.small-expand,
+  table.button.small-expanded {
+    width: 100% !important;
+
+    table {
+      width: 100%;
+
+      a {
+        text-align: center !important;
+        width: 100% !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
+    }
+
+    center {
+      min-width: 0;
+    }
   }
 }

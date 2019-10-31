@@ -6,7 +6,7 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import { useFetchOPosts } from './useFetch'
 
-const PanelOff = ({ createLayoutItem }) => {
+const PanelOff = ({ createLayoutItem, exportAsHTML }) => {
   const inputLabel = useRef(null);
   const [labelWidth, setLabelWidth] = useState(0);
   const [values, setValues] = useState("");
@@ -18,9 +18,8 @@ const PanelOff = ({ createLayoutItem }) => {
   };
 
   const handleImport = () => {
-    if (!values) {
-      return;
-    }
+    if (!values) return;
+
     let searchedfilm = response.events.filter(film => film.id === values);
     searchedfilm = searchedfilm[0];
     let temp = {
@@ -30,9 +29,11 @@ const PanelOff = ({ createLayoutItem }) => {
       htmldescription: searchedfilm.description,
       htmlquotes: searchedfilm.event_reviews,
       posterurl: searchedfilm.image.sizes.medium.url,
-      showtimes: searchedfilm.event_showtimes
+      showtimes: searchedfilm.event_showtimes,
+      agileurl: searchedfilm.url,
+      bannerurl: ''
     }
-    console.log(searchedfilm)
+    // console.log(searchedfilm)
     createLayoutItem(temp);
   };
 
@@ -58,7 +59,9 @@ const PanelOff = ({ createLayoutItem }) => {
           name: 'age',
           id: 'event-label',
         }}>
-        <MenuItem value=""><em>Choose an event</em></MenuItem>
+        <MenuItem value="">
+          <em>Choose an event</em>
+        </MenuItem>
         {response.events && response.events.map( (film) => (
             <MenuItem key={film.id} value={film.id}>
               {film.title}
@@ -71,6 +74,10 @@ const PanelOff = ({ createLayoutItem }) => {
         disabled={!response || values === ''}
         onClick={handleImport}>
         Import
+      </Button>
+
+      <Button onClick={exportAsHTML}>
+        Export as HTML
       </Button>
     </>
   )

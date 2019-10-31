@@ -1,9 +1,17 @@
+import { renderToStaticMarkup } from 'react-dom/server';
+import React from 'react';
+import Inky from 'react-inky';
+import { inlineContent } from 'juice';
+import LayoutTemplateWrapper from '../components/LayoutTemplateWrapper';
+import newsletterStyles from '../components/LayoutTemplateWrapper.scss';
+
 export const CREATE_LAYOUT_ITEM = 'CREATE_LAYOUT_ITEM';
 export const DELETE_LAYOUT_ITEM = 'DELETE_LAYOUT_ITEM';
 export const EDIT_LAYOUT_ITEM   = 'EDIT_LAYOUT_ITEM';
 export const MOVE_LAYOUT_ITEM   = 'MOVE_LAYOUT_ITEM';
 export const UPDATE_PANEL_FIELD = 'UPDATE_PANEL_FIELD';
 export const HIDE_PANEL         = 'HIDE_PANEL';
+export const EXPORT_HTML        = 'EXPORT_HTML';
 
 export const createLayoutItem = (meta=null) => {
   const ts = new Date().getTime();
@@ -65,7 +73,7 @@ export const editPanelField = (event, name) => {
   }
 }
 
-export const editPanelQuill = (newValue, source, field='htmldescription')  => {
+export const editPanelQuill = (newValue, source, field='htmldescription') => {
   return (dispatch, getState) => {
     const state = getState();
     dispatch({
@@ -77,6 +85,28 @@ export const editPanelQuill = (newValue, source, field='htmldescription')  => {
       }
     });
   }
+}
+
+const getExportedHTML = state => {
+  const markup = renderToStaticMarkup(
+    <Inky>
+      <Inky.Head>
+      </Inky.Head>
+      <Inky.Body>
+        {state.layout.map((item, index) => <LayoutTemplateWrapper item={item} />)}
+      </Inky.Body>
+    </Inky>
+  );
+  console.log(newsletterStyles);
+
+  console.log( inlineContent(Inky.doctype + markup, '') )
+}
+
+export const exportAsHTML = () => (dispatch, getState) => {
+  getExportedHTML(getState());
+  dispatch({
+    type: EXPORT_HTML,
+  });
 }
 
 export const hidePanel = () => {

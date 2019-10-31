@@ -14,7 +14,6 @@ const LayoutItem = ({ id, index, item, deleteLayoutItem, editLayoutItem, moveLay
       if (!ref.current) {
         return;
       }
-      // console.log(item.index, index)
       const dragIndex = item.index;
       const hoverIndex = index;
 
@@ -66,7 +65,7 @@ const LayoutItem = ({ id, index, item, deleteLayoutItem, editLayoutItem, moveLay
       style={{ opacity }}>
       <div className="layoutitem--no-hover">
         <div style={{
-          backgroundColor: '#fff',
+          backgroundColor: 'inherit',
           fontFamily: 'Helvetica, Arial, sans-serif',
           width: 580,
           margin: '0 auto'

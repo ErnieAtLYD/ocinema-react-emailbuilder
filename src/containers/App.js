@@ -10,7 +10,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { DndProvider } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 
-import LayoutItem from '../components/LayoutItem'
+import RenderedNewsletter from '../components/RenderedNewsletter'
 import PanelOn from '../components/PanelOn'
 import PanelOff from '../components/PanelOff'
 
@@ -41,16 +41,12 @@ const App = ({ layout, panel, panelIndex, panelItem, actions }) => {
         <CssBaseline />
         <Grid container className={classes.container}>
           <Grid item lg={8} className={classes.render}>
-            {layout.map((item, index) =>
-              <LayoutItem
-                key={item.id}
-                id={item.id}
-                index={index}
-                item={item}
-                deleteLayoutItem={actions.deleteLayoutItem}
-                editLayoutItem={actions.editLayoutItem}
-                moveLayoutItem={actions.moveLayoutItem}
-              />)}
+            <RenderedNewsletter
+              layout={layout}
+              deleteLayoutItem={actions.deleteLayoutItem}
+              editLayoutItem={actions.editLayoutItem}
+              moveLayoutItem={actions.moveLayoutItem}
+            />
           </Grid>
           <Grid item lg={4} className={classes.panel}>
             {panel.visibility &&
@@ -63,7 +59,9 @@ const App = ({ layout, panel, panelIndex, panelItem, actions }) => {
             }
             {!panel.visibility &&
               <PanelOff
-                createLayoutItem={actions.createLayoutItem} />
+                createLayoutItem={actions.createLayoutItem}
+                exportAsHTML={actions.exportAsHTML}
+              />
             }
           </Grid>
         </Grid>

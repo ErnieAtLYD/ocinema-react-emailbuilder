@@ -7,9 +7,11 @@
     "@material-ui/icons": "^4.5.1",
     "immutability-helper": "^3.0.1",
     "inline-css": "^2.4.2",
+    "juice": "^5.2.0",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "node-sass": "^4.12.0",
+    "quill-blot-formatter": "^1.0.5",
     "react": "^16.9.0",
     "react-api-cache": "^1.1.0",
     "react-dnd": "^9.4.0",
@@ -31,6 +33,14 @@
   "eslintConfig": {
     "extends": "react-app"
   },
+  "babel": {
+    "presets": [
+      "react-app"
+    ],
+    "plugins": [
+      "@researchgate/babel-plugin-transform-scss-import-to-string"
+    ]
+  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -42,5 +52,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@researchgate/babel-plugin-transform-scss-import-to-string": "^0.1.3"
   }
 }

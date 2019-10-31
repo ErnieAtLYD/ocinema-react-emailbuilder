@@ -1,8 +1,11 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import ReactQuill from 'react-quill';
+import ReactQuill, { Quill } from 'react-quill';
+import BlotFormatter from 'quill-blot-formatter';
 import 'react-quill/dist/quill.snow.css';
+
+Quill.register('modules/blotFormatter', BlotFormatter);
 
 const PanelOn = ({ panelItem, editPanelField, editPanelQuill, hidePanel }) => {
   return (
@@ -18,10 +21,16 @@ const PanelOn = ({ panelItem, editPanelField, editPanelQuill, hidePanel }) => {
       />
       <ReactQuill
         value={panelItem.htmldescription}
+        modules={{
+          blotFormatter: {}
+        }}
         onChange={(newValue, delta, source) => editPanelQuill(newValue, source)}
       />
       <ReactQuill
         value={panelItem.htmlquotes}
+        modules={{
+          blotFormatter: {}
+        }}
         onChange={(newValue, delta, source) => editPanelQuill(
           newValue, source, 'htmlquotes'
         )}
