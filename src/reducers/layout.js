@@ -13,7 +13,7 @@ const initialState = [
   { id: 6, layout: 'full-bleed-wrapper', content: '', htmldescription:'', htmlquotes: '', posterurl: '' },
   { id: 4, layout: 'filmlayout', content: 'bar', htmldescription:'baz', htmlquotes: '', posterurl: '' },
   { id: 7, layout: 'membership-drive', content: 'bar', htmldescription:'As a nonprofit cinema, the proceeds from our membership program go right back into increasing the diversity of our film presentations and events. An O Cinema membership supports a cornerstone of the cultural life of our community- so you can both feel good and do good by joining. Become a member today!', htmlquotes: '', posterurl: 'https://www.o-cinema.org/membership/' },
-  { id: 9, layout: 'full-bleed-wrapper-2', bannerurl: 'https://www.o-cinema.org/wp-content/uploads/2019/10/sponsors.jpg', htmldescription:'', htmlquotes: '', posterurl: '' },
+  { id: 9, layout: 'full-bleed-wrapper-2', bannerurl: 'https://mangrove-labs-o-cinema.s3.amazonaws.com/email-assets/sponsors.jpg', htmldescription:'', htmlquotes: '', posterurl: '' },
   { id: 3, layout: 'footer', content: 'baz', htmldescription:'', htmlquotes: '', posterurl: '' }
 ];
 

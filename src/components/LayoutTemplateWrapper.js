@@ -1,10 +1,7 @@
 import React from 'react';
 import { Wrapper, Spacer, Button, Container, Callout, Center, Row, Column } from 'react-inky';
 import Showtimes from './Showtimes';
-import './LayoutTemplateWrapper.scss';
-import './LayoutTemplateFooter.scss';
-
-// import '../styles/newsletter.scss';
+import '../styles/newsletter.scss';
 
 const LayoutTemplateWrapper = obj => {
   const {
@@ -13,15 +10,29 @@ const LayoutTemplateWrapper = obj => {
   switch (layout) {
     case 'header':
       return (
-        <Container>
+        <>
+          <Spacer size="8">
+          </Spacer>
           <Row>
-            <Column large="12">
-                <Center>
-                  <img src="http://botshigh.com/wp-content/uploads/2011/04/o_cinema_logo_blk-wht_small_grayscale.jpg" width="100" />
-                </Center>
+            <Column large="8">
+              Your favorite independent cinema is bringing ﻿you more of the kind of movies you love.
+            </Column>
+            <Column large="4">
+              <img src="https://mangrove-labs-o-cinema.s3.amazonaws.com/email-assets/tw.png" style={{display:'inline', margin:4}} />
+              <img src="https://mangrove-labs-o-cinema.s3.amazonaws.com/email-assets/fb.png" style={{display:'inline', margin:4}} />
+              <img src="https://mangrove-labs-o-cinema.s3.amazonaws.com/email-assets/ig.png" style={{display:'inline', margin:4}} />
             </Column>
           </Row>
-        </Container>
+          <Container>
+            <Row>
+              <Column large="12">
+                  <Center>
+                    <img src="https://mangrove-labs-o-cinema.s3.amazonaws.com/email-assets/o-logo-mailcampaign.jpg" style={{ width: 100 }} />
+                  </Center>
+              </Column>
+            </Row>
+          </Container>
+        </>
       )
     case 'full-bleed-wrapper-2':
       return (
@@ -29,9 +40,15 @@ const LayoutTemplateWrapper = obj => {
           <Container>
             <Row className="collapse">
               <Column small="12">
-                <img src={bannerurl ? bannerurl : 'https://placehold.it/580x100'} />
+                {bannerurl && <img src={bannerurl} />}
               </Column>
             </Row>
+            {htmldescription &&
+              <Row>
+                <Column small="12">
+                <div dangerouslySetInnerHTML={{__html: htmldescription}} />
+                </Column>
+              </Row>}
           </Container>
         </Wrapper>
       )
@@ -71,18 +88,15 @@ const LayoutTemplateWrapper = obj => {
       )
     case 'footer':
       return (
-        <Container>
           <Row>
-            <Column large="12">
+            <Column large="12" className="newsletter-footer">
               <p>
-                <small>O Cinema<br/>500 71 Street, Miami Beach FL 33141 (Mailing address)<br />
-                You received this email because you're signed up to get updates
-                from us. <a href="#">Click here to unsubscribe.</a></small>
+                O Cinema<br/>500 71 Street, Miami Beach FL 33141 (Mailing address)<br />
+                You received this email because you signed up to get updates
+                from us. <a href="#">Click here to unsubscribe.</a>
               </p>
             </Column>
           </Row>
-          <Spacer size="16"></Spacer>
-        </Container>
       )
     default:
       return (
