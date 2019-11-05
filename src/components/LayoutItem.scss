@@ -1,0 +1,31 @@
+.layoutitem {
+  cursor: move;
+  position: relative;
+
+  &__edit, &__delete {
+    display: inline-block;
+    cursor: pointer;
+  }
+
+  &:hover &--no-hover {
+    border: 1px solid #999;
+    opacity: 1;
+  }
+
+  &:hover &--hover {
+    border: 1px solid transparent;
+    cursor: move;
+    opacity: 1;
+  }
+
+  &--hover {
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0;
+  }
+
+  &--no-hover {
+    opacity: 1;
+  }
+}

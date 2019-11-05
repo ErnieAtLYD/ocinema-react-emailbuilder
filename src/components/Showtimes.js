@@ -18,14 +18,14 @@ const Showtimes = ({ showtimes }) => {
 
   result.map((value, index) => <div>{value.showDate}</div>);
   return (
-    <Callout className="secondary">
+    <Callout className="primary" size="12">
       {result.map((value, index) => (
-        <small>
-          <strong>{value.showDate}: </strong>
+        <>
+          <strong>{value.showDate} - </strong>
           {value.showTimes.map( (showtime) => {
             return moment(showtime.start_date).format('h:mm A')
           } ).join(', ')}<br />
-        </small>
+        </>
       ))}
     </Callout>
   )

@@ -1,0 +1,31 @@
+// FIX for bug in react-inky callouts
+
+table.callout {
+  margin-bottom: $callout-margin-bottom;
+  Margin-bottom: $callout-margin-bottom;
+
+  th.callout-inner {
+    width: 100%;
+    border: $callout-border;
+    padding: $callout-padding;
+    background: $callout-background;
+  }
+
+  &.primary th.callout-inner {
+    background: scale-color($primary-color, $lightness: $callout-background-fade);
+    border: $callout-border-secondary;
+    color: $black;
+  }
+
+  &.secondary th.callout-inner {
+    background: scale-color($secondary-color, $lightness: $callout-background-fade);
+    border: $callout-border-secondary;
+    color: $black;
+  }
+
+  &.warning th.callout-inner {
+    background: scale-color($warning-color, $lightness: $callout-background-fade);
+    border: $callout-border-warning;
+    color: $white;
+  }
+}
