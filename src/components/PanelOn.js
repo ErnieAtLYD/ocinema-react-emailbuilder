@@ -32,6 +32,7 @@ const PanelOn = ({ panelItem, editPanelField, editPanelQuill, hidePanel }) => {
         <MenuItem value="full-bleed-wrapper">Section Header</MenuItem>
         <MenuItem value="full-bleed-wrapper-2">Content: Full width</MenuItem>
         <MenuItem value="filmlayout">Content: Film Layout #1</MenuItem>
+        <MenuItem value="section-break">Section break</MenuItem>
       </Select>
       <TextField
         label="Content"

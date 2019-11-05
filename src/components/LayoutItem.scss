@@ -2,7 +2,7 @@
   cursor: move;
   position: relative;
 
-  &__edit, &__delete {
+  &__edit, &__delete, &__duplicate {
     display: inline-block;
     cursor: pointer;
   }

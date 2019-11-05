@@ -12,11 +12,12 @@ export const createLayoutItem = (meta=null) => {
   const ts = new Date().getTime();
   const objItem = meta ? meta : {
     id: 'id-' + ts,
-    layout: 'filmlayout',
+    layout: 'full-bleed-wrapper-2',
     content: '',
     htmldescription:'',
     htmlquotes: '',
-    posterurl: ''
+    posterurl: '',
+    bannerurl: 'https://placehold.it/580x100'
   }
 
   return {
