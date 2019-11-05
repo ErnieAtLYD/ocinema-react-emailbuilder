@@ -4,7 +4,7 @@ import { inlineContent } from 'juice';
 import Inky from 'react-inky';
 import Button from '@material-ui/core/Button';
 import LayoutTemplateWrapper from './LayoutTemplateWrapper';
-import newsletterStyles from './LayoutTemplateWrapper.scss';
+import newsletterStyles from '../styles/newsletter.scss';
 import parse from 'siphon-media-query';
 
 // This gets called from the exportAsHTML method in /actions
@@ -13,6 +13,7 @@ export const getExportedHTML = layout => {
     <Inky>
       <Inky.Head>
         <style>
+          {parse(newsletterStyles)}
         </style>
       </Inky.Head>
       <Inky.Body>
