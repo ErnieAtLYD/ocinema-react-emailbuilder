@@ -1,7 +1,8 @@
-import { EDIT_LAYOUT_ITEM, UPDATE_PANEL_FIELD } from '../actions';
+import { EActionKeys } from '../actions';
+import { IPanelItem } from '../types';
 
 const initialState = {
-  id: '',
+  id: 0,
   layout: '',
   content: '',
   htmldescription:'',
@@ -9,12 +10,15 @@ const initialState = {
   posterurl: ''
 };
 
-export default function panelItem(state = initialState, action) {
+export default function panelItem(
+  state: IPanelItem = initialState,
+  action: any
+): IPanelItem {
   switch (action.type) {
-    case EDIT_LAYOUT_ITEM:
+    case EActionKeys.EDIT_LAYOUT_ITEM:
       return action.payload.item;
 
-    case UPDATE_PANEL_FIELD:
+    case EActionKeys.UPDATE_PANEL_FIELD:
       return {
         ...state,
         [action.payload.name]: action.payload.value

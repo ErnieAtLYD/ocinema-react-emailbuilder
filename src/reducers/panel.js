@@ -1,4 +1,4 @@
-import { DELETE_LAYOUT_ITEM, EDIT_LAYOUT_ITEM, HIDE_PANEL } from '../actions';
+import { EActionKeys } from '../actions';
 
 const initialState = {
   visibility: false
@@ -6,19 +6,19 @@ const initialState = {
 
 export default function panel(state = initialState, action) {
   switch (action.type) {
-    case DELETE_LAYOUT_ITEM:
+    case EActionKeys.DELETE_LAYOUT_ITEM:
       return {
         ...state,
         visibility: false
       };
 
-    case EDIT_LAYOUT_ITEM:
+    case EActionKeys.EDIT_LAYOUT_ITEM:
       return {
         ...state,
         visibility: true
       };
 
-    case HIDE_PANEL:
+    case EActionKeys.HIDE_PANEL:
     return {
       ...state,
       visibility: false
