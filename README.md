@@ -1,6 +1,7 @@
 # React Drag and Drop Email Generator
 Because I have to learn what the cool kids are doing somehow.
 
+![image](https://user-images.githubusercontent.com/33945/68308949-afe1a700-007b-11ea-82b5-5b23ddfe21b1.png)
 
 
 ## Colophon
