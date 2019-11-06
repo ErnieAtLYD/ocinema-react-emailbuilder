@@ -11,6 +11,7 @@
         "quotemark": false,
         "no-console": false,
         "semicolon": false,
+        "jsx-boolean-value": false,
         "jsx-no-lambda": false
     },
     "rulesDirectory": [

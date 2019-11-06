@@ -3,6 +3,7 @@
     "target": "es5",
     "lib": [
       "dom",
+      "es6",
       "dom.iterable",
       "esnext"
     ],
@@ -17,7 +18,10 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react"
+    "jsx": "react",
+    "strictNullChecks": false,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
   },
   "include": [
     "src"
