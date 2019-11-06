@@ -1,1 +1,19 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# React Drag and Drop Email Generator
+Because I have to learn what the cool kids are doing somehow.
+
+
+
+## Colophon
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). From there we added various libraries such as Material-UI, Redux, React Drag and Drop, Typescript.
+
+For the email templates I used inky-react, a markup language to create HTML email templates with Foundation for Emails.
+
+## Resources
+### Typescript and Redux
+ - https://medium.com/@rossbulat/how-to-use-typescript-with-react-and-redux-a118b1e02b76
+ - https://levelup.gitconnected.com/react-and-redux-with-typescript-da0c37537a79
+ - https://github.com/JonJam/yorpw_ui_web/tree/master/src
+ - https://fettblog.eu/typescript-react/components/
+ - https://github.com/piotrwitek/react-redux-typescript-guide
+ - https://stackoverflow.com/questions/50794023/redux-action-return-type-when-using-dispatch-and-getstate
+ - https://www.carlrippon.com/strongly-typed-react-redux-code-with-typescript/
