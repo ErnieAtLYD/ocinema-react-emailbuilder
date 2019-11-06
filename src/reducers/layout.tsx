@@ -1,10 +1,5 @@
-import {
-  CREATE_LAYOUT_ITEM,
-  DELETE_LAYOUT_ITEM,
-  EXPORT_HTML,
-  MOVE_LAYOUT_ITEM,
-  UPDATE_PANEL_FIELD
-} from '../actions';
+import { EActionKeys } from '../actions';
+import { IPanelItem } from '../types';
 
 const initialState = [
   { id: 1, layout: 'header', content: 'foo', htmldescription:'bar', htmlquotes: '', posterurl: '' },
@@ -17,23 +12,24 @@ const initialState = [
   { id: 3, layout: 'footer', content: 'baz', htmldescription:'', htmlquotes: '', posterurl: '' }
 ];
 
-export default function layout(state = initialState, action) {
-
+export default function layout(
+  state: Array<IPanelItem> = initialState,
+  action: any
+): Array<IPanelItem> {
   var newLayout;
-
   switch (action.type) {
-    case CREATE_LAYOUT_ITEM:
+    case EActionKeys.CREATE_LAYOUT_ITEM:
       return [...state, action.payload];
 
-    case DELETE_LAYOUT_ITEM:
+    case EActionKeys.DELETE_LAYOUT_ITEM:
       newLayout = [...state];
       newLayout.splice(action.key, 1);
       return newLayout;
 
-    case EXPORT_HTML:
+    case EActionKeys.EXPORT_HTML:
       return state;
 
-    case MOVE_LAYOUT_ITEM:
+    case EActionKeys.MOVE_LAYOUT_ITEM:
       newLayout = [...state];
       if (action.newIndex >= newLayout.length) {
         var k = action.newIndex - newLayout.length + 1;
@@ -48,7 +44,7 @@ export default function layout(state = initialState, action) {
       );
       return newLayout;
 
-    case UPDATE_PANEL_FIELD:
+    case EActionKeys.UPDATE_PANEL_FIELD:
       newLayout = [...state];
       const temp = {
         ...newLayout[action.payload.index],

@@ -1,11 +1,13 @@
 import React from 'react';
+import { ThunkDispatch } from 'redux-thunk'
+import { AnyAction, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+
+import { AppProps, IStore } from '../types';
 import * as Actions from '../actions';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
-import { makeStyles } from '@material-ui/core/styles';
 
 import { DndProvider } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
@@ -14,33 +16,40 @@ import RenderedNewsletter from '../components/RenderedNewsletter'
 import PanelOn from '../components/PanelOn'
 import PanelOff from '../components/PanelOff'
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    height: '100vh',
-  },
-  render: {
-    background: '#b8b8b8',
-    height: '100vh',
-    overflowY: 'scroll'
-  },
-  container: {
-  },
-  panel: {
+const App = ({ layout, panel, panelIndex, panelItem, actions }: AppProps) => {
+  var showPanel;
+  if (panel.visibility) {
+    showPanel = (
+      <PanelOn
+        panelItem={panelItem}
+        editPanelField={actions.editPanelField}
+        editPanelQuill={actions.editPanelQuill}
+        hidePanel={actions.hidePanel}
+      />
+    )
+  } else {
+    showPanel = (
+      <PanelOff
+        createLayoutItem={actions.createLayoutItem}
+        exportAsHTML={actions.exportAsHTML}
+      />
+    )
   }
-}));
-
-const App = ({ layout, panel, panelIndex, panelItem, actions }) => {
-  const classes = useStyles();
 
   return (
     <DndProvider backend={HTML5Backend}>
       <Grid
         container
         component="main"
-        className={classes.root}>
+        style={{ height: '100vh' }}
+      >
         <CssBaseline />
-        <Grid container className={classes.container}>
-          <Grid item lg={8} className={classes.render}>
+        <Grid container>
+          <Grid
+            item
+            lg={8}
+            style={{ background: '#b8b8b8', height: '100vh', overflowY: 'scroll'}}
+          >
             <RenderedNewsletter
               layout={layout}
               deleteLayoutItem={actions.deleteLayoutItem}
@@ -48,21 +57,8 @@ const App = ({ layout, panel, panelIndex, panelItem, actions }) => {
               moveLayoutItem={actions.moveLayoutItem}
             />
           </Grid>
-          <Grid item lg={4} className={classes.panel}>
-            {panel.visibility &&
-              <PanelOn
-                panelItem={panelItem}
-                editPanelField={actions.editPanelField}
-                editPanelQuill={actions.editPanelQuill}
-                hidePanel={actions.hidePanel}
-              />
-            }
-            {!panel.visibility &&
-              <PanelOff
-                createLayoutItem={actions.createLayoutItem}
-                exportAsHTML={actions.exportAsHTML}
-              />
-            }
+          <Grid item lg={4}>
+            {showPanel}
           </Grid>
         </Grid>
       </Grid>
@@ -70,7 +66,7 @@ const App = ({ layout, panel, panelIndex, panelItem, actions }) => {
   );
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state: IStore): IStore {
   return {
     layout: state.layout,
     panel: state.panel,
@@ -79,9 +75,9 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch: ThunkDispatch<any, any, AnyAction>) {
   return {
-    actions: bindActionCreators(Actions, dispatch)
+    actions: bindActionCreators<any, any>(Actions, dispatch)
   };
 }
 

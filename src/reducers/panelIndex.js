@@ -1,13 +1,13 @@
-import { EDIT_LAYOUT_ITEM, MOVE_LAYOUT_ITEM } from '../actions';
+import { EActionKeys } from '../actions';
 
 const initialState = -1;
 
 export default function panelIndex(state = initialState, action) {
   switch (action.type) {
-    case EDIT_LAYOUT_ITEM:
+    case EActionKeys.EDIT_LAYOUT_ITEM:
       return action.payload.index;
 
-    case MOVE_LAYOUT_ITEM:
+    case EActionKeys.MOVE_LAYOUT_ITEM:
       if (action.key===state) {
         return action.newIndex;
       } else if (action.newIndex>=panelIndex && action.key<state) {
