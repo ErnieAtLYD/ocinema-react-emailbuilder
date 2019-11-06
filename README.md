@@ -3,6 +3,7 @@ Because I have to learn what the cool kids are doing somehow.
 
 ![image](https://user-images.githubusercontent.com/33945/68308949-afe1a700-007b-11ea-82b5-5b23ddfe21b1.png)
 
+My partner builds weekly email newsletters for his arthouse theater and needed a way to get the content from the CMS into an email template, which takes a bunch of time. This is an (ongoing!) attempt to build that thing. While he will hopefully use it, I'm mostly building this to understand React, since that seems to be [what all the kids are doing](https://littleyellowdifferent.substack.com/p/a-fictitious-somewhat-farcical-conversation) these days.
 
 ## Colophon
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). From there we added various libraries such as Material-UI, Redux, React Drag and Drop, Typescript.
