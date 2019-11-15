@@ -1,5 +1,3 @@
-import { getExportedHTML } from '../components/ExportTemplate';
-
 export const CREATE_LAYOUT_ITEM = 'CREATE_LAYOUT_ITEM';
 export const DELETE_LAYOUT_ITEM = 'DELETE_LAYOUT_ITEM';
 export const EDIT_LAYOUT_ITEM   = 'EDIT_LAYOUT_ITEM';
@@ -83,12 +81,10 @@ export const editPanelQuill = (newValue, source, field='htmldescription') => {
   }
 }
 
-export const exportAsHTML = () => (dispatch, getState) => {
-  const state = getState();
-  getExportedHTML(state.layout);
-  dispatch({
-    type: EXPORT_HTML,
-  });
+export const exportAsHTML = () => {
+  return {
+    type: EXPORT_HTML
+  }
 }
 
 export const hidePanel = () => {

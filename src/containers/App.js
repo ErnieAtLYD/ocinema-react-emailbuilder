@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -29,8 +31,21 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const App = ({ layout, panel, panelIndex, panelItem, actions }) => {
-  const classes = useStyles();
+type StateType = {|
+  layout: string,
+  panel: { visibility: boolean },
+  panelIndex: number,
+  panelItem: { [key: string]: any }
+|}
+
+type ActionsType = {|
+  actions: { [key: string]: any }
+|}
+
+type AppType = {| ...StateType, ...ActionsType |};
+
+const App = ({layout, panel, panelIndex, panelItem, actions}: AppType) => {
+  const classes: { [key: string]: any } = useStyles();
 
   return (
     <DndProvider backend={HTML5Backend}>
@@ -61,6 +76,7 @@ const App = ({ layout, panel, panelIndex, panelItem, actions }) => {
               <PanelOff
                 createLayoutItem={actions.createLayoutItem}
                 exportAsHTML={actions.exportAsHTML}
+                layout={layout}
               />
             }
           </Grid>
@@ -70,7 +86,7 @@ const App = ({ layout, panel, panelIndex, panelItem, actions }) => {
   );
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state: StateType): StateType {
   return {
     layout: state.layout,
     panel: state.panel,

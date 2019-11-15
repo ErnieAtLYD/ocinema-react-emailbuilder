@@ -1,11 +1,22 @@
+// @flow
+
 import React from 'react';
 import { Callout } from 'react-inky';
 import moment from 'moment';
 import _ from 'lodash';
 
-const Showtimes = ({ showtimes }) => {
-  const result = [];
-  const resultList = _(showtimes)
+type ShowtimesType = {
+  showtimes: Array<string>
+}
+
+type ShowDateType = {
+  showDate: string,
+  showTimes: Array<{ start_date: string }>
+}
+
+const Showtimes = ({ showtimes }: {showtimes: ShowtimesType}) => {
+  const result: Array<ShowDateType> = [];
+  const resultList: Array<string> = _(showtimes)
     .groupBy(v => moment(v.start_date).format('ddd, MMM Do'))
     .value();
 
@@ -18,7 +29,10 @@ const Showtimes = ({ showtimes }) => {
 
   result.map((value, index) => <div>{value.showDate}</div>);
   return (
-    <Callout className="primary" size="12">
+    <Callout
+      className="primary"
+      size="12"
+    >
       {result.map((value, index) => (
         <>
           <strong>{value.showDate} - </strong>

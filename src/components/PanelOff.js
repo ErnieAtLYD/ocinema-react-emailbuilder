@@ -7,7 +7,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import ExportTemplate from './ExportTemplate'
 import { useFetchOPosts } from './useFetch'
 
-const PanelOff = ({ createLayoutItem, exportAsHTML }) => {
+const PanelOff = ({ createLayoutItem, exportAsHTML, layout }) => {
   const inputLabel = useRef(null);
   const [labelWidth, setLabelWidth] = useState(0);
   const [values, setValues] = useState("");
@@ -73,10 +73,14 @@ const PanelOff = ({ createLayoutItem, exportAsHTML }) => {
       <Button
         variant="contained"
         disabled={!response || values === ''}
-        onClick={handleImport}>
+        onClick={handleImport}
+      >
         Import
       </Button>
-      <ExportTemplate exportAsHTML={exportAsHTML} />
+      <ExportTemplate
+        exportAsHTML={exportAsHTML}
+        layout={layout}
+      />
     </>
   )
 }
