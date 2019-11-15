@@ -1,5 +1,25 @@
 // src/types/index.tsx
 
+export interface IRESTAPI {
+  DateTBD: string,
+  Duration: string,
+  ID: string,
+  SalesMessage: string,
+  ShortDescription: string,
+  start_date: string,
+  end_date: string,
+  legacy_purchase_link: string
+}
+
+export interface IShowtimeTable {
+  showDate: string,
+  showTimes: IRESTAPI[]
+}
+
+export interface ShowtimesProps {
+  showtimes: IRESTAPI[]
+}
+
 export interface AppProps {
   layout: object[],
   panel: {

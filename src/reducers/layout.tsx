@@ -37,11 +37,7 @@ export default function layout(
           newLayout.push(undefined);
         }
       }
-      newLayout.splice(
-        action.newIndex,
-        0,
-        newLayout.splice(action.key, 1)[0]
-      );
+      newLayout.splice(action.newIndex, 0, newLayout.splice(action.key, 1)[0]);
       return newLayout;
 
     case EActionKeys.UPDATE_PANEL_FIELD:
