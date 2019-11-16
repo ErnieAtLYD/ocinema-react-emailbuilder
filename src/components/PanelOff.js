@@ -1,3 +1,5 @@
+// @flow
+
 import React, { useEffect, useRef, useState } from 'react';
 import Button from '@material-ui/core/Button';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -7,11 +9,22 @@ import MenuItem from '@material-ui/core/MenuItem';
 import ExportTemplate from './ExportTemplate'
 import { useFetchOPosts } from './useFetch'
 
-const PanelOff = ({ createLayoutItem, exportAsHTML, layout }) => {
+type PanelType = {
+  createLayoutItem: any => void,
+  exportAsHTML: any => void,
+  layout: string
+};
+
+const PanelOff = ({ createLayoutItem, exportAsHTML, layout }: PanelType) => {
   const inputLabel = useRef(null);
   const [labelWidth, setLabelWidth] = useState(0);
   const [values, setValues] = useState("");
-  useEffect(() => { setLabelWidth(inputLabel.current.offsetWidth) }, []);
+
+  useEffect(() => {
+    const refWidth = inputLabel.current ? inputLabel.current.offsetWidth : 0;
+    setLabelWidth(refWidth);
+  }, []);
+
   const response = useFetchOPosts();
 
   const handleChange = event => {
@@ -23,6 +36,7 @@ const PanelOff = ({ createLayoutItem, exportAsHTML, layout }) => {
 
     let searchedfilm = response.events.filter(film => film.id === values);
     searchedfilm = searchedfilm[0];
+
     let temp = {
       id: searchedfilm.id,
       layout: 'filmlayout',
@@ -34,7 +48,6 @@ const PanelOff = ({ createLayoutItem, exportAsHTML, layout }) => {
       agileurl: searchedfilm.url,
       bannerurl: ''
     }
-    // console.log(searchedfilm)
     createLayoutItem(temp);
   };
 
@@ -46,12 +59,8 @@ const PanelOff = ({ createLayoutItem, exportAsHTML, layout }) => {
         Add a blank section
       </Button>
 
-      <Typography>
-        Import from the website:
-      </Typography>
-      <InputLabel ref={inputLabel} htmlFor="event-label">
-        Event
-      </InputLabel>
+      <Typography>Import from the website:</Typography>
+      <InputLabel ref={inputLabel} htmlFor="event-label">Event</InputLabel>
       <Select
         value={values}
         onChange={handleChange}
@@ -60,9 +69,7 @@ const PanelOff = ({ createLayoutItem, exportAsHTML, layout }) => {
           name: 'age',
           id: 'event-label',
         }}>
-        <MenuItem value="">
-          <em>Choose an event</em>
-        </MenuItem>
+        <MenuItem value=""><em>Choose an event</em></MenuItem>
         {response.events && response.events.map( (film) => (
             <MenuItem key={film.id} value={film.id}>
               {film.title}

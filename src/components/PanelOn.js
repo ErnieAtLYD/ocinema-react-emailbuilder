@@ -1,3 +1,5 @@
+// @flow
+
 import React, { useEffect, useRef, useState } from 'react';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -10,10 +12,20 @@ import 'react-quill/dist/quill.snow.css';
 
 Quill.register('modules/blotFormatter', BlotFormatter);
 
-const PanelOn = ({ panelItem, editPanelField, editPanelQuill, hidePanel }) => {
+type PanelType = {
+  editPanelField: (any, string) => void,
+  editPanelQuill: (any, string, ?string) => void,
+  hidePanel: any => void,
+  panelItem: any
+};
+
+const PanelOn = ({ panelItem, editPanelField, editPanelQuill, hidePanel }: PanelType) => {
   const inputLabel = useRef(null);
   const [labelWidth, setLabelWidth] = useState(0);
-  useEffect(() => { setLabelWidth(inputLabel.current.offsetWidth) }, []);
+  useEffect(() => {
+    const refWidth = inputLabel.current ? inputLabel.current.offsetWidth : 0;
+    setLabelWidth(refWidth);
+  }, []);
   return (
     <>
       <InputLabel shrink ref={inputLabel} htmlFor="layouttype-label">
@@ -25,7 +37,8 @@ const PanelOn = ({ panelItem, editPanelField, editPanelQuill, hidePanel }) => {
         labelWidth={labelWidth}
         inputProps={{
           id: 'layouttype-label',
-        }}>
+        }}
+      >
         <MenuItem value="header">Email Header</MenuItem>
         <MenuItem value="footer">Email Footer</MenuItem>
         <MenuItem value="membership-drive">Membership Drive</MenuItem>

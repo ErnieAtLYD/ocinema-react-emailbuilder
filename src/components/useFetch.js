@@ -1,3 +1,5 @@
+// @flow
+
 import { useState, useEffect } from 'react';
 
 export const useFetchOPosts = () => {
@@ -5,7 +7,10 @@ export const useFetchOPosts = () => {
   return useFetch(query, {});
 }
 
-export const useFetch = (url, defaultData) => {
+export const useFetch = (
+  url: string,
+  defaultData: { [key: string]: any }
+) => {
   const [data, updateData] = useState(defaultData);
 
   useEffect(() => {

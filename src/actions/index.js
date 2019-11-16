@@ -6,7 +6,7 @@ export const UPDATE_PANEL_FIELD = 'UPDATE_PANEL_FIELD';
 export const HIDE_PANEL         = 'HIDE_PANEL';
 export const EXPORT_HTML        = 'EXPORT_HTML';
 
-export const createLayoutItem = (meta=null) => {
+export const createLayoutItem = (meta = null) => {
   const ts = new Date().getTime();
   const objItem = meta ? meta : {
     id: 'id-' + ts,
@@ -17,14 +17,13 @@ export const createLayoutItem = (meta=null) => {
     posterurl: '',
     bannerurl: 'https://placehold.it/580x100'
   }
-
   return {
     type: CREATE_LAYOUT_ITEM,
     payload: objItem
   }
 }
 
-export const deleteLayoutItem = key => {
+export const deleteLayoutItem = (key: number) => {
   return {
     type: DELETE_LAYOUT_ITEM,
     key
@@ -32,7 +31,7 @@ export const deleteLayoutItem = key => {
 }
 
 // see: https://gist.github.com/markerikson/ea4d0a6ce56ee479fe8b356e099f857e
-export const editLayoutItem = key => {
+export const editLayoutItem = (key: number) => {
   return (dispatch, getState) => {
     const state = getState();
     dispatch({
@@ -45,7 +44,7 @@ export const editLayoutItem = key => {
   }
 }
 
-export const moveLayoutItem = (key, newIndex) => {
+export const moveLayoutItem = (key: number, newIndex: number) => {
   return {
     type: MOVE_LAYOUT_ITEM,
     key,
@@ -53,7 +52,7 @@ export const moveLayoutItem = (key, newIndex) => {
   }
 }
 
-export const editPanelField = (event, name) => {
+export const editPanelField = (event, name: string) => {
   return (dispatch, getState) => {
     const state = getState();
     dispatch({
@@ -67,7 +66,7 @@ export const editPanelField = (event, name) => {
   }
 }
 
-export const editPanelQuill = (newValue, source, field='htmldescription') => {
+export const editPanelQuill = (newValue, source, field = 'htmldescription') => {
   return (dispatch, getState) => {
     const state = getState();
     dispatch({
