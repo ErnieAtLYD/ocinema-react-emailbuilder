@@ -8,17 +8,17 @@ import MenuItem from '@material-ui/core/MenuItem';
 import ExportTemplate from './ExportTemplate'
 import { useFetchOPosts } from './useFetch'
 
-type PanelType = {
-  createLayoutItem: any => void,
-  exportAsHTML: any => void,
-  layout: string
+type ComponentType = {
+  createLayoutItem: Function,
+  exportAsHTML: Function,
+  layout: NewsletterLayoutType
 };
 
 const PanelOff = ({
   createLayoutItem,
   exportAsHTML,
   layout
-}: PanelType): React$Element<({children?: React$Node}) => React$Node> => {
+}: ComponentType): React$Element<({children?: React$Node}) => React$Node> => {
   const inputLabel = useRef(null);
   const [labelWidth, setLabelWidth] = useState(0);
   const [values, setValues] = useState("");
@@ -38,7 +38,7 @@ const PanelOff = ({
   const handleImport = (): void => {
     if (!values) return;
 
-    let searchedfilm = response.events.filter((film: any): any => film.id === values);
+    let searchedfilm = response.events.filter((film: NewsletterLayoutItemType): boolean => film.id === values);
     searchedfilm = searchedfilm[0];
 
     let temp = {
@@ -74,7 +74,7 @@ const PanelOff = ({
           id: 'event-label',
         }}>
         <MenuItem value=""><em>Choose an event</em></MenuItem>
-        {response.events && response.events.map( (film: any): React$Element<any> => (
+        {response.events && response.events.map( (film: WebsiteEventAPIType): React$Element<typeof MenuItem> => (
             <MenuItem key={film.id} value={film.id}>
               {film.title}
             </MenuItem>
