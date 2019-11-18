@@ -3,7 +3,6 @@ import { shallow } from 'enzyme';
 import RenderedNewsletter from './RenderedNewsletter'
 
 describe('RenderedNewsletter', () => {
-
   it('renders layout items', () => {
     const layout = [{id: 1}, {id: 2}];
     const wrapper = shallow(<RenderedNewsletter layout={layout} />);
