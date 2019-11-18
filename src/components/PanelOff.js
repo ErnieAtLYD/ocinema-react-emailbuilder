@@ -1,5 +1,4 @@
 // @flow
-
 import React, { useEffect, useRef, useState } from 'react';
 import Button from '@material-ui/core/Button';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -15,26 +14,31 @@ type PanelType = {
   layout: string
 };
 
-const PanelOff = ({ createLayoutItem, exportAsHTML, layout }: PanelType) => {
+const PanelOff = ({
+  createLayoutItem,
+  exportAsHTML,
+  layout
+}: PanelType): React$Element<({children?: React$Node}) => React$Node> => {
   const inputLabel = useRef(null);
   const [labelWidth, setLabelWidth] = useState(0);
   const [values, setValues] = useState("");
 
-  useEffect(() => {
+  useEffect((): void => {
     const refWidth = inputLabel.current ? inputLabel.current.offsetWidth : 0;
     setLabelWidth(refWidth);
   }, []);
 
   const response = useFetchOPosts();
 
-  const handleChange = event => {
-    setValues(event.target.value);
+  const handleChange = (event: SyntheticInputEvent<HTMLSelectElement>) => {
+    const {value} = event.target;
+    setValues(value);
   };
 
-  const handleImport = () => {
+  const handleImport = (): void => {
     if (!values) return;
 
-    let searchedfilm = response.events.filter(film => film.id === values);
+    let searchedfilm = response.events.filter((film: any): any => film.id === values);
     searchedfilm = searchedfilm[0];
 
     let temp = {
@@ -55,7 +59,7 @@ const PanelOff = ({ createLayoutItem, exportAsHTML, layout }: PanelType) => {
     <>
       <Button
         variant="contained"
-        onClick={() => createLayoutItem()}>
+        onClick={(): void => createLayoutItem()}>
         Add a blank section
       </Button>
 
@@ -70,7 +74,7 @@ const PanelOff = ({ createLayoutItem, exportAsHTML, layout }: PanelType) => {
           id: 'event-label',
         }}>
         <MenuItem value=""><em>Choose an event</em></MenuItem>
-        {response.events && response.events.map( (film) => (
+        {response.events && response.events.map( (film: any): React$Element<any> => (
             <MenuItem key={film.id} value={film.id}>
               {film.title}
             </MenuItem>

@@ -13,7 +13,7 @@ import 'react-quill/dist/quill.snow.css';
 Quill.register('modules/blotFormatter', BlotFormatter);
 
 type PanelType = {
-  editPanelField: (any, string) => void,
+  editPanelField: (SyntheticInputEvent<>, string) => void,
   editPanelQuill: (any, string, ?string) => void,
   hidePanel: any => void,
   panelItem: any
@@ -22,17 +22,19 @@ type PanelType = {
 const PanelOn = ({ panelItem, editPanelField, editPanelQuill, hidePanel }: PanelType) => {
   const inputLabel = useRef(null);
   const [labelWidth, setLabelWidth] = useState(0);
-  useEffect(() => {
+
+  useEffect((): void => {
     const refWidth = inputLabel.current ? inputLabel.current.offsetWidth : 0;
     setLabelWidth(refWidth);
   }, []);
+
   return (
     <>
       <InputLabel shrink ref={inputLabel} htmlFor="layouttype-label">
         Layout type
       </InputLabel>
       <Select
-        onChange={(event) => editPanelField(event, 'layout')}
+        onChange={(event: SyntheticInputEvent<HTMLSelectElement>): void => editPanelField(event, 'layout')}
         value={panelItem.layout}
         labelWidth={labelWidth}
         inputProps={{
@@ -50,7 +52,7 @@ const PanelOn = ({ panelItem, editPanelField, editPanelQuill, hidePanel }: Panel
       <TextField
         label="Content"
         value={panelItem.content}
-        onChange={(event) => editPanelField(event, 'content')}
+        onChange={(event: SyntheticInputEvent<HTMLInputElement>):void => editPanelField(event, 'content')}
       />
       <ReactQuill
         value={panelItem.htmldescription}
@@ -71,12 +73,12 @@ const PanelOn = ({ panelItem, editPanelField, editPanelQuill, hidePanel }: Panel
       <TextField
         label="Poster thumbnail URL"
         value={panelItem.posterurl}
-        onChange={(event) => editPanelField(event, 'posterurl')}
+        onChange={(event: SyntheticInputEvent<HTMLInputElement>): void => editPanelField(event, 'posterurl')}
       />
       <TextField
         label="Banner URL"
         value={panelItem.bannerurl}
-        onChange={(event) => editPanelField(event, 'bannerurl')}
+        onChange={(event: SyntheticInputEvent<HTMLInputElement>): void => editPanelField(event, 'bannerurl')}
       />
       <Button
         variant="contained"

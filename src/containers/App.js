@@ -1,5 +1,4 @@
 // @flow
-
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -16,7 +15,7 @@ import RenderedNewsletter from '../components/RenderedNewsletter'
 import PanelOn from '../components/PanelOn'
 import PanelOff from '../components/PanelOff'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme: any): any => ({
   root: {
     height: '100vh',
   },
@@ -44,9 +43,11 @@ type ActionsType = {|
 
 type AppType = {| ...StateType, ...ActionsType |};
 
-const App = ({layout, panel, panelIndex, panelItem, actions}: AppType) => {
-  const classes: { [key: string]: any } = useStyles();
+const App = (
+  {layout, panel, panelIndex, panelItem, actions}: AppType
+): React$Element<any> => {
 
+  const classes: { [key: string]: any } = useStyles();
   return (
     <DndProvider backend={HTML5Backend}>
       <Grid
@@ -95,7 +96,7 @@ function mapStateToProps(state: StateType): StateType {
   };
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch: any): {|actions: any|} {
   return {
     actions: bindActionCreators(Actions, dispatch)
   };

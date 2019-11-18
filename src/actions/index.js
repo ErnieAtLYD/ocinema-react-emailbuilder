@@ -1,3 +1,4 @@
+// @flow
 export const CREATE_LAYOUT_ITEM = 'CREATE_LAYOUT_ITEM';
 export const DELETE_LAYOUT_ITEM = 'DELETE_LAYOUT_ITEM';
 export const EDIT_LAYOUT_ITEM   = 'EDIT_LAYOUT_ITEM';
@@ -6,7 +7,20 @@ export const UPDATE_PANEL_FIELD = 'UPDATE_PANEL_FIELD';
 export const HIDE_PANEL         = 'HIDE_PANEL';
 export const EXPORT_HTML        = 'EXPORT_HTML';
 
-export const createLayoutItem = (meta = null) => {
+export const createLayoutItem = (meta: any = null): {|
+  payload:
+    | any
+    | {|
+      bannerurl: string,
+      content: string,
+      htmldescription: string,
+      htmlquotes: string,
+      id: string,
+      layout: string,
+      posterurl: string,
+    |},
+  type: string,
+|} => {
   const ts = new Date().getTime();
   const objItem = meta ? meta : {
     id: 'id-' + ts,
@@ -23,7 +37,9 @@ export const createLayoutItem = (meta = null) => {
   }
 }
 
-export const deleteLayoutItem = (key: number) => {
+export const deleteLayoutItem = (
+  key: number
+): {|key: number, type: string|} => {
   return {
     type: DELETE_LAYOUT_ITEM,
     key
@@ -31,8 +47,10 @@ export const deleteLayoutItem = (key: number) => {
 }
 
 // see: https://gist.github.com/markerikson/ea4d0a6ce56ee479fe8b356e099f857e
-export const editLayoutItem = (key: number) => {
-  return (dispatch, getState) => {
+export const editLayoutItem = (
+  key: number
+): ((dispatch: any, getState: any) => void) => {
+  return (dispatch: any, getState: any): void => {
     const state = getState();
     dispatch({
       type: EDIT_LAYOUT_ITEM,
@@ -44,7 +62,9 @@ export const editLayoutItem = (key: number) => {
   }
 }
 
-export const moveLayoutItem = (key: number, newIndex: number) => {
+export const moveLayoutItem = (
+  key: number, newIndex: number
+): {|key: number, newIndex: number, type: string|} => {
   return {
     type: MOVE_LAYOUT_ITEM,
     key,
@@ -52,8 +72,10 @@ export const moveLayoutItem = (key: number, newIndex: number) => {
   }
 }
 
-export const editPanelField = (event, name: string) => {
-  return (dispatch, getState) => {
+export const editPanelField = (
+  event: any, name: string
+): ((dispatch: any, getState: any) => void) => {
+  return (dispatch: any, getState: any): void => {
     const state = getState();
     dispatch({
       type: UPDATE_PANEL_FIELD,
@@ -66,8 +88,10 @@ export const editPanelField = (event, name: string) => {
   }
 }
 
-export const editPanelQuill = (newValue, source, field = 'htmldescription') => {
-  return (dispatch, getState) => {
+export const editPanelQuill = (
+  newValue: any, source: any, field: string = 'htmldescription'
+): ((dispatch: any, getState: any) => void) => {
+  return (dispatch: any, getState: any): void => {
     const state = getState();
     dispatch({
       type: UPDATE_PANEL_FIELD,
@@ -80,13 +104,13 @@ export const editPanelQuill = (newValue, source, field = 'htmldescription') => {
   }
 }
 
-export const exportAsHTML = () => {
+export const exportAsHTML = (): {|type: string|} => {
   return {
     type: EXPORT_HTML
   }
 }
 
-export const hidePanel = () => {
+export const hidePanel = (): {|type: string|} => {
   return {
     type: HIDE_PANEL,
   }
