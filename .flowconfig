@@ -3,6 +3,7 @@
 [include]
 
 [libs]
+./src/types/global.js
 
 [lints]
 all=warn
