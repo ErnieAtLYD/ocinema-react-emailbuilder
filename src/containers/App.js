@@ -30,19 +30,6 @@ const useStyles = makeStyles((theme: any): any => ({
   }
 }));
 
-type StateType = {|
-  layout: string,
-  panel: { visibility: boolean },
-  panelIndex: number,
-  panelItem: { [key: string]: any }
-|}
-
-type ActionsType = {|
-  actions: { [key: string]: any }
-|}
-
-type AppType = {| ...StateType, ...ActionsType |};
-
 const App = (
   {layout, panel, panelIndex, panelItem, actions}: AppType
 ): React$Element<any> => {
