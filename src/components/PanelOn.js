@@ -1,5 +1,4 @@
 // @flow
-
 import React, { useEffect, useRef, useState } from 'react';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -15,8 +14,8 @@ Quill.register('modules/blotFormatter', BlotFormatter);
 type PanelType = {
   editPanelField: (SyntheticInputEvent<>, string) => void,
   editPanelQuill: (any, string, ?string) => void,
-  hidePanel: any => void,
-  panelItem: any
+  hidePanel: Function,
+  panelItem: NewsletterLayoutItemType
 };
 
 const PanelOn = ({ panelItem, editPanelField, editPanelQuill, hidePanel }: PanelType) => {
@@ -35,7 +34,7 @@ const PanelOn = ({ panelItem, editPanelField, editPanelQuill, hidePanel }: Panel
       </InputLabel>
       <Select
         onChange={(event: SyntheticInputEvent<HTMLSelectElement>): void => editPanelField(event, 'layout')}
-        value={panelItem.layout}
+        value={panelItem && panelItem.layout}
         labelWidth={labelWidth}
         inputProps={{
           id: 'layouttype-label',
@@ -51,18 +50,18 @@ const PanelOn = ({ panelItem, editPanelField, editPanelQuill, hidePanel }: Panel
       </Select>
       <TextField
         label="Content"
-        value={panelItem.content}
+        value={panelItem && panelItem.content}
         onChange={(event: SyntheticInputEvent<HTMLInputElement>):void => editPanelField(event, 'content')}
       />
       <ReactQuill
-        value={panelItem.htmldescription}
+        value={panelItem && panelItem.htmldescription}
         modules={{
           blotFormatter: {}
         }}
         onChange={(newValue, delta, source) => editPanelQuill(newValue, source)}
       />
       <ReactQuill
-        value={panelItem.htmlquotes}
+        value={panelItem && panelItem.htmlquotes}
         modules={{
           blotFormatter: {}
         }}
@@ -72,12 +71,12 @@ const PanelOn = ({ panelItem, editPanelField, editPanelQuill, hidePanel }: Panel
       />
       <TextField
         label="Poster thumbnail URL"
-        value={panelItem.posterurl}
+        value={panelItem && panelItem.posterurl}
         onChange={(event: SyntheticInputEvent<HTMLInputElement>): void => editPanelField(event, 'posterurl')}
       />
       <TextField
         label="Banner URL"
-        value={panelItem.bannerurl}
+        value={panelItem && panelItem.bannerurl}
         onChange={(event: SyntheticInputEvent<HTMLInputElement>): void => editPanelField(event, 'bannerurl')}
       />
       <Button

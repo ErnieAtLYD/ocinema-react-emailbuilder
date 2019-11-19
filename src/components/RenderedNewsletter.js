@@ -5,6 +5,7 @@ import LayoutItem from '../components/LayoutItem'
 type ComponentType = {
   layout: NewsletterLayoutType,
   deleteLayoutItem: Function,
+  duplicateLayoutItem: Function,
   editLayoutItem: Function,
   moveLayoutItem: Function
 }
@@ -12,6 +13,7 @@ type ComponentType = {
 const RenderedNewsletter = ({
   layout,
   deleteLayoutItem,
+  duplicateLayoutItem,
   editLayoutItem,
   moveLayoutItem
 }: ComponentType): any => (
@@ -24,6 +26,7 @@ const RenderedNewsletter = ({
       id={item.id}
       index={index}
       item={item}
+      duplicateLayoutItem={duplicateLayoutItem}
       deleteLayoutItem={deleteLayoutItem}
       editLayoutItem={editLayoutItem}
       moveLayoutItem={moveLayoutItem}

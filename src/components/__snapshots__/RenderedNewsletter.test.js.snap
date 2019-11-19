@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RenderedNewsletter renders layout items 1`] = `
+Array [
+  <LayoutItem
+    id={1}
+    index={0}
+    item={
+      Object {
+        "id": 1,
+      }
+    }
+    key="1"
+  />,
+  <LayoutItem
+    id={2}
+    index={1}
+    item={
+      Object {
+        "id": 2,
+      }
+    }
+    key="2"
+  />,
+]
+`;

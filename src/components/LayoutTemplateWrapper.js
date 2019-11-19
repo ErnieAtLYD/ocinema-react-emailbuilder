@@ -15,7 +15,7 @@ const LayoutTemplateWrapper = obj => {
           </Spacer>
           <Row>
             <Column large="8">
-              Your favorite independent cinema is bringing ﻿you more of the kind of movies you love.
+              <p dangerouslySetInnerHTML={{__html: htmldescription}} />
             </Column>
             <Column large="4">
               <img src="https://mangrove-labs-o-cinema.s3.amazonaws.com/email-assets/tw.png" style={{display:'inline', margin:4}} />

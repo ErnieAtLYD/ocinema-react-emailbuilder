@@ -6,7 +6,10 @@ export const useFetchOPosts = (): any | {[key: string]: any} => {
   return useFetch(query, {});
 }
 
-export const useFetch = (url: string, defaultData: {[key: string]: any}): any | {[key: string]: any} => {
+export const useFetch = (
+  url: string,
+  defaultData: {[key: string]: any}
+): any | {[key: string]: any} => {
   const [data, updateData] = useState(defaultData);
 
   useEffect((): void => {

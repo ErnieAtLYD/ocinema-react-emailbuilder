@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ExportTemplate renders without crashing 1`] = `
+<Fragment>
+  <WithStyles(ForwardRef(Button))
+    onClick={[Function]}
+  >
+    Export as HTML
+  </WithStyles(ForwardRef(Button))>
+  <ForwardRef(Modal)
+    onClose={[Function]}
+    open={false}
+  >
+    <div
+      className="modal"
+    >
+      <p>
+        Copy and paste the HTML.
+      </p>
+      <textarea />
+      <WithStyles(ForwardRef(Button))>
+        Copy to Clipboard
+      </WithStyles(ForwardRef(Button))>
+    </div>
+  </ForwardRef(Modal)>
+</Fragment>
+`;

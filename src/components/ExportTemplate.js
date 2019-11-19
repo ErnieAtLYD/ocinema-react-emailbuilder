@@ -1,3 +1,4 @@
+// @flow
 import React, { useState } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { inlineContent } from 'juice';
@@ -11,7 +12,7 @@ import newsletterStyles from '../styles/newsletter.scss';
 import './ExportTemplate.scss';
 
 // This gets called from the exportAsHTML method in /actions
-export const getExportedHTML = layout => {
+export const getExportedHTML = (layout: any): any => {
   const markup = renderToStaticMarkup(
     <Inky>
       <Inky.Head>
@@ -20,25 +21,29 @@ export const getExportedHTML = layout => {
         </style>
       </Inky.Head>
       <Inky.Body>
-        {layout.map((item, index) => <LayoutTemplateWrapper item={item} />)}
+        {layout.map((item: NewsletterLayoutItemType, index: any): React$Element<any> => <LayoutTemplateWrapper item={item} />)}
       </Inky.Body>
     </Inky>
   );
   return inlineContent(Inky.doctype + markup, newsletterStyles);
 }
 
-const ExportTemplate = ({ layout, exportAsHTML }) => {
-  console.log(layout)
+type ComponentType = {
+  layout: Array<any>,
+  exportAsHTML: Function
+}
+
+const ExportTemplate = ({ layout, exportAsHTML }: ComponentType): React$Element<({children?: React$Node}) => React$Node> => {
   const [open, setOpen] = useState(false);
   const [newsletterHTML, setHTML] = useState();
 
-  const handleOpen = () => {
+  const handleOpen = (): void => {
     setOpen(true);
   };
-  const handleClose = () => {
+  const handleClose = (): void => {
     setOpen(false);
   };
-  const handleExport = (layout) => {
+  const handleExport = (layout: any): void => {
     exportAsHTML();
     setHTML(getExportedHTML(layout));
     handleOpen();
@@ -46,7 +51,7 @@ const ExportTemplate = ({ layout, exportAsHTML }) => {
 
   return (
     <>
-      <Button onClick={() => { handleExport(layout) }}>
+      <Button onClick={(): void => { handleExport(layout) }}>
         Export as HTML
       </Button>
       <Modal

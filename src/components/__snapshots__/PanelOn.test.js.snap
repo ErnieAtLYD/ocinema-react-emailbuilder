@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PanelOff renders without crashing 1`] = `
+<Fragment>
+  <WithStyles(ForwardRef(Button))
+    onClick={[Function]}
+    variant="contained"
+  >
+    Add a blank section
+  </WithStyles(ForwardRef(Button))>
+  <WithStyles(ForwardRef(Typography))>
+    Import from the website:
+  </WithStyles(ForwardRef(Typography))>
+  <WithStyles(ForwardRef(InputLabel))
+    htmlFor="event-label"
+  >
+    Event
+  </WithStyles(ForwardRef(InputLabel))>
+  <WithStyles(ForwardRef(Select))
+    inputProps={
+      Object {
+        "id": "event-label",
+        "name": "age",
+      }
+    }
+    labelWidth={0}
+    onChange={[Function]}
+    value=""
+  >
+    <WithStyles(ForwardRef(MenuItem))
+      value=""
+    >
+      <em>
+        Choose an event
+      </em>
+    </WithStyles(ForwardRef(MenuItem))>
+  </WithStyles(ForwardRef(Select))>
+  <WithStyles(ForwardRef(Button))
+    disabled={true}
+    onClick={[Function]}
+    variant="contained"
+  >
+    Import
+  </WithStyles(ForwardRef(Button))>
+  <ExportTemplate />
+</Fragment>
+`;

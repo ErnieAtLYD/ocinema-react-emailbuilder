@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button } from '@material-ui/core';
-// import { shallow } from 'enzyme';
 import { createShallow } from '@material-ui/core/test-utils';
 import PanelOff from './PanelOff'
 

@@ -1,3 +1,4 @@
+// @flow
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
@@ -8,7 +9,19 @@ import ItemTypes from './ItemTypes'
 import LayoutTemplateWrapper from './LayoutTemplateWrapper'
 import './LayoutItem.scss';
 
-const LayoutItem = ({ id, index, item, deleteLayoutItem, duplicateLayoutItem, editLayoutItem, moveLayoutItem }) => {
+type LayoutType = {
+  id: number,
+  index: number,
+  item: any,
+  deleteLayoutItem: Function,
+  duplicateLayoutItem: Function,
+  editLayoutItem: Function,
+  moveLayoutItem: Function
+}
+
+const LayoutItem = ({
+  id, index, item, deleteLayoutItem, duplicateLayoutItem, editLayoutItem, moveLayoutItem
+}: LayoutType): React$Element<"div"> => {
   const ref = useRef(null)
   const [,drop] = useDrop({
     accept: ItemTypes.LAYOUTITEM,
