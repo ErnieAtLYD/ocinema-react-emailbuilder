@@ -1,7 +1,6 @@
-import { EDIT_LAYOUT_ITEM, UPDATE_PANEL_FIELD } from '../actions';
-
+// @flow
 const initialState = {
-  id: '',
+  id: 999,
   layout: '',
   content: '',
   htmldescription:'',
@@ -9,12 +8,15 @@ const initialState = {
   posterurl: ''
 };
 
-export default function panelItem(state = initialState, action) {
+export default function panelItem(
+  state: NewsletterLayoutItemType = initialState,
+  action: Action
+) {
   switch (action.type) {
-    case EDIT_LAYOUT_ITEM:
+    case "EDIT_LAYOUT_ITEM":
       return action.payload.item;
 
-    case UPDATE_PANEL_FIELD:
+    case "UPDATE_PANEL_FIELD":
       return {
         ...state,
         [action.payload.name]: action.payload.value

@@ -1,29 +1,10 @@
 // @flow
-export const CREATE_LAYOUT_ITEM = 'CREATE_LAYOUT_ITEM';
-export const DELETE_LAYOUT_ITEM = 'DELETE_LAYOUT_ITEM';
-export const EDIT_LAYOUT_ITEM   = 'EDIT_LAYOUT_ITEM';
-export const MOVE_LAYOUT_ITEM   = 'MOVE_LAYOUT_ITEM';
-export const UPDATE_PANEL_FIELD = 'UPDATE_PANEL_FIELD';
-export const HIDE_PANEL         = 'HIDE_PANEL';
-export const EXPORT_HTML        = 'EXPORT_HTML';
-
-export const createLayoutItem = (meta: any = null): {|
-  payload:
-    | any
-    | {|
-      bannerurl: string,
-      content: string,
-      htmldescription: string,
-      htmlquotes: string,
-      id: string,
-      layout: string,
-      posterurl: string,
-    |},
-  type: string,
-|} => {
+export const createLayoutItem = (
+  meta: ?NewsletterLayoutItemType = null
+): ActionCreateLayoutItem => {
   const ts = new Date().getTime();
   const objItem = meta ? meta : {
-    id: 'id-' + ts,
+    id: ts,
     layout: 'full-bleed-wrapper-2',
     content: '',
     htmldescription:'',
@@ -32,28 +13,23 @@ export const createLayoutItem = (meta: any = null): {|
     bannerurl: 'https://placehold.it/580x100'
   }
   return {
-    type: CREATE_LAYOUT_ITEM,
+    type: "CREATE_LAYOUT_ITEM",
     payload: objItem
   }
 }
 
-export const deleteLayoutItem = (
-  key: number
-): {|key: number, type: string|} => {
+export const deleteLayoutItem = (key: number): ActionDeleteLayoutItem => {
   return {
-    type: DELETE_LAYOUT_ITEM,
-    key
+    type: "DELETE_LAYOUT_ITEM",
+    key: key
   }
 }
 
-// see: https://gist.github.com/markerikson/ea4d0a6ce56ee479fe8b356e099f857e
-export const editLayoutItem = (
-  key: number
-): ((dispatch: any, getState: any) => void) => {
+export const editLayoutItem = (key: number): ThunkAction => {
   return (dispatch: any, getState: any): void => {
     const state = getState();
     dispatch({
-      type: EDIT_LAYOUT_ITEM,
+      type: "EDIT_LAYOUT_ITEM",
       payload: {
         index: key,
         item: state.layout[key]
@@ -63,22 +39,21 @@ export const editLayoutItem = (
 }
 
 export const moveLayoutItem = (
-  key: number, newIndex: number
-): {|key: number, newIndex: number, type: string|} => {
+  key: number,
+  newIndex: number
+): ActionMoveLayoutItem => {
   return {
-    type: MOVE_LAYOUT_ITEM,
-    key,
-    newIndex
+    type: "MOVE_LAYOUT_ITEM",
+    key: key,
+    newIndex: newIndex
   }
 }
 
-export const editPanelField = (
-  event: any, name: string
-): ((dispatch: any, getState: any) => void) => {
-  return (dispatch: any, getState: any): void => {
+export const editPanelField = (event: any, name: string): ThunkAction => {
+  return (dispatch, getState) => {
     const state = getState();
     dispatch({
-      type: UPDATE_PANEL_FIELD,
+      type: "UPDATE_PANEL_FIELD",
       payload: {
         name: name,
         index: state.panelIndex,
@@ -89,12 +64,14 @@ export const editPanelField = (
 }
 
 export const editPanelQuill = (
-  newValue: any, source: any, field: string = 'htmldescription'
-): ((dispatch: any, getState: any) => void) => {
-  return (dispatch: any, getState: any): void => {
+  newValue: string,
+  source: string,
+  field: string = 'htmldescription'
+): ThunkAction => {
+  return (dispatch, getState) => {
     const state = getState();
     dispatch({
-      type: UPDATE_PANEL_FIELD,
+      type: "UPDATE_PANEL_FIELD",
       payload: {
         name: field,
         index: state.panelIndex,
@@ -104,14 +81,10 @@ export const editPanelQuill = (
   }
 }
 
-export const exportAsHTML = (): {|type: string|} => {
-  return {
-    type: EXPORT_HTML
-  }
+export const exportAsHTML = (): ActionExportHTML => {
+  return {type: "EXPORT_HTML"}
 }
 
-export const hidePanel = (): {|type: string|} => {
-  return {
-    type: HIDE_PANEL,
-  }
+export const hidePanel = (): ActionHidePanel => {
+  return {type: "HIDE_PANEL"}
 }

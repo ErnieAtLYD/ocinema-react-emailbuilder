@@ -47,6 +47,7 @@ const App = (
             <RenderedNewsletter
               layout={layout}
               deleteLayoutItem={actions.deleteLayoutItem}
+              duplicateLayoutItem={actions.duplicateLayoutItem}
               editLayoutItem={actions.editLayoutItem}
               moveLayoutItem={actions.moveLayoutItem}
             />
