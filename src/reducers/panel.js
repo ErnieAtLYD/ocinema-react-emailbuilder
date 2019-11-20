@@ -21,10 +21,10 @@ export default function panel(
       };
 
     case "HIDE_PANEL":
-    return {
-      ...state,
-      visibility: false
-    };
+      return {
+        ...state,
+        visibility: false
+      };
 
     default:
       return state;

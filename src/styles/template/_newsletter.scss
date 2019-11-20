@@ -4,6 +4,12 @@ center {
   min-width: inherit;
 }
 
+// Try to not force a fixed height for images imported from the website into
+// the newsletter
+img {
+  height: auto !important;
+}
+
 // FIX for bug in react-inky callouts
 table.callout {
   margin-bottom: $callout-margin-bottom;

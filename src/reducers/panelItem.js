@@ -1,11 +1,11 @@
 // @flow
 const initialState = {
   id: 999,
-  layout: '',
-  content: '',
-  htmldescription:'',
-  htmlquotes: '',
-  posterurl: ''
+  layout: "",
+  content: "",
+  htmldescription: "",
+  htmlquotes: "",
+  posterurl: ""
 };
 
 export default function panelItem(

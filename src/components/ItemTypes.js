@@ -1,3 +1,3 @@
 export default {
-  LAYOUTITEM: 'layoutitem',
-}
+  LAYOUTITEM: "layoutitem"
+};

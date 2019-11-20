@@ -30,11 +30,16 @@
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
+    "lint": "eslint .",
+    "format": "prettier --write \"**/*.+(js|jsx|json|css|md)\"",
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "react-app",
+      "plugin:prettier/recommended"
+    ]
   },
   "babel": {
     "presets": [
@@ -64,9 +69,14 @@
     "customize-cra": "^0.8.0",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
+    "eslint": "^6.6.0",
+    "eslint-config-prettier": "^6.7.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-react": "^7.16.0",
     "flow-bin": "^0.112.0",
     "jest-environment-enzyme": "^7.1.2",
     "jest-enzyme": "^7.1.2",
+    "prettier": "^1.19.1",
     "react-app-rewired": "^2.1.4",
     "react-dnd-cjs": "^9.4.0",
     "react-dnd-test-backend": "^9.4.0",
@@ -74,7 +84,9 @@
     "react-test-renderer": "^16.12.0"
   },
   "jest": {
-    "setupFilesAfterEnv": ["jest-enzyme"],
+    "setupFilesAfterEnv": [
+      "jest-enzyme"
+    ],
     "testEnvironment": "enzyme",
     "moduleNameMapper": {
       "^dnd-core$": "dnd-core/dist/cjs",

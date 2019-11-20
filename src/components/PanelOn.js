@@ -1,15 +1,17 @@
 // @flow
-import React, { useEffect, useRef, useState } from 'react';
-import Select from '@material-ui/core/Select';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import ReactQuill, { Quill } from 'react-quill';
-import BlotFormatter from 'quill-blot-formatter';
-import 'react-quill/dist/quill.snow.css';
+import React, { useEffect, useRef, useState } from "react";
+import Select from "@material-ui/core/Select";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import ReactQuill, { Quill } from "react-quill";
+import BlotFormatter from "quill-blot-formatter";
+import "react-quill/dist/quill.snow.css";
 
-Quill.register('modules/blotFormatter', BlotFormatter);
+import ImageUploaderModal from "./ImageUploaderModal";
+
+Quill.register("modules/blotFormatter", BlotFormatter);
 
 type PanelType = {
   editPanelField: (SyntheticInputEvent<>, string) => void,
@@ -18,7 +20,12 @@ type PanelType = {
   panelItem: NewsletterLayoutItemType
 };
 
-const PanelOn = ({ panelItem, editPanelField, editPanelQuill, hidePanel }: PanelType) => {
+const PanelOn = ({
+  panelItem,
+  editPanelField,
+  editPanelQuill,
+  hidePanel
+}: PanelType) => {
   const inputLabel = useRef(null);
   const [labelWidth, setLabelWidth] = useState(0);
 
@@ -33,11 +40,13 @@ const PanelOn = ({ panelItem, editPanelField, editPanelQuill, hidePanel }: Panel
         Layout type
       </InputLabel>
       <Select
-        onChange={(event: SyntheticInputEvent<HTMLSelectElement>): void => editPanelField(event, 'layout')}
+        onChange={(event: SyntheticInputEvent<HTMLSelectElement>): void =>
+          editPanelField(event, "layout")
+        }
         value={panelItem && panelItem.layout}
         labelWidth={labelWidth}
         inputProps={{
-          id: 'layouttype-label',
+          id: "layouttype-label"
         }}
       >
         <MenuItem value="header">Email Header</MenuItem>
@@ -51,12 +60,20 @@ const PanelOn = ({ panelItem, editPanelField, editPanelQuill, hidePanel }: Panel
       <TextField
         label="Content"
         value={panelItem && panelItem.content}
-        onChange={(event: SyntheticInputEvent<HTMLInputElement>):void => editPanelField(event, 'content')}
+        onChange={(event: SyntheticInputEvent<HTMLInputElement>): void =>
+          editPanelField(event, "content")
+        }
       />
       <ReactQuill
         value={panelItem && panelItem.htmldescription}
         modules={{
-          blotFormatter: {}
+          blotFormatter: {},
+          toolbar: [
+            [{ header: [1, 2, 3, 4, 5, 6, false] }],
+            ["bold", "italic", "link", "image"],
+            [{ list: "ordered" }, { list: "bullet" }],
+            ["clean"]
+          ]
         }}
         onChange={(newValue, delta, source) => editPanelQuill(newValue, source)}
       />
@@ -65,28 +82,31 @@ const PanelOn = ({ panelItem, editPanelField, editPanelQuill, hidePanel }: Panel
         modules={{
           blotFormatter: {}
         }}
-        onChange={(newValue, delta, source) => editPanelQuill(
-          newValue, source, 'htmlquotes'
-        )}
+        onChange={(newValue, delta, source) =>
+          editPanelQuill(newValue, source, "htmlquotes")
+        }
       />
       <TextField
         label="Poster thumbnail URL"
         value={panelItem && panelItem.posterurl}
-        onChange={(event: SyntheticInputEvent<HTMLInputElement>): void => editPanelField(event, 'posterurl')}
+        onChange={(event: SyntheticInputEvent<HTMLInputElement>): void =>
+          editPanelField(event, "posterurl")
+        }
       />
       <TextField
         label="Banner URL"
         value={panelItem && panelItem.bannerurl}
-        onChange={(event: SyntheticInputEvent<HTMLInputElement>): void => editPanelField(event, 'bannerurl')}
+        onChange={(event: SyntheticInputEvent<HTMLInputElement>): void =>
+          editPanelField(event, "bannerurl")
+        }
       />
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={hidePanel}>
+      <Button variant="contained" color="primary" onClick={hidePanel}>
         Save and close this
       </Button>
+
+      <ImageUploaderModal />
     </>
-  )
-}
+  );
+};
 
 export default PanelOn;

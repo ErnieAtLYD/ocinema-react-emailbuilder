@@ -1,8 +1,8 @@
-import React from 'react';
-import { Button } from '@material-ui/core';
+import React from "react";
+import { Button } from "@material-ui/core";
 // import { shallow } from 'enzyme';
-import { createShallow } from '@material-ui/core/test-utils';
-import PanelOff from './PanelOff'
+import { createShallow } from "@material-ui/core/test-utils";
+import PanelOff from "./PanelOff";
 
 let shallow;
 let wrapper;
@@ -14,18 +14,17 @@ beforeEach(() => {
   wrapper = shallow(<PanelOff />);
 });
 
-describe('PanelOff', () => {
-  it('renders without crashing', () => {
+describe("PanelOff", () => {
+  it("renders without crashing", () => {
     // console.log(wrapper.debug());
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should call the onClick function when \'Add a blank section\' button is clicked', () => {
+  it("should call the onClick function when 'Add a blank section' button is clicked", () => {
     // const mockedFn = jest.fn();
     // wrapper.instance().createLayoutItem = mockedFn;
     // console.log(wrapper.debug());
     // wrapper.find(Button).first().props().onClick();
     // expect(mockedFn).toHaveBeenCalledTimes(1);
   });
-
 });

@@ -1,6 +1,6 @@
 // @flow
-import React from 'react';
-import LayoutItem from '../components/LayoutItem'
+import React from "react";
+import LayoutItem from "../components/LayoutItem";
 
 type ComponentType = {
   layout: NewsletterLayoutType,
@@ -8,7 +8,7 @@ type ComponentType = {
   duplicateLayoutItem: Function,
   editLayoutItem: Function,
   moveLayoutItem: Function
-}
+};
 
 const RenderedNewsletter = ({
   layout,
@@ -16,11 +16,10 @@ const RenderedNewsletter = ({
   duplicateLayoutItem,
   editLayoutItem,
   moveLayoutItem
-}: ComponentType): any => (
-  layout.map((
-    item: NewsletterLayoutItemType,
-    index: number
-  ): React$Element<typeof LayoutItem> =>
+}: ComponentType): any =>
+  layout.map((item: NewsletterLayoutItemType, index: number): React$Element<
+    typeof LayoutItem
+  > => (
     <LayoutItem
       key={item.id}
       id={item.id}
@@ -30,7 +29,7 @@ const RenderedNewsletter = ({
       deleteLayoutItem={deleteLayoutItem}
       editLayoutItem={editLayoutItem}
       moveLayoutItem={moveLayoutItem}
-    />)
-)
+    />
+  ));
 
 export default RenderedNewsletter;

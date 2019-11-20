@@ -1,15 +1,92 @@
 // @flow
 const initialState = [
-  { id: 1, layout: 'header', content: '', htmldescription:'Your favorite independent cinema is bringing ﻿you more of the kind of movies you love.', htmlquotes: '', posterurl: '' },
-  { id: 2, layout: 'filmlayout', content: 'bar', htmldescription:'baz', htmlquotes: '', posterurl: '' },
-  { id: 5, layout: 'section-break', content: '', htmldescription:'', htmlquotes: '', posterurl: '' },
-  { id: 6, layout: 'full-bleed-wrapper', content: '', htmldescription:'', htmlquotes: '', posterurl: '' },
-  { id: 4, layout: 'filmlayout', content: 'bar', htmldescription:'baz', htmlquotes: '', posterurl: '' },
-  { id: 7, layout: 'membership-drive', content: 'bar', htmldescription:'As a nonprofit cinema, the proceeds from our membership program go right back into increasing the diversity of our film presentations and events. An O Cinema membership supports a cornerstone of the cultural life of our community- so you can both feel good and do good by joining. Become a member today!', htmlquotes: '', posterurl: 'https://www.o-cinema.org/membership/' },
-  { id: 9, layout: 'full-bleed-wrapper-2', content: '', bannerurl: 'https://mangrove-labs-o-cinema.s3.amazonaws.com/email-assets/sponsors.jpg', htmldescription:'', htmlquotes: '', posterurl: '' },
-  { id: 3, layout: 'footer', content: '', htmldescription:'', htmlquotes: '', posterurl: '' }
+  {
+    id: 1,
+    layout: "header",
+    content: "",
+    htmldescription:
+      "Your favorite independent cinema is bringing ﻿you more of the kind of movies you love.",
+    htmlquotes: "",
+    posterurl: ""
+  },
+  {
+    id: 2,
+    layout: "filmlayout",
+    content: "bar",
+    htmldescription: "baz",
+    htmlquotes: "",
+    posterurl: ""
+  },
+  {
+    id: 5,
+    layout: "section-break",
+    content: "",
+    htmldescription: "",
+    htmlquotes: "",
+    posterurl: ""
+  },
+  {
+    id: 11,
+    layout: "full-bleed-wrapper",
+    content: "Around town",
+    htmldescription: "Check out these cool events around Miami",
+    htmlquotes: "",
+    posterurl: ""
+  },
+  {
+    id: 6,
+    layout: "full-bleed-wrapper",
+    content: "Next week",
+    htmldescription: "",
+    htmlquotes: "",
+    posterurl: ""
+  },
+  {
+    id: 4,
+    layout: "filmlayout",
+    content: "bar",
+    htmldescription: "baz",
+    htmlquotes: "",
+    posterurl: ""
+  },
+  {
+    id: 7,
+    layout: "membership-drive",
+    content: "bar",
+    htmldescription:
+      "As a nonprofit cinema, the proceeds from our membership program go right back into increasing the diversity of our film presentations and events. An O Cinema membership supports a cornerstone of the cultural life of our community- so you can both feel good and do good by joining. Become a member today!",
+    htmlquotes: "",
+    posterurl: "https://www.o-cinema.org/membership/"
+  },
+  {
+    id: 9,
+    layout: "full-bleed-wrapper-2",
+    content: "",
+    bannerurl:
+      "https://mangrove-labs-o-cinema.s3.amazonaws.com/email-assets/sponsors.jpg",
+    htmldescription: "",
+    htmlquotes: "",
+    posterurl: ""
+  },
+  {
+    id: 12,
+    layout: "full-bleed-wrapper-2",
+    content: "",
+    bannerurl:
+      "https://mangrove-labs-o-cinema.s3.amazonaws.com/email-assets/nextweek.jpg",
+    htmldescription: "",
+    htmlquotes: "",
+    posterurl: ""
+  },
+  {
+    id: 3,
+    layout: "footer",
+    content: "",
+    htmldescription: "",
+    htmlquotes: "",
+    posterurl: ""
+  }
 ];
-
 export default function layout(
   state: NewsletterLayoutType = initialState,
   action: Action
@@ -44,7 +121,7 @@ export default function layout(
         ...newLayout[action.payload.index],
         [action.payload.name]: action.payload.value
       };
-      newLayout[action.payload.index] = temp
+      newLayout[action.payload.index] = temp;
       return newLayout;
 
     default:
