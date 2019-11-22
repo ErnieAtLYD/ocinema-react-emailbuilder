@@ -49,7 +49,7 @@ const PanelOff = ({
       content: searchedfilm.title,
       htmldescription: searchedfilm.description,
       htmlquotes: searchedfilm.event_reviews,
-      posterurl: searchedfilm.image.sizes.large.url,
+      posterurl: searchedfilm["image"]["sizes"]["poster-full"]["url"],
       showtimes: searchedfilm.event_showtimes,
       agileurl: searchedfilm.url,
       bannerurl: ""

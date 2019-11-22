@@ -9,6 +9,9 @@ import ReactQuill, { Quill } from "react-quill";
 import BlotFormatter from "quill-blot-formatter";
 import "react-quill/dist/quill.snow.css";
 
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Switch from "@material-ui/core/Switch";
+
 import ImageUploaderModal from "./ImageUploaderModal";
 
 Quill.register("modules/blotFormatter", BlotFormatter);
@@ -100,6 +103,14 @@ const PanelOn = ({
           editPanelField(event, "bannerurl")
         }
       />
+
+      <FormControlLabel
+        control={<Switch value="checkedC" color="primary" />}
+        label="Show CTA Button?"
+      />
+      <TextField label="CTA button label" />
+      <TextField label="CTA URL" />
+
       <Button variant="contained" color="primary" onClick={hidePanel}>
         Save and close this
       </Button>
