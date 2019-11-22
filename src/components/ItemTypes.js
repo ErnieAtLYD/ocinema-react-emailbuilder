@@ -1,3 +1,4 @@
 export default {
-  LAYOUTITEM: "layoutitem"
+  LAYOUTITEM: "layoutitem",
+  PANELBUTTON: "panelbutton",
 };

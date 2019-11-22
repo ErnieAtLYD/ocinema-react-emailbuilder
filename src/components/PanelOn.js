@@ -1,11 +1,11 @@
 // @flow
-import React, { useEffect, useRef, useState } from "react";
+import React, {useEffect, useRef, useState} from "react";
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import ReactQuill, { Quill } from "react-quill";
+import ReactQuill, {Quill} from "react-quill";
 import BlotFormatter from "quill-blot-formatter";
 import "react-quill/dist/quill.snow.css";
 
@@ -20,15 +20,10 @@ type PanelType = {
   editPanelField: (SyntheticInputEvent<>, string) => void,
   editPanelQuill: (any, string, ?string) => void,
   hidePanel: Function,
-  panelItem: NewsletterLayoutItemType
+  panelItem: NewsletterLayoutItemType,
 };
 
-const PanelOn = ({
-  panelItem,
-  editPanelField,
-  editPanelQuill,
-  hidePanel
-}: PanelType) => {
+const PanelOn = ({panelItem, editPanelField, editPanelQuill, hidePanel}: PanelType) => {
   const inputLabel = useRef(null);
   const [labelWidth, setLabelWidth] = useState(0);
 
@@ -49,7 +44,7 @@ const PanelOn = ({
         value={panelItem && panelItem.layout}
         labelWidth={labelWidth}
         inputProps={{
-          id: "layouttype-label"
+          id: "layouttype-label",
         }}
       >
         <MenuItem value="header">Email Header</MenuItem>
@@ -72,18 +67,18 @@ const PanelOn = ({
         modules={{
           blotFormatter: {},
           toolbar: [
-            [{ header: [1, 2, 3, 4, 5, 6, false] }],
+            [{header: [1, 2, 3, 4, 5, 6, false]}],
             ["bold", "italic", "link", "image"],
-            [{ list: "ordered" }, { list: "bullet" }],
-            ["clean"]
-          ]
+            [{list: "ordered"}, {list: "bullet"}],
+            ["clean"],
+          ],
         }}
         onChange={(newValue, delta, source) => editPanelQuill(newValue, source)}
       />
       <ReactQuill
         value={panelItem && panelItem.htmlquotes}
         modules={{
-          blotFormatter: {}
+          blotFormatter: {},
         }}
         onChange={(newValue, delta, source) =>
           editPanelQuill(newValue, source, "htmlquotes")

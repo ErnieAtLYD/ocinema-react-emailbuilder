@@ -1,29 +1,26 @@
 // @flow
 const initialState = {
-  visibility: false
+  visibility: false,
 };
 
-export default function panel(
-  state: PanelStateType = initialState,
-  action: Action
-) {
+export default function panel(state: PanelStateType = initialState, action: Action) {
   switch (action.type) {
     case "DELETE_LAYOUT_ITEM":
       return {
         ...state,
-        visibility: false
+        visibility: false,
       };
 
     case "EDIT_LAYOUT_ITEM":
       return {
         ...state,
-        visibility: true
+        visibility: true,
       };
 
     case "HIDE_PANEL":
       return {
         ...state,
-        visibility: false
+        visibility: false,
       };
 
     default:

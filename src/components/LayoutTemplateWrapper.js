@@ -7,8 +7,9 @@ import {
   Callout,
   Center,
   Row,
-  Column
+  Column,
 } from "react-inky";
+import ColumnContent from "./ColumnContent";
 import Showtimes from "./Showtimes";
 import "../styles/newsletter.scss";
 
@@ -16,12 +17,14 @@ const LayoutTemplateWrapper = obj => {
   const {
     agileurl,
     bannerurl,
+    id,
     posterurl,
     layout,
     content,
+    contents,
     htmldescription,
     htmlquotes,
-    showtimes
+    showtimes,
   } = obj.item;
   switch (layout) {
     case "header":
@@ -30,20 +33,20 @@ const LayoutTemplateWrapper = obj => {
           <Spacer size="8"></Spacer>
           <Row>
             <Column large="8">
-              <p dangerouslySetInnerHTML={{ __html: htmldescription }} />
+              <p dangerouslySetInnerHTML={{__html: htmldescription}} />
             </Column>
             <Column large="4">
               <img
                 src="https://mangrove-labs-o-cinema.s3.amazonaws.com/email-assets/tw.png"
-                style={{ display: "inline", margin: 4 }}
+                style={{display: "inline", margin: 4}}
               />
               <img
                 src="https://mangrove-labs-o-cinema.s3.amazonaws.com/email-assets/fb.png"
-                style={{ display: "inline", margin: 4 }}
+                style={{display: "inline", margin: 4}}
               />
               <img
                 src="https://mangrove-labs-o-cinema.s3.amazonaws.com/email-assets/ig.png"
-                style={{ display: "inline", margin: 4 }}
+                style={{display: "inline", margin: 4}}
               />
             </Column>
           </Row>
@@ -53,7 +56,7 @@ const LayoutTemplateWrapper = obj => {
                 <Center>
                   <img
                     src="https://mangrove-labs-o-cinema.s3.amazonaws.com/email-assets/o-logo-mailcampaign.jpg"
-                    style={{ width: 100 }}
+                    style={{width: 100}}
                   />
                 </Center>
               </Column>
@@ -61,36 +64,29 @@ const LayoutTemplateWrapper = obj => {
           </Container>
         </>
       );
-    case "full-bleed-wrapper-2":
+    case "column-1":
       return (
-        <Wrapper className="full-bleed-wrapper-2">
-          <Container>
-            <Row className="collapse">
-              <Column small="12">{bannerurl && <img src={bannerurl} />}</Column>
-            </Row>
-            {htmldescription && (
-              <Row>
-                <Column small="12">
-                  <div dangerouslySetInnerHTML={{ __html: htmldescription }} />
-                </Column>
-              </Row>
-            )}
-          </Container>
-        </Wrapper>
+        <Container>
+          <Row className="collapse">
+            <Column small="12">
+              <ColumnContent contents={contents} id={id} />
+            </Column>
+          </Row>
+        </Container>
       );
     case "full-bleed-wrapper":
       return (
         <Container>
           <Row className="collapse">
             <Column small="12">
-              <Wrapper style={{ backgroundColor: "#777777" }}>
+              <Wrapper style={{backgroundColor: "#777777"}}>
                 <h3
                   className="text-center"
                   style={{
                     textTransform: "uppercase",
                     marginTop: 10,
                     color: "#fff",
-                    fontWeight: "bold"
+                    fontWeight: "bold",
                   }}
                 >
                   {content}
@@ -105,14 +101,14 @@ const LayoutTemplateWrapper = obj => {
         <Container>
           <Row className="collapse">
             <Column small="12">
-              <Wrapper style={{ backgroundColor: "#ed008c" }}>
+              <Wrapper style={{backgroundColor: "#ed008c"}}>
                 <h3
                   className="text-center"
                   style={{
                     textTransform: "uppercase",
                     marginTop: 10,
                     color: "#fff",
-                    fontWeight: "bold"
+                    fontWeight: "bold",
                   }}
                 >
                   {content}
@@ -131,7 +127,7 @@ const LayoutTemplateWrapper = obj => {
             <h2>
               Support O Cinema <small>Become a member</small>
             </h2>
-            <div dangerouslySetInnerHTML={{ __html: htmldescription }} />
+            <div dangerouslySetInnerHTML={{__html: htmldescription}} />
             <Spacer size="16"></Spacer>
             <Center>
               <Button href={posterurl}>Join now</Button>
@@ -148,8 +144,8 @@ const LayoutTemplateWrapper = obj => {
               <br />
               500 71 Street, Miami Beach FL 33141 (Mailing address)
               <br />
-              You received this email because you signed up to get updates from
-              us. <a href="#">Click here to unsubscribe.</a>
+              You received this email because you signed up to get updates from us.{" "}
+              <a href="#">Click here to unsubscribe.</a>
             </p>
           </Column>
         </Row>
@@ -160,11 +156,11 @@ const LayoutTemplateWrapper = obj => {
           <Row>
             <Column large="6">
               {posterurl && <img alt="Poster thumbnail" src={posterurl} />}
-              <div dangerouslySetInnerHTML={{ __html: htmlquotes }} />
+              <div dangerouslySetInnerHTML={{__html: htmlquotes}} />
             </Column>
             <Column large="6">
               <h1>{content}</h1>
-              <div dangerouslySetInnerHTML={{ __html: htmldescription }} />
+              <div dangerouslySetInnerHTML={{__html: htmldescription}} />
             </Column>
           </Row>
           {showtimes && showtimes.length > 0 && (

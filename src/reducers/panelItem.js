@@ -3,9 +3,10 @@ const initialState = {
   id: 999,
   layout: "",
   content: "",
+  contents: [],
   htmldescription: "",
   htmlquotes: "",
-  posterurl: ""
+  posterurl: "",
 };
 
 export default function panelItem(
@@ -19,7 +20,7 @@ export default function panelItem(
     case "UPDATE_PANEL_FIELD":
       return {
         ...state,
-        [action.payload.name]: action.payload.value
+        [action.payload.name]: action.payload.value,
       };
 
     default:

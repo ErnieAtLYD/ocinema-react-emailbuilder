@@ -1,24 +1,28 @@
 // @flow
-import React, { useEffect, useRef, useState } from "react";
+import React, {useEffect, useRef, useState} from "react";
 import Button from "@material-ui/core/Button";
 import InputLabel from "@material-ui/core/InputLabel";
 import Typography from "@material-ui/core/Typography";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import ExportTemplate from "./ExportTemplate";
-import { useFetchOPosts } from "./useFetch";
+import {useFetchOPosts} from "./useFetch";
+
+import TestDrag from "./TestDrag";
 
 type ComponentType = {
   createLayoutItem: Function,
+  dropDraggedButtonIntoColumnContent: Function,
   exportAsHTML: Function,
-  layout: NewsletterLayoutType
+  layout: NewsletterLayoutType,
 };
 
 const PanelOff = ({
   createLayoutItem,
+  dropDraggedButtonIntoColumnContent,
   exportAsHTML,
-  layout
-}: ComponentType): React$Element<({ children?: React$Node }) => React$Node> => {
+  layout,
+}: ComponentType): React$Element<({children?: React$Node}) => React$Node> => {
   const inputLabel = useRef(null);
   const [labelWidth, setLabelWidth] = useState(0);
   const [values, setValues] = useState("");
@@ -31,7 +35,7 @@ const PanelOff = ({
   const response = useFetchOPosts();
 
   const handleChange = (event: SyntheticInputEvent<HTMLSelectElement>) => {
-    const { value } = event.target;
+    const {value} = event.target;
     setValues(value);
   };
 
@@ -52,7 +56,7 @@ const PanelOff = ({
       posterurl: searchedfilm["image"]["sizes"]["poster-full"]["url"],
       showtimes: searchedfilm.event_showtimes,
       agileurl: searchedfilm.url,
-      bannerurl: ""
+      bannerurl: "",
     };
     createLayoutItem(temp);
   };
@@ -60,8 +64,16 @@ const PanelOff = ({
   return (
     <>
       <Button variant="contained" onClick={(): void => createLayoutItem()}>
-        Add a blank section
+        Add 1-Column
       </Button>
+
+      <Button variant="contained" onClick={(): void => createLayoutItem()}>
+        Add 2-Columns
+      </Button>
+
+      <TestDrag
+        dropDraggedButtonIntoColumnContent={dropDraggedButtonIntoColumnContent}
+      ></TestDrag>
 
       <Typography>Import from the website:</Typography>
       <InputLabel ref={inputLabel} htmlFor="event-label">
@@ -73,7 +85,7 @@ const PanelOff = ({
         labelWidth={labelWidth}
         inputProps={{
           name: "age",
-          id: "event-label"
+          id: "event-label",
         }}
       >
         <MenuItem value="">

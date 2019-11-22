@@ -3,8 +3,8 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
 
-import React, { useRef } from "react";
-import { useDrop, useDrag } from "react-dnd";
+import React, {useRef} from "react";
+import {useDrop, useDrag} from "react-dnd";
 import ItemTypes from "./ItemTypes";
 import LayoutTemplateWrapper from "./LayoutTemplateWrapper";
 import "./LayoutItem.scss";
@@ -16,7 +16,7 @@ type LayoutType = {
   deleteLayoutItem: Function,
   duplicateLayoutItem: Function,
   editLayoutItem: Function,
-  moveLayoutItem: Function
+  moveLayoutItem: Function,
 };
 
 const LayoutItem = ({
@@ -26,7 +26,7 @@ const LayoutItem = ({
   deleteLayoutItem,
   duplicateLayoutItem,
   editLayoutItem,
-  moveLayoutItem
+  moveLayoutItem,
 }: LayoutType): React$Element<"div"> => {
   const ref = useRef(null);
   const [, drop] = useDrop({
@@ -47,8 +47,7 @@ const LayoutItem = ({
       const hoverBoundingRect = ref.current.getBoundingClientRect();
 
       // Get vertical middle
-      const hoverMiddleY =
-        (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+      const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
 
       // Determine mouse position
       const clientOffset = monitor.getClientOffset();
@@ -70,35 +69,32 @@ const LayoutItem = ({
       }
       moveLayoutItem(dragIndex, hoverIndex);
       item.index = hoverIndex;
-    }
+    },
   });
-  const [{ isDragging }, drag] = useDrag({
-    item: { type: ItemTypes.LAYOUTITEM, id, index },
+  const [{isDragging}, drag] = useDrag({
+    item: {type: ItemTypes.LAYOUTITEM, id, index},
     collect: monitor => ({
-      isDragging: monitor.isDragging()
-    })
+      isDragging: monitor.isDragging(),
+    }),
   });
   const opacity = isDragging ? 0 : 1;
   drag(drop(ref));
   return (
-    <div className="layoutitem" ref={ref} style={{ opacity }}>
+    <div className="layoutitem" ref={ref} style={{opacity}}>
       <div className="layoutitem--no-hover">
         <div
           style={{
             backgroundColor: "inherit",
             fontFamily: "Helvetica, Arial, sans-serif",
             width: 580,
-            margin: "0 auto"
+            margin: "0 auto",
           }}
         >
           <LayoutTemplateWrapper item={item} />
         </div>
       </div>
       <div className="layoutitem--hover">
-        <EditIcon
-          className="layoutitem__edit"
-          onClick={() => editLayoutItem(index)}
-        />
+        <EditIcon className="layoutitem__edit" onClick={() => editLayoutItem(index)} />
         <DeleteIcon
           className="layoutitem__delete"
           onClick={() => deleteLayoutItem(index)}

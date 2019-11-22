@@ -1,15 +1,15 @@
 // @flow
-import { useState, useEffect } from "react";
+import {useState, useEffect} from "react";
 
-export const useFetchOPosts = (): any | { [key: string]: any } => {
+export const useFetchOPosts = (): any | {[key: string]: any} => {
   const query = `https://o-cinema.org/wp-json/tribe/events/v1/events?page=1&per_page=20`;
   return useFetch(query, {});
 };
 
 export const useFetch = (
   url: string,
-  defaultData: { [key: string]: any }
-): any | { [key: string]: any } => {
+  defaultData: {[key: string]: any}
+): any | {[key: string]: any} => {
   const [data, updateData] = useState(defaultData);
 
   useEffect((): void => {

@@ -7,23 +7,38 @@ export const createLayoutItem = (
     ? meta
     : {
         id: ts,
-        layout: "full-bleed-wrapper-2",
+        layout: "column-1",
         content: "",
+        contents: [],
         htmldescription: "",
         htmlquotes: "",
         posterurl: "",
-        bannerurl: "https://placehold.it/580x100"
+        bannerurl: "",
       };
   return {
     type: "CREATE_LAYOUT_ITEM",
-    payload: objItem
+    payload: objItem,
+  };
+};
+
+export const dropDraggedButtonIntoColumnContent = (
+  columnId: number,
+  index: number = 0
+): ActionDropDraggedButtonIntoColumn => {
+  return {
+    type: "DROP_DRAGGED_BUTTON_INTO_COLUMN_CONTENT",
+    payload: {
+      columnId: columnId,
+      index: index,
+      buttonType: "text",
+    },
   };
 };
 
 export const deleteLayoutItem = (key: number): ActionDeleteLayoutItem => {
   return {
     type: "DELETE_LAYOUT_ITEM",
-    key: key
+    key: key,
   };
 };
 
@@ -34,20 +49,17 @@ export const editLayoutItem = (key: number): ThunkAction => {
       type: "EDIT_LAYOUT_ITEM",
       payload: {
         index: key,
-        item: state.layout[key]
-      }
+        item: state.layout[key],
+      },
     });
   };
 };
 
-export const moveLayoutItem = (
-  key: number,
-  newIndex: number
-): ActionMoveLayoutItem => {
+export const moveLayoutItem = (key: number, newIndex: number): ActionMoveLayoutItem => {
   return {
     type: "MOVE_LAYOUT_ITEM",
     key: key,
-    newIndex: newIndex
+    newIndex: newIndex,
   };
 };
 
@@ -59,8 +71,8 @@ export const editPanelField = (event: any, name: string): ThunkAction => {
       payload: {
         name: name,
         index: state.panelIndex,
-        value: event.target.value
-      }
+        value: event.target.value,
+      },
     });
   };
 };
@@ -77,16 +89,16 @@ export const editPanelQuill = (
       payload: {
         name: field,
         index: state.panelIndex,
-        value: newValue
-      }
+        value: newValue,
+      },
     });
   };
 };
 
 export const exportAsHTML = (): ActionExportHTML => {
-  return { type: "EXPORT_HTML" };
+  return {type: "EXPORT_HTML"};
 };
 
 export const hidePanel = (): ActionHidePanel => {
-  return { type: "HIDE_PANEL" };
+  return {type: "HIDE_PANEL"};
 };

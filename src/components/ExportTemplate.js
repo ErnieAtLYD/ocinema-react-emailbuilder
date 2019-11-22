@@ -1,7 +1,7 @@
 // @flow
-import React, { useState } from "react";
-import { renderToStaticMarkup } from "react-dom/server";
-import { inlineContent } from "juice";
+import React, {useState} from "react";
+import {renderToStaticMarkup} from "react-dom/server";
+import {inlineContent} from "juice";
 import Inky from "react-inky";
 import Button from "@material-ui/core/Button";
 import Modal from "@material-ui/core/Modal";
@@ -19,11 +19,9 @@ export const getExportedHTML = (layout: any): any => {
         <style>{parse(newsletterStyles)}</style>
       </Inky.Head>
       <Inky.Body>
-        {layout.map(
-          (item: NewsletterLayoutItemType, index: any): React$Element<any> => (
-            <LayoutTemplateWrapper item={item} />
-          )
-        )}
+        {layout.map((item: NewsletterLayoutItemType, index: any): React$Element<any> => (
+          <LayoutTemplateWrapper item={item} />
+        ))}
       </Inky.Body>
     </Inky>
   );
@@ -32,13 +30,13 @@ export const getExportedHTML = (layout: any): any => {
 
 type ComponentType = {
   layout: Array<any>,
-  exportAsHTML: Function
+  exportAsHTML: Function,
 };
 
 const ExportTemplate = ({
   layout,
-  exportAsHTML
-}: ComponentType): React$Element<({ children?: React$Node }) => React$Node> => {
+  exportAsHTML,
+}: ComponentType): React$Element<({children?: React$Node}) => React$Node> => {
   const [open, setOpen] = useState(false);
   const [newsletterHTML, setHTML] = useState();
 

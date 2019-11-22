@@ -7,7 +7,7 @@ type ComponentType = {
   deleteLayoutItem: Function,
   duplicateLayoutItem: Function,
   editLayoutItem: Function,
-  moveLayoutItem: Function
+  moveLayoutItem: Function,
 };
 
 const RenderedNewsletter = ({
@@ -15,7 +15,7 @@ const RenderedNewsletter = ({
   deleteLayoutItem,
   duplicateLayoutItem,
   editLayoutItem,
-  moveLayoutItem
+  moveLayoutItem,
 }: ComponentType): any =>
   layout.map((item: NewsletterLayoutItemType, index: number): React$Element<
     typeof LayoutItem

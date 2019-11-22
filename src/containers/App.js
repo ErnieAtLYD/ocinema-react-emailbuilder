@@ -1,14 +1,14 @@
 // @flow
 import React from "react";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
 import * as Actions from "../actions";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
-import { makeStyles } from "@material-ui/core/styles";
+import {makeStyles} from "@material-ui/core/styles";
 
-import { DndProvider } from "react-dnd";
+import {DndProvider} from "react-dnd";
 import HTML5Backend from "react-dnd-html5-backend";
 
 import RenderedNewsletter from "../components/RenderedNewsletter";
@@ -17,15 +17,15 @@ import PanelOff from "../components/PanelOff";
 
 const useStyles = makeStyles((theme: any): any => ({
   root: {
-    height: "100vh"
+    height: "100vh",
   },
   render: {
     background: "#b8b8b8",
     height: "100vh",
-    overflowY: "scroll"
+    overflowY: "scroll",
   },
   container: {},
-  panel: {}
+  panel: {},
 }));
 
 const App = ({
@@ -33,9 +33,9 @@ const App = ({
   panel,
   panelIndex,
   panelItem,
-  actions
+  actions,
 }: AppType): React$Element<any> => {
-  const classes: { [key: string]: any } = useStyles();
+  const classes: {[key: string]: any} = useStyles();
   return (
     <DndProvider backend={HTML5Backend}>
       <Grid container component="main" className={classes.root}>
@@ -62,6 +62,9 @@ const App = ({
             {!panel.visibility && (
               <PanelOff
                 createLayoutItem={actions.createLayoutItem}
+                dropDraggedButtonIntoColumnContent={
+                  actions.dropDraggedButtonIntoColumnContent
+                }
                 exportAsHTML={actions.exportAsHTML}
                 layout={layout}
               />
@@ -78,13 +81,13 @@ function mapStateToProps(state: StateType): StateType {
     layout: state.layout,
     panel: state.panel,
     panelIndex: state.panelIndex,
-    panelItem: state.panelItem
+    panelItem: state.panelItem,
   };
 }
 
-function mapDispatchToProps(dispatch: any): {| actions: any |} {
+function mapDispatchToProps(dispatch: any): {|actions: any|} {
   return {
-    actions: bindActionCreators(Actions, dispatch)
+    actions: bindActionCreators(Actions, dispatch),
   };
 }
 
