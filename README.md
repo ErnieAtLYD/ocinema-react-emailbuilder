@@ -16,5 +16,10 @@ A drag and drop email builder for a local independant cinema which uses its WP J
  - Add unit tests
  - Document what I needed to change on the WP REST API side
 
-### Colophon
+## Dev Installation and Tech Notes
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). We also used Material-UI and Flow for typesetting variables. To generate the email templates, we used Inky, based on Foundation for Email.
+
+```
+yarn install
+yarn run start
+```
