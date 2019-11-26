@@ -44,6 +44,7 @@ const App = ({
           <Grid item lg={8} className={classes.render}>
             <RenderedNewsletter
               layout={layout}
+              dropElementIntoColumnContent={actions.dropElementIntoColumnContent}
               deleteLayoutItem={actions.deleteLayoutItem}
               duplicateLayoutItem={actions.duplicateLayoutItem}
               editLayoutItem={actions.editLayoutItem}

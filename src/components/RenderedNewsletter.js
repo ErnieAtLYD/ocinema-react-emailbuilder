@@ -2,9 +2,10 @@
 import React from "react";
 import LayoutItem from "../components/LayoutItem";
 
-type ComponentType = {
+type RenderedNewsletterType = {
   layout: NewsletterLayoutType,
   deleteLayoutItem: Function,
+  dropElementIntoColumnContent: Function,
   duplicateLayoutItem: Function,
   editLayoutItem: Function,
   moveLayoutItem: Function,
@@ -13,10 +14,11 @@ type ComponentType = {
 const RenderedNewsletter = ({
   layout,
   deleteLayoutItem,
+  dropElementIntoColumnContent,
   duplicateLayoutItem,
   editLayoutItem,
   moveLayoutItem,
-}: ComponentType): any =>
+}: RenderedNewsletterType): any =>
   layout.map((item: NewsletterLayoutItemType, index: number): React$Element<
     typeof LayoutItem
   > => (
@@ -25,8 +27,9 @@ const RenderedNewsletter = ({
       id={item.id}
       index={index}
       item={item}
-      duplicateLayoutItem={duplicateLayoutItem}
       deleteLayoutItem={deleteLayoutItem}
+      dropElementIntoColumnContent={dropElementIntoColumnContent}
+      duplicateLayoutItem={duplicateLayoutItem}
       editLayoutItem={editLayoutItem}
       moveLayoutItem={moveLayoutItem}
     />

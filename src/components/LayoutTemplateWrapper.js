@@ -13,10 +13,12 @@ import ColumnContent from "./ColumnContent";
 import Showtimes from "./Showtimes";
 import "../styles/newsletter.scss";
 
-const LayoutTemplateWrapper = obj => {
+/**
+ * Called by <LayoutItem>
+ */
+const LayoutTemplateWrapper = ({dropElementIntoColumnContent, item}) => {
   const {
     agileurl,
-    bannerurl,
     id,
     posterurl,
     layout,
@@ -25,7 +27,8 @@ const LayoutTemplateWrapper = obj => {
     htmldescription,
     htmlquotes,
     showtimes,
-  } = obj.item;
+  } = item;
+
   switch (layout) {
     case "header":
       return (
@@ -37,14 +40,17 @@ const LayoutTemplateWrapper = obj => {
             </Column>
             <Column large="4">
               <img
+                alt="Twitter"
                 src="https://mangrove-labs-o-cinema.s3.amazonaws.com/email-assets/tw.png"
                 style={{display: "inline", margin: 4}}
               />
               <img
+                alt="Facebook"
                 src="https://mangrove-labs-o-cinema.s3.amazonaws.com/email-assets/fb.png"
                 style={{display: "inline", margin: 4}}
               />
               <img
+                alt="Instagram"
                 src="https://mangrove-labs-o-cinema.s3.amazonaws.com/email-assets/ig.png"
                 style={{display: "inline", margin: 4}}
               />
@@ -55,6 +61,7 @@ const LayoutTemplateWrapper = obj => {
               <Column large="12">
                 <Center>
                   <img
+                    alt="O Cinema Logo"
                     src="https://mangrove-labs-o-cinema.s3.amazonaws.com/email-assets/o-logo-mailcampaign.jpg"
                     style={{width: 100}}
                   />
@@ -69,7 +76,11 @@ const LayoutTemplateWrapper = obj => {
         <Container>
           <Row className="collapse">
             <Column small="12">
-              <ColumnContent contents={contents} id={id} />
+              <ColumnContent
+                dropElementIntoColumnContent={dropElementIntoColumnContent}
+                contents={contents}
+                id={id}
+              />
             </Column>
           </Row>
         </Container>

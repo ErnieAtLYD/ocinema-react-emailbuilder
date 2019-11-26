@@ -9,15 +9,23 @@ const style = {
 };
 
 type ColumnContentType = {
-  id: string,
+  id: number,
   contents: Array<ColumnElementType>,
+  dropElementIntoColumnContent: Function,
 };
 
-// called from <LayoutTemplateWrapper>
-const ColumnContent = ({id, contents = []}: ColumnContentType) => {
+/**
+ * The idea: ColumnElements are dropped on top of these ColumnComponents.
+ * called from <LayoutTemplateWrapper>
+ */
+const ColumnContent = ({
+  id,
+  contents = [],
+  dropElementIntoColumnContent,
+}: ColumnContentType) => {
   const ref = useRef(null);
   const [{canDrop, isOver}, drop] = useDrop({
-    accept: ItemTypes.PANELBUTTON,
+    accept: [ItemTypes.COLUMNELEMENT, ItemTypes.PANELBUTTON],
     drop: (item, monitor) => {
       const didDrop = monitor.didDrop();
       if (didDrop) return;
@@ -43,8 +51,14 @@ const ColumnContent = ({id, contents = []}: ColumnContentType) => {
     <div ref={ref} style={{...style, backgroundColor}}>
       <div style={{float: "right"}}>id: {id}</div>
       {contents &&
-        contents.map((content: ColumnElementType) => (
-          <ColumnElement id={content.id} key={content.id} />
+        contents.map((content: ColumnElementType, index: number) => (
+          <ColumnElement
+            dropElementIntoColumnContent={dropElementIntoColumnContent}
+            id={content.id}
+            index={index}
+            key={content.id}
+            parentId={id}
+          />
         ))}
     </div>
   );

@@ -11,24 +11,30 @@ type TestDragType = {
   dropDraggedButtonIntoColumnContent: Function,
 };
 
+/**
+ * Right now, TestDrag is being called from <PanelOff>.
+ */
 const TestDrag = ({dropDraggedButtonIntoColumnContent}: TestDragType) => {
-  const [{isDragging}, drag] = useDrag({
+  const [, drag] = useDrag({
     item: {
-      name: "testobject",
       type: ItemTypes.PANELBUTTON,
+      name: "testobject",
     },
     end: (item, monitor) => {
       const dropResult = monitor.getDropResult();
       if (item && dropResult) {
-        alert(`You dropped ${item.name} into ${dropResult.name}!`);
+        alert(
+          `You dropped ${item.name} into ${dropResult.name}! It has an index of ${dropResult.index}`
+        );
         if (dropResult.isColumnContainer) {
-          dropDraggedButtonIntoColumnContent(dropResult.name);
+          // dropped on a ColumnContent component
+          dropDraggedButtonIntoColumnContent(dropResult.name, -1);
+        } else {
+          // dropped on a ColumnElement component
+          dropDraggedButtonIntoColumnContent(dropResult.parentId, dropResult.index);
         }
       }
     },
-    collect: monitor => ({
-      isDragging: monitor.isDragging(),
-    }),
   });
   return (
     <Button ref={drag} style={{...style}} variant="contained">

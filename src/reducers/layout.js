@@ -1,98 +1,15 @@
 // @flow
-// const initialState = [
-//   {
-//     id: 1,
-//     layout: "header",
-//     content: "",
-//     htmldescription:
-//       "Your favorite independent cinema is bringing ﻿you more of the kind of movies you love.",
-//     htmlquotes: "",
-//     posterurl: ""
-//   },
-//   {
-//     id: 2,
-//     layout: "filmlayout",
-//     content: "bar",
-//     htmldescription: "baz",
-//     htmlquotes: "",
-//     posterurl: ""
-//   },
-//   {
-//     id: 5,
-//     layout: "section-break",
-//     content: "",
-//     htmldescription: "",
-//     htmlquotes: "",
-//     posterurl: ""
-//   },
-//   {
-//     id: 11,
-//     layout: "full-bleed-wrapper",
-//     content: "Around town",
-//     htmldescription: "Check out these cool events around Miami",
-//     htmlquotes: "",
-//     posterurl: ""
-//   },
-//   {
-//     id: 6,
-//     layout: "full-bleed-wrapper",
-//     content: "Next week",
-//     htmldescription: "",
-//     htmlquotes: "",
-//     posterurl: ""
-//   },
-//   {
-//     id: 4,
-//     layout: "filmlayout",
-//     content: "bar",
-//     htmldescription: "baz",
-//     htmlquotes: "",
-//     posterurl: ""
-//   },
-//   {
-//     id: 7,
-//     layout: "membership-drive",
-//     content: "bar",
-//     htmldescription:
-//       "As a nonprofit cinema, the proceeds from our membership program go right back into increasing the diversity of our film presentations and events. An O Cinema membership supports a cornerstone of the cultural life of our community- so you can both feel good and do good by joining. Become a member today!",
-//     htmlquotes: "",
-//     posterurl: "https://www.o-cinema.org/membership/"
-//   },
-//   {
-//     id: 9,
-//     layout: "full-bleed-wrapper-2",
-//     content: "",
-//     bannerurl:
-//       "https://mangrove-labs-o-cinema.s3.amazonaws.com/email-assets/sponsors.jpg",
-//     htmldescription: "",
-//     htmlquotes: "",
-//     posterurl: ""
-//   },
-//   {
-//     id: 12,
-//     layout: "full-bleed-wrapper-2",
-//     content: "",
-//     bannerurl:
-//       "https://mangrove-labs-o-cinema.s3.amazonaws.com/email-assets/nextweek.jpg",
-//     htmldescription: "",
-//     htmlquotes: "",
-//     posterurl: ""
-//   },
-//   {
-//     id: 3,
-//     layout: "footer",
-//     content: "",
-//     htmldescription: "",
-//     htmlquotes: "",
-//     posterurl: ""
-//   }
-// ];
+import produce from "immer";
+
 const initialState = [];
 export default function layout(
   state: NewsletterLayoutType = initialState,
   action: Action
 ) {
   var newLayout;
+  let newElement;
+  let nextState;
+
   switch (action.type) {
     case "CREATE_LAYOUT_ITEM":
       return [...state, action.payload];
@@ -102,15 +19,36 @@ export default function layout(
       newLayout.splice(action.key, 1);
       return newLayout;
 
+    case "DROP_ELEMENT_INTO_COLUMN_CONTENT":
+      // find the ColumnContent component by columnId.
+      let newStateIndex = state.findIndex(({id}) => id === action.payload.columnId);
+      let oldStateIndex = state.findIndex(({id}) => id === action.payload.item.parentId);
+      newElement = {
+        id: action.payload.item.id,
+        parentId: action.payload.columnId,
+      };
+      nextState = produce(state, draftState => {
+        // remove the element from the old container
+        draftState[oldStateIndex].contents.splice(action.payload.item.index, 1);
+        // add the element to the new container
+        draftState[newStateIndex].contents.push(newElement);
+      });
+      return nextState;
+
     case "DROP_DRAGGED_BUTTON_INTO_COLUMN_CONTENT":
       const ts = new Date().getTime();
-      newLayout = [...state];
-      let index = newLayout.findIndex(({id}) => id === action.payload.columnId);
-      const newElement: ColumnElementType = {
-        id: ts,
-      };
-      newLayout[index].contents.push(newElement);
-      return newLayout;
+      const {columnId, index} = action.payload;
+
+      // find the ColumnContent component by columnId.
+      let stateIndex = state.findIndex(({id}) => id === columnId);
+      newElement = {id: ts, parentId: columnId};
+
+      // Now get the contents array and insert into the index'ed element
+      // Note: this reducer uses immer while all the others use vanilla JS.
+      nextState = produce(state, draftState => {
+        draftState[stateIndex].contents.splice(index, 0, newElement);
+      });
+      return nextState;
 
     case "MOVE_LAYOUT_ITEM":
       newLayout = [...state];

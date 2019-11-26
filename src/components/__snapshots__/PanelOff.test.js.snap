@@ -6,8 +6,15 @@ exports[`PanelOff renders without crashing 1`] = `
     onClick={[Function]}
     variant="contained"
   >
-    Add a blank section
+    Add 1-Column
   </WithStyles(ForwardRef(Button))>
+  <WithStyles(ForwardRef(Button))
+    onClick={[Function]}
+    variant="contained"
+  >
+    Add 2-Columns
+  </WithStyles(ForwardRef(Button))>
+  <TestDrag />
   <WithStyles(ForwardRef(Typography))>
     Import from the website:
   </WithStyles(ForwardRef(Typography))>

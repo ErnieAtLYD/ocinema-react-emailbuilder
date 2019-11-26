@@ -3,8 +3,8 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
 
-import React, {useRef} from "react";
-import {useDrop, useDrag} from "react-dnd";
+import React, {useRef, useState} from "react";
+import {useDrag, useDrop} from "react-dnd";
 import ItemTypes from "./ItemTypes";
 import LayoutTemplateWrapper from "./LayoutTemplateWrapper";
 import "./LayoutItem.scss";
@@ -14,16 +14,28 @@ type LayoutType = {
   index: number,
   item: any,
   deleteLayoutItem: Function,
+  dropElementIntoColumnContent: Function,
   duplicateLayoutItem: Function,
   editLayoutItem: Function,
   moveLayoutItem: Function,
 };
 
+const style = {
+  backgroundColor: "inherit",
+  fontFamily: "Helvetica, Arial, sans-serif",
+  width: 580,
+  margin: "0 auto",
+};
+
+/**
+ * The base layout components.
+ */
 const LayoutItem = ({
   id,
   index,
   item,
   deleteLayoutItem,
+  dropElementIntoColumnContent,
   duplicateLayoutItem,
   editLayoutItem,
   moveLayoutItem,
@@ -32,16 +44,12 @@ const LayoutItem = ({
   const [, drop] = useDrop({
     accept: ItemTypes.LAYOUTITEM,
     hover(item, monitor) {
-      if (!ref.current) {
-        return;
-      }
+      if (!ref.current) return;
       const dragIndex = item.index;
       const hoverIndex = index;
 
       // Don't replace items with themselves
-      if (dragIndex === hoverIndex) {
-        return;
-      }
+      if (dragIndex === hoverIndex) return;
 
       // Determine rectangle on screen
       const hoverBoundingRect = ref.current.getBoundingClientRect();
@@ -77,23 +85,39 @@ const LayoutItem = ({
       isDragging: monitor.isDragging(),
     }),
   });
-  const opacity = isDragging ? 0 : 1;
+  const [isHovered, setHover] = useState(false);
+
+  const toggleHover = (event: SyntheticMouseEvent<>) => {
+    // be careful distinguishing between event.target and event.currentTarget.
+    // in this case it is the former, but event propogation makes things tricky
+
+    // see: http://bit.ly/2OjCbUa
+    const target = ((event.target: any): HTMLElement);
+    if (target.dataset.component === "layoutitem") {
+      setHover(!isHovered);
+    }
+  };
+
+  const hoverClass: string = isHovered ? " react-hover" : "";
+  const opacity: number = isDragging ? 0 : 1;
   drag(drop(ref));
   return (
-    <div className="layoutitem" ref={ref} style={{opacity}}>
-      <div className="layoutitem--no-hover">
-        <div
-          style={{
-            backgroundColor: "inherit",
-            fontFamily: "Helvetica, Arial, sans-serif",
-            width: 580,
-            margin: "0 auto",
-          }}
-        >
-          <LayoutTemplateWrapper item={item} />
+    <div
+      className="layoutitem"
+      ref={ref}
+      style={{opacity}}
+      onMouseOver={toggleHover}
+      onMouseOut={toggleHover}
+    >
+      <div className={`layoutitem--no-hover${hoverClass}`} data-component="layoutitem">
+        <div style={style}>
+          <LayoutTemplateWrapper
+            dropElementIntoColumnContent={dropElementIntoColumnContent}
+            item={item}
+          />
         </div>
       </div>
-      <div className="layoutitem--hover">
+      <div className={`layoutitem--hover${hoverClass}`} data-component="layoutitem">
         <EditIcon className="layoutitem__edit" onClick={() => editLayoutItem(index)} />
         <DeleteIcon
           className="layoutitem__delete"

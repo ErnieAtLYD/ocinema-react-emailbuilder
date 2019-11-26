@@ -1,6 +1,6 @@
 // @flow
 import React, {useRef, useState} from "react";
-import {useDrop} from "react-dnd";
+import {useDrag, useDrop} from "react-dnd";
 import ItemTypes from "./ItemTypes";
 const style = {
   minHeight: 20,
@@ -8,21 +8,40 @@ const style = {
 };
 
 // called from <ColumnContent>
-const ColumnElement = ({id}: ColumnElementType) => {
+const ColumnElement = ({
+  dropElementIntoColumnContent,
+  id,
+  index,
+  parentId,
+}: ColumnElementType): React$Element<"div"> => {
+  let backgroundColor = "#ccc";
+  let borderTopColor = "red";
+  let borderBottomColor = "red";
+  let borderTopStyle = "dotted";
+  let borderBottomStyle = "dotted";
+
   const ref = useRef(null);
   const [isUpperHalf, setUpperHalf] = useState();
   const [{canDrop, isOver}, drop] = useDrop({
-    accept: ItemTypes.PANELBUTTON,
+    accept: [ItemTypes.COLUMNELEMENT, ItemTypes.PANELBUTTON],
     drop: () => ({
       name: id,
+      index: isUpperHalf ? index : index + 1,
       isColumnContainer: false,
+      parentId: parentId,
     }),
-    collect: monitor => ({
+    collect: (monitor: empty) => ({
       canDrop: monitor.canDrop(),
       isOver: monitor.isOver(),
     }),
-    hover(item, monitor) {
+    hover(item, monitor): void {
       if (!ref.current) return;
+      const dragIndex = item.index;
+      const hoverIndex = index;
+
+      // Don't replace items with themselves
+      if (dragIndex === hoverIndex) return;
+
       const hoverBoundingRect = ref.current.getBoundingClientRect();
       const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
       const clientOffset = monitor.getClientOffset();
@@ -37,18 +56,63 @@ const ColumnElement = ({id}: ColumnElementType) => {
         setUpperHalf(false);
         return;
       }
+      // moveLayoutItem(dragIndex, hoverIndex);
+      // item.index = hoverIndex;
     },
   });
+  const [{isDragging}, drag] = useDrag({
+    item: {
+      type: ItemTypes.COLUMNELEMENT,
+      id: id,
+      index: index,
+      name: "element",
+      parentId: parentId,
+    },
+    collect: (monitor: empty) => ({
+      isDragging: monitor.isDragging(),
+    }),
+    end: (item, monitor): void => {
+      const dropResult = monitor.getDropResult();
+
+      // the "&& dropElementIntoColumnContent" is due to flow type being an optional function
+      if (item && dropResult && dropElementIntoColumnContent) {
+        console.log(item, dropResult);
+        alert(
+          `You dropped ${item.name} into ${dropResult.name}! It has an index of ${dropResult.index}`
+        );
+        if (dropResult.isColumnContainer) {
+          dropElementIntoColumnContent(item, dropResult.name);
+        }
+      }
+    },
+  });
+
   const isActive = canDrop && isOver;
-  let backgroundColor = "#ccc";
   if (isActive) {
     backgroundColor = "darkgreen";
+    borderTopColor = isUpperHalf ? "yellow" : "red";
+    borderBottomColor = !isUpperHalf ? "yellow" : "red";
+
+    borderTopStyle = isUpperHalf ? "solid" : "dotted";
+    borderBottomStyle = !isUpperHalf ? "solid" : "dotted";
   } else if (canDrop) {
     backgroundColor = "darkkhaki";
   }
-  drop(ref);
+  const opacity: number = isDragging ? 0 : 1;
+  drag(drop(ref));
   return (
-    <div ref={ref} style={{...style, backgroundColor}}>
+    <div
+      ref={ref}
+      style={{
+        ...style,
+        backgroundColor,
+        borderTopColor,
+        borderBottomColor,
+        borderTopStyle,
+        borderBottomStyle,
+        opacity,
+      }}
+    >
       test element: {id}
     </div>
   );

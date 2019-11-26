@@ -1,30 +1,10 @@
-import React from "react";
-import { wrapInTestContext } from "react-dnd-test-utils";
-import { shallow, mount } from "enzyme";
-import LayoutItem from "./LayoutItem";
-import LayoutTemplateWrapper from "./LayoutTemplateWrapper";
-import EditIcon from "@material-ui/icons/Edit";
-
 describe("LayoutItem", () => {
-  it("renders without crashing", () => {
-    const LayoutContext = wrapInTestContext(LayoutItem);
-    shallow(<LayoutContext />);
-  });
-
+  xit("renders without crashing", () => {});
+  xit("triggers the mouseOver if in the component", () => {});
+  xit("drags if it starts in the component", () => {});
+  xit("DOESN'T trigger mouseOver if moused over a child ColumnContent component", () => {});
+  xit("DOESN'T drag if starts at the child ColumnContent component", () => {});
   xit("properly fires `onClick` when EditIcon is clicked", () => {});
-
   xit("properly fires `onClick` when DeleteIcon is clicked", () => {});
-
   xit("properly fires `onClick` when FileCopyIcon is clicked", () => {});
-});
-
-// May have to do this through a proper mount as evertyhing is wrapped in that drag and drop context
-describe("LayoutItem mounted", () => {
-  xit("renders without crashing", () => {
-    const LayoutContext = wrapInTestContext(LayoutItem);
-    let props = { item: {} };
-    const mountedwrapper = mount(<LayoutContext {...props} />);
-    let calloutWrapper = mountedwrapper.find(LayoutTemplateWrapper);
-    expect(calloutWrapper).toExist();
-  });
 });

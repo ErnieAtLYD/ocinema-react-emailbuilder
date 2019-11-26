@@ -25,7 +25,14 @@ type ActionHidePanel = {type: "HIDE_PANEL"};
 type ActionExportHTML = {type: "EXPORT_HTML"};
 type ActionDropDraggedButtonIntoColumn = {
   type: "DROP_DRAGGED_BUTTON_INTO_COLUMN_CONTENT",
-  payload: {columnId: number},
+  payload: {columnId: number, index: number},
+};
+type ActionDropElementIntoColumn = {
+  type: "DROP_ELEMENT_INTO_COLUMN_CONTENT",
+  payload: {
+    item: {id: number, index: number, parentId: number},
+    columnId: number,
+  },
 };
 
 type Action =
@@ -36,23 +43,27 @@ type Action =
   | ActionUpdatePanelField
   | ActionHidePanel
   | ActionExportHTML
-  | ActionDropDraggedButtonIntoColumn;
+  | ActionDropDraggedButtonIntoColumn
+  | ActionDropElementIntoColumn;
 
 type NewsletterLayoutType = Array<NewsletterLayoutItemType>;
 
 type ColumnElementType = {
+  dropElementIntoColumnContent?: Function,
   id: number,
+  index?: number,
+  parentId: number,
 };
 
 type NewsletterLayoutItemType = {
-  id: number,
-  layout: string,
+  bannerurl?: string,
   content: string,
   contents: Array<ColumnElementType>,
   htmldescription: string,
   htmlquotes: string,
+  id: number,
+  layout: string,
   posterurl: string,
-  bannerurl?: string,
 };
 
 type WebsiteEventAPIType = {

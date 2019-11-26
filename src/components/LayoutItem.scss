@@ -1,20 +1,22 @@
 .layoutitem {
-  cursor: move;
   position: relative;
 
-  &__edit, &__delete, &__duplicate {
+  &__edit,
+  &__delete,
+  &__duplicate {
     display: inline-block;
     cursor: pointer;
   }
 
-  &:hover &--no-hover {
-    border: 1px solid #999;
+  &--no-hover.react-hover {
+    // border: 1px solid #999;
+    background-color: #cff;
+    cursor: move;
     opacity: 1;
   }
 
-  &:hover &--hover {
+  &--hover.react-hover {
     border: 1px solid transparent;
-    cursor: move;
     opacity: 1;
   }
 

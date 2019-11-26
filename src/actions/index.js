@@ -21,9 +21,27 @@ export const createLayoutItem = (
   };
 };
 
+// parameter 1: source object
+// parameter 2: target column id
+export const dropElementIntoColumnContent = (
+  item: ColumnElementType,
+  columnId: number
+) => {
+  return {
+    type: "DROP_ELEMENT_INTO_COLUMN_CONTENT",
+    payload: {
+      item: item,
+      columnId: columnId,
+    },
+  };
+};
+
+/**
+ * if index is -1 then append at the end of the array
+ */
 export const dropDraggedButtonIntoColumnContent = (
   columnId: number,
-  index: number = 0
+  index: number = -1
 ): ActionDropDraggedButtonIntoColumn => {
   return {
     type: "DROP_DRAGGED_BUTTON_INTO_COLUMN_CONTENT",
@@ -63,7 +81,10 @@ export const moveLayoutItem = (key: number, newIndex: number): ActionMoveLayoutI
   };
 };
 
-export const editPanelField = (event: any, name: string): ThunkAction => {
+export const editPanelField = (
+  event: SyntheticInputEvent<>,
+  name: string
+): ThunkAction => {
   return (dispatch, getState) => {
     const state = getState();
     dispatch({
