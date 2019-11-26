@@ -16,7 +16,11 @@ import "../styles/newsletter.scss";
 /**
  * Called by <LayoutItem>
  */
-const LayoutTemplateWrapper = ({dropElementIntoColumnContent, item}) => {
+const LayoutTemplateWrapper = ({
+  dropElementIntoColumnContent,
+  dropElementIntoColumnElement,
+  item,
+}) => {
   const {
     agileurl,
     id,
@@ -78,6 +82,7 @@ const LayoutTemplateWrapper = ({dropElementIntoColumnContent, item}) => {
             <Column small="12">
               <ColumnContent
                 dropElementIntoColumnContent={dropElementIntoColumnContent}
+                dropElementIntoColumnElement={dropElementIntoColumnElement}
                 contents={contents}
                 id={id}
               />

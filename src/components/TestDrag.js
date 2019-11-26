@@ -23,9 +23,9 @@ const TestDrag = ({dropDraggedButtonIntoColumnContent}: TestDragType) => {
     end: (item, monitor) => {
       const dropResult = monitor.getDropResult();
       if (item && dropResult) {
-        alert(
-          `You dropped ${item.name} into ${dropResult.name}! It has an index of ${dropResult.index}`
-        );
+        // alert(
+        //   `You dropped ${item.name} into ${dropResult.name}! It has an index of ${dropResult.index}`
+        // );
         if (dropResult.isColumnContainer) {
           // dropped on a ColumnContent component
           dropDraggedButtonIntoColumnContent(dropResult.name, -1);

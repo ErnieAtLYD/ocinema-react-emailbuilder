@@ -10,6 +10,7 @@ const style = {
 // called from <ColumnContent>
 const ColumnElement = ({
   dropElementIntoColumnContent,
+  dropElementIntoColumnElement,
   id,
   index,
   parentId,
@@ -74,14 +75,20 @@ const ColumnElement = ({
     end: (item, monitor): void => {
       const dropResult = monitor.getDropResult();
 
-      // the "&& dropElementIntoColumnContent" is due to flow type being an optional function
+      // the "&& dropElementIntoColumnContent" is due to flow type being an
+      // optional function
       if (item && dropResult && dropElementIntoColumnContent) {
         console.log(item, dropResult);
-        alert(
-          `You dropped ${item.name} into ${dropResult.name}! It has an index of ${dropResult.index}`
-        );
+        // alert(
+        //   `You dropped ${item.name} into ${dropResult.name}! It has an index of ${dropResult.index}`
+        // );
         if (dropResult.isColumnContainer) {
           dropElementIntoColumnContent(item, dropResult.name);
+        } else {
+          // Dropped on another element container, but could either be its
+          // own column element or a different one
+          if (dropElementIntoColumnElement)
+            dropElementIntoColumnElement(item, dropResult);
         }
       }
     },

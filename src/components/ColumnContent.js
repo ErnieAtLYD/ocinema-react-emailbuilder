@@ -12,6 +12,7 @@ type ColumnContentType = {
   id: number,
   contents: Array<ColumnElementType>,
   dropElementIntoColumnContent: Function,
+  dropElementIntoColumnElement: Function,
 };
 
 /**
@@ -22,6 +23,7 @@ const ColumnContent = ({
   id,
   contents = [],
   dropElementIntoColumnContent,
+  dropElementIntoColumnElement,
 }: ColumnContentType) => {
   const ref = useRef(null);
   const [{canDrop, isOver}, drop] = useDrop({
@@ -54,6 +56,7 @@ const ColumnContent = ({
         contents.map((content: ColumnElementType, index: number) => (
           <ColumnElement
             dropElementIntoColumnContent={dropElementIntoColumnContent}
+            dropElementIntoColumnElement={dropElementIntoColumnElement}
             id={content.id}
             index={index}
             key={content.id}

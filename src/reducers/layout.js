@@ -9,6 +9,8 @@ export default function layout(
   var newLayout;
   let newElement;
   let nextState;
+  let newStateIndex;
+  let oldStateIndex;
 
   switch (action.type) {
     case "CREATE_LAYOUT_ITEM":
@@ -19,10 +21,39 @@ export default function layout(
       newLayout.splice(action.key, 1);
       return newLayout;
 
+    case "DROP_ELEMENT_INTO_COLUMN_ELEMENT":
+      // find the ColumnContent component by columnId.
+      newStateIndex = state.findIndex(({id}) => id === action.payload.target.parentId);
+      oldStateIndex = state.findIndex(({id}) => id === action.payload.source.parentId);
+      nextState = produce(state, draftState => {
+        if (newStateIndex === oldStateIndex) {
+          // treat like a good old fashioned move
+          draftState[oldStateIndex].contents.splice(
+            action.payload.target.index,
+            0,
+            draftState[oldStateIndex].contents.splice(action.payload.source.index, 1)[0]
+          );
+        } else {
+          // remove the element from the old container
+          newElement = {
+            id: action.payload.source.id,
+            parentId: action.payload.target.parentId,
+          };
+          draftState[oldStateIndex].contents.splice(action.payload.source.index, 1);
+          // add the element to the new container
+          draftState[newStateIndex].contents.splice(
+            action.payload.target.index,
+            0,
+            newElement
+          );
+        }
+      });
+      return nextState;
+
     case "DROP_ELEMENT_INTO_COLUMN_CONTENT":
       // find the ColumnContent component by columnId.
-      let newStateIndex = state.findIndex(({id}) => id === action.payload.columnId);
-      let oldStateIndex = state.findIndex(({id}) => id === action.payload.item.parentId);
+      newStateIndex = state.findIndex(({id}) => id === action.payload.columnId);
+      oldStateIndex = state.findIndex(({id}) => id === action.payload.item.parentId);
       newElement = {
         id: action.payload.item.id,
         parentId: action.payload.columnId,

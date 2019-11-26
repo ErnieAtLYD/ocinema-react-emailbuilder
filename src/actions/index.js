@@ -22,6 +22,21 @@ export const createLayoutItem = (
 };
 
 // parameter 1: source object
+// parameter 2: target object
+export const dropElementIntoColumnElement = (
+  source: ColumnElementType,
+  target: ColumnElementType
+) => {
+  return {
+    type: "DROP_ELEMENT_INTO_COLUMN_ELEMENT",
+    payload: {
+      source: source,
+      target: target,
+    },
+  };
+};
+
+// parameter 1: source object
 // parameter 2: target column id
 export const dropElementIntoColumnContent = (
   item: ColumnElementType,

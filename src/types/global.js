@@ -34,6 +34,13 @@ type ActionDropElementIntoColumn = {
     columnId: number,
   },
 };
+type ActionDropElementIntoElement = {
+  type: "DROP_ELEMENT_INTO_COLUMN_ELEMENT",
+  payload: {
+    source: {id: number, index: number, parentId: number},
+    target: {id: number, index: number, parentId: number},
+  },
+};
 
 type Action =
   | ActionCreateLayoutItem
@@ -44,12 +51,14 @@ type Action =
   | ActionHidePanel
   | ActionExportHTML
   | ActionDropDraggedButtonIntoColumn
-  | ActionDropElementIntoColumn;
+  | ActionDropElementIntoColumn
+  | ActionDropElementIntoElement;
 
 type NewsletterLayoutType = Array<NewsletterLayoutItemType>;
 
 type ColumnElementType = {
   dropElementIntoColumnContent?: Function,
+  dropElementIntoColumnElement?: Function,
   id: number,
   index?: number,
   parentId: number,

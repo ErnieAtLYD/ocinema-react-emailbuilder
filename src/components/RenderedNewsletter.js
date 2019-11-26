@@ -6,6 +6,7 @@ type RenderedNewsletterType = {
   layout: NewsletterLayoutType,
   deleteLayoutItem: Function,
   dropElementIntoColumnContent: Function,
+  dropElementIntoColumnElement: Function,
   duplicateLayoutItem: Function,
   editLayoutItem: Function,
   moveLayoutItem: Function,
@@ -15,6 +16,7 @@ const RenderedNewsletter = ({
   layout,
   deleteLayoutItem,
   dropElementIntoColumnContent,
+  dropElementIntoColumnElement,
   duplicateLayoutItem,
   editLayoutItem,
   moveLayoutItem,
@@ -29,6 +31,7 @@ const RenderedNewsletter = ({
       item={item}
       deleteLayoutItem={deleteLayoutItem}
       dropElementIntoColumnContent={dropElementIntoColumnContent}
+      dropElementIntoColumnElement={dropElementIntoColumnElement}
       duplicateLayoutItem={duplicateLayoutItem}
       editLayoutItem={editLayoutItem}
       moveLayoutItem={moveLayoutItem}

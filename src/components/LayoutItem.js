@@ -15,6 +15,7 @@ type LayoutType = {
   item: any,
   deleteLayoutItem: Function,
   dropElementIntoColumnContent: Function,
+  dropElementIntoColumnElement: Function,
   duplicateLayoutItem: Function,
   editLayoutItem: Function,
   moveLayoutItem: Function,
@@ -36,6 +37,7 @@ const LayoutItem = ({
   item,
   deleteLayoutItem,
   dropElementIntoColumnContent,
+  dropElementIntoColumnElement,
   duplicateLayoutItem,
   editLayoutItem,
   moveLayoutItem,
@@ -113,6 +115,7 @@ const LayoutItem = ({
         <div style={style}>
           <LayoutTemplateWrapper
             dropElementIntoColumnContent={dropElementIntoColumnContent}
+            dropElementIntoColumnElement={dropElementIntoColumnElement}
             item={item}
           />
         </div>

@@ -45,6 +45,7 @@ const App = ({
             <RenderedNewsletter
               layout={layout}
               dropElementIntoColumnContent={actions.dropElementIntoColumnContent}
+              dropElementIntoColumnElement={actions.dropElementIntoColumnElement}
               deleteLayoutItem={actions.deleteLayoutItem}
               duplicateLayoutItem={actions.duplicateLayoutItem}
               editLayoutItem={actions.editLayoutItem}
