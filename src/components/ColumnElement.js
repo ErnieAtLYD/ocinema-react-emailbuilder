@@ -2,9 +2,11 @@
 import React, {useRef, useState} from "react";
 import {useDrag, useDrop} from "react-dnd";
 import ItemTypes from "./ItemTypes";
+import ColumnElementToolbar from "./ColumnElementToolbar";
 const style = {
-  minHeight: 20,
   border: "1px dotted red",
+  minHeight: 20,
+  position: "relative",
 };
 
 // called from <ColumnContent>
@@ -22,6 +24,7 @@ const ColumnElement = ({
   let borderBottomStyle = "dotted";
 
   const ref = useRef(null);
+  const [isToolbarShown, setToolbarVisibility] = useState(false);
   const [isUpperHalf, setUpperHalf] = useState();
   const [{canDrop, isOver}, drop] = useDrop({
     accept: [ItemTypes.COLUMNELEMENT, ItemTypes.PANELBUTTON],
@@ -121,6 +124,7 @@ const ColumnElement = ({
         opacity,
       }}
     >
+      <ColumnElementToolbar />
       test element: {id}
     </div>
   );
