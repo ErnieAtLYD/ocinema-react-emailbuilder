@@ -63,11 +63,16 @@ const PanelOff = ({
 
   return (
     <>
-      <Button variant="contained" onClick={(): void => createLayoutItem()}>
+      <Button
+        data-cy="add-1-col"
+        variant="contained"
+        onClick={(): void => createLayoutItem()}
+      >
         Add 1-Column
       </Button>
 
       <Button
+        data-cy="add-2-col"
         variant="contained"
         onClick={(): void => {
           let ts = new Date().getTime();
