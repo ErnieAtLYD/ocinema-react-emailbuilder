@@ -21,7 +21,7 @@ const RenderedNewsletter = ({
   editLayoutItem,
   moveLayoutItem,
 }: RenderedNewsletterType): any =>
-  layout.map((item: NewsletterLayoutItemType, index: number): React$Element<
+  layout.map((item: NewsletterLayoutItemTypeV2, index: number): React$Element<
     typeof LayoutItem
   > => (
     <LayoutItem

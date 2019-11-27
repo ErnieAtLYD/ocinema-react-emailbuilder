@@ -41,7 +41,7 @@ const App = ({
       <Grid container component="main" className={classes.root}>
         <CssBaseline />
         <Grid container className={classes.container}>
-          <Grid item lg={8} className={classes.render}>
+          <Grid item md={8} className={classes.render}>
             <RenderedNewsletter
               layout={layout}
               dropElementIntoColumnContent={actions.dropElementIntoColumnContent}
@@ -52,7 +52,7 @@ const App = ({
               moveLayoutItem={actions.moveLayoutItem}
             />
           </Grid>
-          <Grid item lg={4} className={classes.panel}>
+          <Grid item md={4} className={classes.panel}>
             {panel.visibility && (
               <PanelOn
                 panelItem={panelItem}

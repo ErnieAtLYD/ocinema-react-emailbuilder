@@ -23,11 +23,11 @@ const LayoutTemplateWrapper = ({
 }) => {
   const {
     agileurl,
+    elements,
     id,
     posterurl,
     layout,
     content,
-    contents,
     htmldescription,
     htmlquotes,
     showtimes,
@@ -83,8 +83,31 @@ const LayoutTemplateWrapper = ({
               <ColumnContent
                 dropElementIntoColumnContent={dropElementIntoColumnContent}
                 dropElementIntoColumnElement={dropElementIntoColumnElement}
-                contents={contents}
-                id={id}
+                contents={elements[0].contents}
+                id={id + 1}
+              />
+            </Column>
+          </Row>
+        </Container>
+      );
+    case "column-2":
+      return (
+        <Container>
+          <Row>
+            <Column large="6">
+              <ColumnContent
+                dropElementIntoColumnContent={dropElementIntoColumnContent}
+                dropElementIntoColumnElement={dropElementIntoColumnElement}
+                contents={elements[0].contents}
+                id={id + 1}
+              />
+            </Column>
+            <Column large="6">
+              <ColumnContent
+                dropElementIntoColumnContent={dropElementIntoColumnContent}
+                dropElementIntoColumnElement={dropElementIntoColumnElement}
+                contents={elements[1].contents}
+                id={id + 2}
               />
             </Column>
           </Row>

@@ -67,7 +67,22 @@ const PanelOff = ({
         Add 1-Column
       </Button>
 
-      <Button variant="contained" onClick={(): void => createLayoutItem()}>
+      <Button
+        variant="contained"
+        onClick={(): void => {
+          let ts = new Date().getTime();
+          createLayoutItem({
+            id: ts,
+            layout: "column-2",
+            content: "",
+            contents: [],
+            htmldescription: "",
+            htmlquotes: "",
+            posterurl: "",
+            bannerurl: "",
+          });
+        }}
+      >
         Add 2-Columns
       </Button>
 

@@ -5,7 +5,7 @@ type Dispatch = (action: Action | ThunkAction | PromiseAction | Array<Action>) =
 
 type ActionCreateLayoutItem = {
   type: "CREATE_LAYOUT_ITEM",
-  payload: NewsletterLayoutItemType,
+  payload: NewsletterLayoutItemTypeV2,
 };
 type ActionDeleteLayoutItem = {type: "DELETE_LAYOUT_ITEM", key: number};
 type ActionEditLayoutItem = {
@@ -54,7 +54,7 @@ type Action =
   | ActionDropElementIntoColumn
   | ActionDropElementIntoElement;
 
-type NewsletterLayoutType = Array<NewsletterLayoutItemType>;
+type NewsletterLayoutType = Array<NewsletterLayoutItemTypeV2>;
 
 type ColumnElementType = {
   dropElementIntoColumnContent?: Function,
@@ -62,6 +62,15 @@ type ColumnElementType = {
   id: number,
   index?: number,
   parentId: number,
+};
+
+type NewsletterLayoutItemTypeV2 = {
+  id: number,
+  layout: string,
+  elements: Array<{
+    columnId: number,
+    contents: Array<ColumnElementType>,
+  }>,
 };
 
 type NewsletterLayoutItemType = {

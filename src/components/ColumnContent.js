@@ -50,7 +50,7 @@ const ColumnContent = ({
   }
   drop(ref);
   return (
-    <div ref={ref} style={{...style, backgroundColor}}>
+    <div className="column" ref={ref} style={{...style, backgroundColor}}>
       <div style={{float: "right"}}>id: {id}</div>
       {contents &&
         contents.map((content: ColumnElementType, index: number) => (

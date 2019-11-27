@@ -1,6 +1,6 @@
 // @flow
 export const createLayoutItem = (
-  meta: ?NewsletterLayoutItemType = null
+  meta: ?NewsletterLayoutItemTypeV2 = null
 ): ActionCreateLayoutItem => {
   const ts = new Date().getTime();
   const objItem = meta
@@ -10,6 +10,7 @@ export const createLayoutItem = (
         layout: "column-1",
         content: "",
         contents: [],
+        elements: [],
         htmldescription: "",
         htmlquotes: "",
         posterurl: "",

@@ -1,20 +1,75 @@
 // @flow
 import produce from "immer";
+import _ from "lodash";
 
 const initialState = [];
+
 export default function layout(
   state: NewsletterLayoutType = initialState,
   action: Action
 ) {
+  let contentArray;
   var newLayout;
   let newElement;
   let nextState;
-  let newStateIndex;
-  let oldStateIndex;
+  let newIndexes;
+  let oldIndexes;
+
+  /**
+   * From the layout state, grab the layout index (root level) and element index
+   * (second level) of the element given its columnId. Returns -1 for both
+   * indexes if the columnId can't be found
+   */
+  const getIndexesFromColumnId = (
+    id: number
+  ): {layoutIndex: number, elementIndex: number} => {
+    for (let [layoutIndex, layoutItem] of state.entries()) {
+      let elementIndex = layoutItem.elements.findIndex(
+        element => element.columnId === id
+      );
+      if (elementIndex > -1) {
+        return {layoutIndex: layoutIndex, elementIndex: elementIndex};
+      }
+    }
+    return {layoutIndex: -1, elementIndex: -1};
+  };
 
   switch (action.type) {
     case "CREATE_LAYOUT_ITEM":
-      return [...state, action.payload];
+      let newLayoutTemp;
+      // previously we pushed action.payload
+      newLayoutTemp = action.payload;
+      if (action.payload.layout === "column-1") {
+        newLayoutTemp = {
+          id: action.payload.id,
+          layout: "column-1",
+          elements: [
+            {
+              columnId: action.payload.id + 1,
+              contents: [],
+            },
+          ],
+        };
+      } else if (action.payload.layout === "column-2") {
+        newLayoutTemp = {
+          id: action.payload.id,
+          layout: "column-2",
+          elements: [
+            {
+              columnId: action.payload.id + 1,
+              contents: [],
+            },
+            {
+              columnId: action.payload.id + 2,
+              contents: [],
+            },
+          ],
+        };
+      }
+      nextState = produce(state, draftState => {
+        draftState.push(newLayoutTemp);
+      });
+      return nextState;
 
     case "DELETE_LAYOUT_ITEM":
       newLayout = [...state];
@@ -22,47 +77,54 @@ export default function layout(
       return newLayout;
 
     case "DROP_ELEMENT_INTO_COLUMN_ELEMENT":
+      let {source, target} = action.payload;
+
       // find the ColumnContent component by columnId.
-      newStateIndex = state.findIndex(({id}) => id === action.payload.target.parentId);
-      oldStateIndex = state.findIndex(({id}) => id === action.payload.source.parentId);
+      newIndexes = getIndexesFromColumnId(target.parentId);
+      oldIndexes = getIndexesFromColumnId(source.parentId);
+
       nextState = produce(state, draftState => {
-        if (newStateIndex === oldStateIndex) {
+        contentArray =
+          draftState[oldIndexes.layoutIndex].elements[oldIndexes.elementIndex].contents;
+
+        if (_.isEqual(newIndexes, oldIndexes)) {
           // treat like a good old fashioned move
-          draftState[oldStateIndex].contents.splice(
-            action.payload.target.index,
-            0,
-            draftState[oldStateIndex].contents.splice(action.payload.source.index, 1)[0]
-          );
+          contentArray.splice(target.index, 0, contentArray.splice(source.index, 1)[0]);
         } else {
           // remove the element from the old container
           newElement = {
-            id: action.payload.source.id,
-            parentId: action.payload.target.parentId,
+            id: source.id,
+            parentId: target.parentId,
           };
-          draftState[oldStateIndex].contents.splice(action.payload.source.index, 1);
+          contentArray.splice(source.index, 1);
+
           // add the element to the new container
-          draftState[newStateIndex].contents.splice(
-            action.payload.target.index,
-            0,
-            newElement
-          );
+          draftState[newIndexes.layoutIndex].elements[
+            newIndexes.elementIndex
+          ].contents.splice(target.index, 0, newElement);
         }
       });
       return nextState;
 
     case "DROP_ELEMENT_INTO_COLUMN_CONTENT":
       // find the ColumnContent component by columnId.
-      newStateIndex = state.findIndex(({id}) => id === action.payload.columnId);
-      oldStateIndex = state.findIndex(({id}) => id === action.payload.item.parentId);
+      newIndexes = getIndexesFromColumnId(action.payload.columnId);
+      oldIndexes = getIndexesFromColumnId(action.payload.item.parentId);
       newElement = {
         id: action.payload.item.id,
         parentId: action.payload.columnId,
       };
+
       nextState = produce(state, draftState => {
         // remove the element from the old container
-        draftState[oldStateIndex].contents.splice(action.payload.item.index, 1);
+        draftState[oldIndexes.layoutIndex].elements[
+          oldIndexes.elementIndex
+        ].contents.splice(action.payload.item.index, 1);
+
         // add the element to the new container
-        draftState[newStateIndex].contents.push(newElement);
+        draftState[newIndexes.layoutIndex].elements[
+          newIndexes.elementIndex
+        ].contents.push(newElement);
       });
       return nextState;
 
@@ -71,13 +133,13 @@ export default function layout(
       const {columnId, index} = action.payload;
 
       // find the ColumnContent component by columnId.
-      let stateIndex = state.findIndex(({id}) => id === columnId);
-      newElement = {id: ts, parentId: columnId};
+      newIndexes = getIndexesFromColumnId(columnId);
 
-      // Now get the contents array and insert into the index'ed element
-      // Note: this reducer uses immer while all the others use vanilla JS.
+      newElement = {id: ts, parentId: columnId};
       nextState = produce(state, draftState => {
-        draftState[stateIndex].contents.splice(index, 0, newElement);
+        draftState[newIndexes.layoutIndex].elements[
+          newIndexes.elementIndex
+        ].contents.splice(index, 0, newElement);
       });
       return nextState;
 

@@ -78,7 +78,7 @@ const ColumnElement = ({
       // the "&& dropElementIntoColumnContent" is due to flow type being an
       // optional function
       if (item && dropResult && dropElementIntoColumnContent) {
-        console.log(item, dropResult);
+        // console.log(item, dropResult);
         // alert(
         //   `You dropped ${item.name} into ${dropResult.name}! It has an index of ${dropResult.index}`
         // );
@@ -109,6 +109,7 @@ const ColumnElement = ({
   drag(drop(ref));
   return (
     <div
+      className="element"
       ref={ref}
       style={{
         ...style,

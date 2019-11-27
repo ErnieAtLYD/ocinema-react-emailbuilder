@@ -95,9 +95,9 @@ const LayoutItem = ({
 
     // see: http://bit.ly/2OjCbUa
     const target = ((event.target: any): HTMLElement);
-    if (target.dataset.component === "layoutitem") {
-      setHover(!isHovered);
-    }
+    let isLayoutComponent = target.dataset.component === "layoutitem";
+    let isValidTag = ["PATH", "SVG"].includes(target.tagName.toUpperCase());
+    setHover(isLayoutComponent || isValidTag ? true : false);
   };
 
   const hoverClass: string = isHovered ? " react-hover" : "";
@@ -109,7 +109,9 @@ const LayoutItem = ({
       ref={ref}
       style={{opacity}}
       onMouseOver={toggleHover}
-      onMouseOut={toggleHover}
+      onMouseOut={() => {
+        setHover(false);
+      }}
     >
       <div className={`layoutitem--no-hover${hoverClass}`} data-component="layoutitem">
         <div style={style}>

@@ -37,7 +37,7 @@ const TestDrag = ({dropDraggedButtonIntoColumnContent}: TestDragType) => {
     },
   });
   return (
-    <Button ref={drag} style={{...style}} variant="contained">
+    <Button ref={drag} id="dragmehandle" style={{...style}} variant="contained">
       Drag Me
     </Button>
   );
