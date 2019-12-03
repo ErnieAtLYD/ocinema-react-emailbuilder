@@ -61,7 +61,7 @@ const ExportTemplate = ({
           handleExport(layout);
         }}
       >
-        Export as HTML
+        Export template as HTML
       </Button>
       <Modal open={open} onClose={handleClose}>
         <div className="modal">

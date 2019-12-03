@@ -10,14 +10,6 @@ const initialState = [
     posterurl: ""
   },
   {
-    id: 2,
-    layout: "filmlayout",
-    content: "bar",
-    htmldescription: "baz",
-    htmlquotes: "",
-    posterurl: ""
-  },
-  {
     id: 5,
     layout: "section-break",
     content: "",
@@ -38,14 +30,6 @@ const initialState = [
     layout: "full-bleed-wrapper",
     content: "Next week",
     htmldescription: "",
-    htmlquotes: "",
-    posterurl: ""
-  },
-  {
-    id: 4,
-    layout: "filmlayout",
-    content: "bar",
-    htmldescription: "baz",
     htmlquotes: "",
     posterurl: ""
   },
