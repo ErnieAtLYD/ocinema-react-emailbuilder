@@ -12,16 +12,18 @@ import ExportTemplate from "./ExportTemplate";
 import { useFetchOPosts } from "./useFetch";
 
 type ComponentType = {
-  createLayoutItem: Function,
-  exportAsHTML: Function,
+  actions: { createLayoutItem: Function, exportAsHTML: Function },
   layout: NewsletterLayoutType
 };
 
+/**
+ * Contains redux methods in containers/PanelOffContainer.js
+ **/
 const PanelOff = ({
-  createLayoutItem,
-  exportAsHTML,
-  layout
+  layout,
+  actions
 }: ComponentType): React$Element<({ children?: React$Node }) => React$Node> => {
+  const { createLayoutItem, exportAsHTML } = actions;
   const inputLabel = useRef(null);
   const [labelWidth, setLabelWidth] = useState(0);
   const [values, setValues] = useState("");

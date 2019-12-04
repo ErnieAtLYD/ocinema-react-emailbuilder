@@ -19,18 +19,19 @@ import "react-quill/dist/quill.snow.css";
 Quill.register("modules/blotFormatter", BlotFormatter);
 
 type PanelType = {
-  editPanelField: (SyntheticInputEvent<>, string) => void,
-  editPanelQuill: (any, string, ?string) => void,
-  hidePanel: Function,
-  panelItem: NewsletterLayoutItemType
+  panelItem: NewsletterLayoutItemType,
+  actions: {
+    editPanelField: (SyntheticInputEvent<>, string) => void,
+    editPanelQuill: (any, string, ?string) => void,
+    hidePanel: Function
+  }
 };
 
-const PanelOn = ({
-  panelItem,
-  editPanelField,
-  editPanelQuill,
-  hidePanel
-}: PanelType) => {
+/**
+ * Contains redux methods in containers/PanelOnContainer.js
+ **/
+const PanelOn = ({ panelItem, actions }: PanelType) => {
+  const { editPanelField, editPanelQuill, hidePanel } = actions;
   const inputLabel = useRef(null);
   const [labelWidth, setLabelWidth] = useState(0);
 

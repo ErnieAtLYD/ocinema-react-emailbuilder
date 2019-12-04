@@ -7,13 +7,13 @@ import * as Actions from "../actions";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
-
 import { DndProvider } from "react-dnd";
 import HTML5Backend from "react-dnd-html5-backend";
 
 import RenderedNewsletter from "../components/RenderedNewsletter";
-import PanelOn from "../components/PanelOn";
-import PanelOff from "../components/PanelOff";
+
+import PanelOnContainer from "../containers/PanelOnContainer";
+import PanelOffContainer from "../containers/PanelOffContainer";
 
 const useStyles = makeStyles((theme: any): any => ({
   root: {
@@ -28,13 +28,7 @@ const useStyles = makeStyles((theme: any): any => ({
   panel: {}
 }));
 
-const App = ({
-  layout,
-  panel,
-  panelIndex,
-  panelItem,
-  actions
-}: AppType): React$Element<any> => {
+const App = ({ layout, panel, actions }: AppType): React$Element<any> => {
   const classes: { [key: string]: any } = useStyles();
   return (
     <DndProvider backend={HTML5Backend}>
@@ -42,30 +36,11 @@ const App = ({
         <CssBaseline />
         <Grid container className={classes.container}>
           <Grid item md={8} className={classes.render}>
-            <RenderedNewsletter
-              layout={layout}
-              deleteLayoutItem={actions.deleteLayoutItem}
-              duplicateLayoutItem={actions.duplicateLayoutItem}
-              editLayoutItem={actions.editLayoutItem}
-              moveLayoutItem={actions.moveLayoutItem}
-            />
+            <RenderedNewsletter layout={layout} />
           </Grid>
           <Grid item md={4} className={classes.panel}>
-            {panel.visibility && (
-              <PanelOn
-                panelItem={panelItem}
-                editPanelField={actions.editPanelField}
-                editPanelQuill={actions.editPanelQuill}
-                hidePanel={actions.hidePanel}
-              />
-            )}
-            {!panel.visibility && (
-              <PanelOff
-                createLayoutItem={actions.createLayoutItem}
-                exportAsHTML={actions.exportAsHTML}
-                layout={layout}
-              />
-            )}
+            {panel.visibility && <PanelOnContainer />}
+            {!panel.visibility && <PanelOffContainer />}
           </Grid>
         </Grid>
       </Grid>
@@ -73,19 +48,13 @@ const App = ({
   );
 };
 
-function mapStateToProps(state: StateType): StateType {
-  return {
-    layout: state.layout,
-    panel: state.panel,
-    panelIndex: state.panelIndex,
-    panelItem: state.panelItem
-  };
-}
+const mapStateToProps = (state: StateType): StateType => ({
+  layout: state.layout,
+  panel: state.panel
+});
 
-function mapDispatchToProps(dispatch: any): {| actions: any |} {
-  return {
-    actions: bindActionCreators(Actions, dispatch)
-  };
-}
+const mapDispatchToProps = (dispatch: Dispatch): {| actions: any |} => ({
+  actions: bindActionCreators(Actions, dispatch)
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

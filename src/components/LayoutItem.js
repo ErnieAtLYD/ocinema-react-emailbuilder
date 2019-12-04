@@ -13,21 +13,21 @@ type LayoutType = {
   id: number,
   index: number,
   item: any,
-  deleteLayoutItem: Function,
-  duplicateLayoutItem: Function,
-  editLayoutItem: Function,
-  moveLayoutItem: Function
+  actions: any
 };
 
 const LayoutItem = ({
   id,
   index,
   item,
-  deleteLayoutItem,
-  duplicateLayoutItem,
-  editLayoutItem,
-  moveLayoutItem
+  actions
 }: LayoutType): React$Element<"div"> => {
+  const {
+    deleteLayoutItem,
+    duplicateLayoutItem,
+    editLayoutItem,
+    moveLayoutItem
+  } = actions;
   const ref = useRef(null);
   const [, drop] = useDrop({
     accept: ItemTypes.LAYOUTITEM,

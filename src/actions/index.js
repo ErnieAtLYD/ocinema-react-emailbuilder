@@ -28,7 +28,7 @@ export const deleteLayoutItem = (key: number): ActionDeleteLayoutItem => {
 };
 
 export const editLayoutItem = (key: number): ThunkAction => {
-  return (dispatch: any, getState: any): void => {
+  return (dispatch: Dispatch, getState: GetState): void => {
     const state = getState();
     dispatch({
       type: "EDIT_LAYOUT_ITEM",
@@ -52,7 +52,7 @@ export const moveLayoutItem = (
 };
 
 export const editPanelField = (event: any, name: string): ThunkAction => {
-  return (dispatch, getState) => {
+  return (dispatch: Dispatch, getState: GetState) => {
     const state = getState();
     dispatch({
       type: "UPDATE_PANEL_FIELD",
@@ -70,7 +70,7 @@ export const editPanelQuill = (
   source: string,
   field: string = "htmldescription"
 ): ThunkAction => {
-  return (dispatch, getState) => {
+  return (dispatch: Dispatch, getState: GetState) => {
     const state = getState();
     dispatch({
       type: "UPDATE_PANEL_FIELD",
