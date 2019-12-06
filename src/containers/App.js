@@ -1,8 +1,6 @@
 // @flow
 import React from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import * as Actions from "../actions";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
@@ -11,7 +9,6 @@ import { DndProvider } from "react-dnd";
 import HTML5Backend from "react-dnd-html5-backend";
 
 import RenderedNewsletter from "../components/RenderedNewsletter";
-
 import PanelOnContainer from "../containers/PanelOnContainer";
 import PanelOffContainer from "../containers/PanelOffContainer";
 
@@ -25,7 +22,10 @@ const useStyles = makeStyles((theme: any): any => ({
     overflowY: "scroll"
   },
   container: {},
-  panel: {}
+  panel: {
+    height: "100vh",
+    overflowY: "scroll"
+  }
 }));
 
 const App = ({ layout, panel, actions }: AppType): React$Element<any> => {
@@ -50,11 +50,9 @@ const App = ({ layout, panel, actions }: AppType): React$Element<any> => {
 
 const mapStateToProps = (state: StateType): StateType => ({
   layout: state.layout,
-  panel: state.panel
+  panel: state.panel,
+  panelIndex: state.panelIndex,
+  panelItem: state.panelItem
 });
 
-const mapDispatchToProps = (dispatch: Dispatch): {| actions: any |} => ({
-  actions: bindActionCreators(Actions, dispatch)
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);

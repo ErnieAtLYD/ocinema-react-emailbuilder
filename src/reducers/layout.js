@@ -1,8 +1,9 @@
 // @flow
+import ItemTypes from "../components/ItemTypes";
 const initialState = [
   {
     id: 1,
-    layout: "header",
+    layout: ItemTypes.LAYOUT_TYPE.HEADER,
     content: "",
     htmldescription:
       "Your favorite independent cinema is bringing ﻿you more of the kind of movies you love.",
@@ -11,7 +12,7 @@ const initialState = [
   },
   {
     id: 5,
-    layout: "section-break",
+    layout: ItemTypes.LAYOUT_TYPE.SECTION_BREAK,
     content: "",
     htmldescription: "",
     htmlquotes: "",
@@ -64,7 +65,7 @@ const initialState = [
   },
   {
     id: 3,
-    layout: "footer",
+    layout: ItemTypes.LAYOUT_TYPE.FOOTER,
     content: "",
     htmldescription: "",
     htmlquotes: "",

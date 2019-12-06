@@ -14,12 +14,15 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 import ImageUploaderModal from "./ImageUploaderModal";
 
+import ItemTypes from "./ItemTypes";
+
 import "react-quill/dist/quill.snow.css";
 
 Quill.register("modules/blotFormatter", BlotFormatter);
 
 type PanelType = {
   panelItem: NewsletterLayoutItemType,
+  panelFieldStatus: any,
   actions: {
     editPanelField: (SyntheticInputEvent<>, string) => void,
     editPanelQuill: (any, string, ?string) => void,
@@ -30,7 +33,7 @@ type PanelType = {
 /**
  * Contains redux methods in containers/PanelOnContainer.js
  **/
-const PanelOn = ({ panelItem, actions }: PanelType) => {
+const PanelOn = ({ panelItem, panelFieldStatus, actions }: PanelType) => {
   const { editPanelField, editPanelQuill, hidePanel } = actions;
   const inputLabel = useRef(null);
   const [labelWidth, setLabelWidth] = useState(0);
@@ -58,7 +61,9 @@ const PanelOn = ({ panelItem, actions }: PanelType) => {
               id: "layouttype-label"
             }}
           >
-            <MenuItem value="header">Email Header</MenuItem>
+            <MenuItem value={ItemTypes.LAYOUT_TYPE.HEADER}>
+              Email Header
+            </MenuItem>
             <MenuItem value="footer">Email Footer</MenuItem>
             <MenuItem value="membership-drive">Membership Drive</MenuItem>
             <MenuItem value="full-bleed-wrapper">Section Header</MenuItem>
@@ -69,81 +74,102 @@ const PanelOn = ({ panelItem, actions }: PanelType) => {
             <MenuItem value="section-break">Section break</MenuItem>
           </Select>
         </Grid>
-        <Grid item xs={12}>
-          <TextField
-            fullWidth
-            label="Content"
-            value={panelItem && panelItem.content}
-            onChange={(event: SyntheticInputEvent<HTMLInputElement>): void =>
-              editPanelField(event, "content")
-            }
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <ReactQuill
-            value={panelItem && panelItem.htmldescription}
-            modules={{
-              blotFormatter: {},
-              toolbar: [
-                [{ header: [1, 2, 3, 4, 5, 6, false] }],
-                ["bold", "italic", "link", "image"],
-                [{ list: "ordered" }, { list: "bullet" }],
-                ["clean"]
-              ]
-            }}
-            onChange={(newValue, delta, source) =>
-              editPanelQuill(newValue, source)
-            }
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <ReactQuill
-            value={panelItem && panelItem.htmlquotes}
-            modules={{
-              blotFormatter: {},
-              toolbar: [
-                [{ header: [1, 2, 3, 4, 5, 6, false] }],
-                ["bold", "italic", "link", "image"],
-                [{ list: "ordered" }, { list: "bullet" }],
-                ["clean"]
-              ]
-            }}
-            onChange={(newValue, delta, source) =>
-              editPanelQuill(newValue, source, "htmlquotes")
-            }
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            fullWidth
-            label="Poster thumbnail URL"
-            value={panelItem && panelItem.posterurl}
-            onChange={(event: SyntheticInputEvent<HTMLInputElement>): void =>
-              editPanelField(event, "posterurl")
-            }
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            fullWidth
-            label="Banner URL"
-            value={panelItem && panelItem.bannerurl}
-            onChange={(event: SyntheticInputEvent<HTMLInputElement>): void =>
-              editPanelField(event, "bannerurl")
-            }
-          />
-        </Grid>
+        {panelFieldStatus.content && (
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              label="Content"
+              value={panelItem && panelItem.content}
+              onChange={(event: SyntheticInputEvent<HTMLInputElement>): void =>
+                editPanelField(event, "content")
+              }
+            />
+          </Grid>
+        )}
+        {panelFieldStatus.htmldescription && (
+          <Grid item xs={12}>
+            <ReactQuill
+              value={panelItem && panelItem.htmldescription}
+              modules={{
+                blotFormatter: {},
+                toolbar: [
+                  [{ header: [1, 2, 3, 4, 5, 6, false] }],
+                  ["bold", "italic", "link", "image"],
+                  [{ list: "ordered" }, { list: "bullet" }],
+                  ["clean"]
+                ]
+              }}
+              onChange={(newValue, delta, source) =>
+                editPanelQuill(newValue, source)
+              }
+            />
+          </Grid>
+        )}
+        {panelFieldStatus.htmlquotes && (
+          <Grid item xs={12}>
+            <ReactQuill
+              value={panelItem && panelItem.htmlquotes}
+              modules={{
+                blotFormatter: {},
+                toolbar: [
+                  [{ header: [1, 2, 3, 4, 5, 6, false] }],
+                  ["bold", "italic", "link", "image"],
+                  [{ list: "ordered" }, { list: "bullet" }],
+                  ["clean"]
+                ]
+              }}
+              onChange={(newValue, delta, source) =>
+                editPanelQuill(newValue, source, "htmlquotes")
+              }
+            />
+          </Grid>
+        )}
+        {panelFieldStatus.posterurl && (
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              label="Poster thumbnail URL"
+              value={panelItem && panelItem.posterurl}
+              onChange={(event: SyntheticInputEvent<HTMLInputElement>): void =>
+                editPanelField(event, "posterurl")
+              }
+            />
+          </Grid>
+        )}
+        {panelFieldStatus.bannerurl && (
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              label="Banner URL"
+              value={panelItem && panelItem.bannerurl}
+              onChange={(event: SyntheticInputEvent<HTMLInputElement>): void =>
+                editPanelField(event, "bannerurl")
+              }
+            />
+          </Grid>
+        )}
+        {panelFieldStatus.ctalabel && panelFieldStatus.ctaurl && (
+          <>
+            <Grid item xs={12}>
+              <FormControlLabel
+                control={<Switch value="checkedC" color="primary" />}
+                label="Show CTA Button?"
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField label="CTA button label" />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField label="CTA URL" />
+            </Grid>
+          </>
+        )}
 
-        <FormControlLabel
-          control={<Switch value="checkedC" color="primary" />}
-          label="Show CTA Button?"
-        />
-        <TextField label="CTA button label" />
-        <TextField label="CTA URL" />
-
-        <Button variant="contained" color="primary" onClick={hidePanel}>
-          Save and close this
-        </Button>
+        <Grid item xs={12}>
+          <Button variant="contained" color="primary" onClick={hidePanel}>
+            Save and close this
+          </Button>
+        </Grid>
       </Grid>
     </Container>
   );

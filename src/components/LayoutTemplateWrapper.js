@@ -1,3 +1,4 @@
+// @flow
 import React from "react";
 import {
   Wrapper,
@@ -9,6 +10,7 @@ import {
   Row,
   Column
 } from "react-inky";
+import ItemTypes from "./ItemTypes";
 import Showtimes from "./Showtimes";
 import "../styles/newsletter.scss";
 
@@ -24,7 +26,7 @@ const LayoutTemplateWrapper = obj => {
     showtimes
   } = obj.item;
   switch (layout) {
-    case "header":
+    case ItemTypes.LAYOUT_TYPE.HEADER:
       return (
         <>
           <Spacer size="8"></Spacer>
@@ -61,7 +63,7 @@ const LayoutTemplateWrapper = obj => {
           </Container>
         </>
       );
-    case "full-bleed-wrapper-2":
+    case ItemTypes.LAYOUT_TYPE.SECTION_IMAGE:
       return (
         <Wrapper className="full-bleed-wrapper-2">
           <Container>
@@ -139,7 +141,7 @@ const LayoutTemplateWrapper = obj => {
           </Callout>
         </Container>
       );
-    case "footer":
+    case ItemTypes.LAYOUT_TYPE.FOOTER:
       return (
         <Row>
           <Column large="12" className="newsletter-footer">

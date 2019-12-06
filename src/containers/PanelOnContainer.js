@@ -4,7 +4,10 @@ import { bindActionCreators } from "redux";
 import * as Actions from "../actions";
 import PanelOn from "../components/PanelOn";
 
-const mapStateToProps = state => ({ panelItem: state.panelItem });
+const mapStateToProps = state => ({
+  panelItem: state.panelItem,
+  panelFieldStatus: state.panelFieldStatus
+});
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   actions: bindActionCreators(Actions, dispatch)
 });
