@@ -4,15 +4,6 @@ import { Callout } from "react-inky";
 import moment from "moment";
 import _ from "lodash";
 
-type ShowtimesType = {
-  showtimes: Array<string>
-};
-
-type ShowDateType = {
-  showDate: string,
-  showTimes: Array<{ start_date: string }>
-};
-
 const Showtimes = ({
   showtimes
 }: {

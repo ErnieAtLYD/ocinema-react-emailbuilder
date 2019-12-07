@@ -56,7 +56,7 @@ const PanelOff = ({
       htmlquotes: searchedfilm.event_reviews,
       posterurl: searchedfilm["image"]["sizes"]["poster-full"]["url"],
       showtimes: searchedfilm.event_showtimes,
-      agileurl: searchedfilm.url,
+      ctaurl: searchedfilm.url,
       bannerurl: ""
     };
     createLayoutItem(temp);

@@ -11,7 +11,10 @@ const initialState = {
   ctaurl: true
 };
 
-export default function panelFieldStatus(state = initialState, action: Action) {
+export default function panelFieldStatus(
+  state: any = initialState,
+  action: Action
+) {
   switch (action.type) {
     case "EDIT_LAYOUT_ITEM":
       switch (action.payload.item.layout) {
@@ -26,15 +29,30 @@ export default function panelFieldStatus(state = initialState, action: Action) {
         case ItemTypes.LAYOUT_TYPE.FOOTER:
           return state;
         case ItemTypes.LAYOUT_TYPE.SECTION_BREAK:
-          return state;
+          return {
+            ...initialState,
+            content: false,
+            htmldescription: false,
+            htmlquotes: false,
+            bannerurl: false,
+            posterurl: false,
+            ctalabel: false,
+            ctaurl: false
+          };
         case ItemTypes.LAYOUT_TYPE.SECTION_IMAGE:
-          return state;
+          return {
+            ...initialState,
+            content: false,
+            htmlquotes: false,
+            posterurl: false
+          };
         case ItemTypes.LAYOUT_TYPE.SECTION_HEADER:
           return {
             ...initialState,
             htmlquotes: false,
             ctalabel: false,
-            bannerurl: false
+            bannerurl: false,
+            posterurl: false
           };
         case ItemTypes.LAYOUT_TYPE.TEMPLATE_EVENT:
           return initialState;
@@ -43,7 +61,6 @@ export default function panelFieldStatus(state = initialState, action: Action) {
         default:
           return state;
       }
-      return state;
 
     default:
       return state;

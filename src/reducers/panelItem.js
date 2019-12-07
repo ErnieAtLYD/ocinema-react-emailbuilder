@@ -5,7 +5,10 @@ const initialState = {
   content: "",
   htmldescription: "",
   htmlquotes: "",
-  posterurl: ""
+  posterurl: "",
+  ctaurl: "",
+  ctalabel: "",
+  bannerurl: ""
 };
 
 export default function panelItem(

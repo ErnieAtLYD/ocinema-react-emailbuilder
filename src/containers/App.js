@@ -48,11 +48,9 @@ const App = ({ layout, panel, actions }: AppType): React$Element<any> => {
   );
 };
 
-const mapStateToProps = (state: StateType): StateType => ({
+const mapStateToProps = (state: StateType): AppStateType => ({
   layout: state.layout,
-  panel: state.panel,
-  panelIndex: state.panelIndex,
-  panelItem: state.panelItem
+  panel: state.panel
 });
 
 export default connect(mapStateToProps)(App);

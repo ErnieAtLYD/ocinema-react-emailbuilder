@@ -12,7 +12,9 @@ export const createLayoutItem = (
         htmldescription: "",
         htmlquotes: "",
         posterurl: "",
-        bannerurl: "https://placehold.it/580x100"
+        bannerurl: "https://placehold.it/580x100",
+        ctalabel: "",
+        ctaurl: ""
       };
   return {
     type: "CREATE_LAYOUT_ITEM",

@@ -37,15 +37,29 @@ type Action =
 
 type NewsletterLayoutType = Array<NewsletterLayoutItemType>;
 
-type NewsletterLayoutItemType = {
-  id: number,
-  layout: string,
-  content: string,
-  htmldescription: string,
-  htmlquotes: string,
-  posterurl: string,
-  bannerurl?: string
+type ShowtimesType = {
+  showtimes: Array<string>
 };
+
+type ShowDateType = {
+  showDate: string,
+  showTimes: Array<{ start_date: string }>
+};
+
+type NewsletterLayoutItemType = {
+  id?: number,
+  layout?: string,
+  content?: string,
+  htmldescription?: string,
+  htmlquotes?: string,
+  posterurl?: string,
+  bannerurl?: string,
+  ctaurl?: string,
+  ctalabel?: string,
+  showtimes?: ShowtimesType
+};
+
+type LayoutWrapperType = { item: NewsletterLayoutItemType };
 
 type WebsiteEventAPIType = {
   id: string,
@@ -56,9 +70,13 @@ type PanelStateType = {
   visibility: boolean
 };
 
-type StateType = {|
+type AppStateType = {|
   layout: NewsletterLayoutType,
-  panel: PanelStateType,
+  panel: PanelStateType
+|};
+
+type StateType = {|
+  ...AppStateType,
   panelIndex: number,
   panelItem: NewsletterLayoutItemType
 |};
