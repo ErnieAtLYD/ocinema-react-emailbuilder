@@ -2,7 +2,7 @@
 import React from "react";
 import { Container, Center, Spacer, Row, Column } from "react-inky";
 
-const Header = (obj: LayoutWrapperType) => {
+const Header = (obj: LayoutWrapperType): React$Element<any> => {
   const { item } = obj;
   return (
     <>

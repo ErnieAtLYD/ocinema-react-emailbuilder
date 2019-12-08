@@ -3,7 +3,9 @@ import React from "react";
 import Showtimes from "../Showtimes";
 import { Button, Container, Row, Column } from "react-inky";
 
-const TemplateEvent = (obj: LayoutWrapperType) => {
+const TemplateEvent = (
+  obj: LayoutWrapperType
+): React$Element<typeof Container> => {
   const { item } = obj;
   return (
     <Container>

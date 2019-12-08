@@ -2,7 +2,7 @@
 import React from "react";
 import { Row, Column } from "react-inky";
 
-const Footer = () => (
+const Footer = (): React$Element<typeof Row> => (
   <Row>
     <Column large="12" className="newsletter-footer">
       <p>

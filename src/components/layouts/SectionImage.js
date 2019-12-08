@@ -2,7 +2,9 @@
 import React from "react";
 import { Container, Row, Column, Wrapper } from "react-inky";
 
-const SectionImage = (obj: LayoutWrapperType) => {
+const SectionImage = (
+  obj: LayoutWrapperType
+): React$Element<typeof Wrapper> => {
   const { item } = obj;
   return (
     <Wrapper className="full-bleed-wrapper-2">

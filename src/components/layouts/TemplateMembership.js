@@ -2,7 +2,9 @@
 import React from "react";
 import { Callout, Button, Container, Center, Spacer } from "react-inky";
 
-const TemplateMembership = (obj: LayoutWrapperType) => {
+const TemplateMembership = (
+  obj: LayoutWrapperType
+): React$Element<typeof Container> => {
   const { item } = obj;
   return (
     <Container>
