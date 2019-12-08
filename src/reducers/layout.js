@@ -25,9 +25,9 @@ const initialState = [
   {
     id: 7,
     layout: ItemTypes.LAYOUT_TYPE.TEMPLATE_MEMBERSHIP,
-    content: "bar",
     htmldescription:
       "As a nonprofit cinema, the proceeds from our membership program go right back into increasing the diversity of our film presentations and events. An O Cinema membership supports a cornerstone of the cultural life of our community- so you can both feel good and do good by joining. Become a member today!",
+    hascta: true,
     ctaurl: "https://www.o-cinema.org/membership/",
     ctalabel: "Join now"
   },

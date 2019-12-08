@@ -2,7 +2,7 @@
 import React from "react";
 import { Container, Row, Column, Wrapper } from "react-inky";
 
-const SectionImage = (
+const TemplateGeneric = (
   obj: LayoutWrapperType
 ): React$Element<typeof Wrapper> => {
   const { item } = obj;
@@ -26,4 +26,4 @@ const SectionImage = (
   );
 };
 
-export default SectionImage;
+export default TemplateGeneric;
