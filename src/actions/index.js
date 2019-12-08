@@ -1,4 +1,6 @@
 // @flow
+import ItemTypes from "../components/ItemTypes";
+
 export const createLayoutItem = (
   meta: ?NewsletterLayoutItemType = null
 ): ActionCreateLayoutItem => {
@@ -7,12 +9,13 @@ export const createLayoutItem = (
     ? meta
     : {
         id: ts,
-        layout: "full-bleed-wrapper-2",
+        layout: ItemTypes.LAYOUT_TYPE.TEMPLATE_GENERIC,
         content: "",
         htmldescription: "",
         htmlquotes: "",
         posterurl: "",
         bannerurl: "https://placehold.it/580x100",
+        hascta: true,
         ctalabel: "",
         ctaurl: ""
       };
@@ -61,7 +64,7 @@ export const editPanelField = (event: any, name: string): ThunkAction => {
       payload: {
         name: name,
         index: state.panelIndex,
-        value: event.target.value
+        value: name !== "hascta" ? event.target.value : event.target.checked
       }
     });
   };

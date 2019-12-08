@@ -1,7 +1,7 @@
 // @flow
 import React from "react";
 import Showtimes from "../Showtimes";
-import { Button, Container, Row, Column } from "react-inky";
+import { Button, Container, Row, Column, Spacer } from "react-inky";
 
 const TemplateEvent = (
   obj: LayoutWrapperType
@@ -12,7 +12,10 @@ const TemplateEvent = (
       <Row>
         <Column large="6">
           {item.posterurl && (
-            <img alt="Poster thumbnail" src={item.posterurl} />
+            <>
+              <img alt="Poster thumbnail" src={item.posterurl} />
+              <Spacer size="16"></Spacer>
+            </>
           )}
           <div dangerouslySetInnerHTML={{ __html: item.htmlquotes }} />
         </Column>
@@ -25,7 +28,7 @@ const TemplateEvent = (
         <Row>
           <Column large="12">
             <Showtimes showtimes={item.showtimes} />
-            {item.ctaurl && (
+            {item.hascta && (
               <Button className="expanded" href={item.ctaurl}>
                 {item.ctalabel}
               </Button>

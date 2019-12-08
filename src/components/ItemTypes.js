@@ -9,7 +9,7 @@ export default {
     FOOTER: "footer",
     SECTION_BREAK: "section-break",
     SECTION_HEADER: "full-bleed-wrapper",
-    SECTION_IMAGE: "full-bleed-wrapper-2",
+    TEMPLATE_GENERIC: "full-bleed-wrapper-2",
     TEMPLATE_MEMBERSHIP: "membership-drive",
     TEMPLATE_EVENT: "filmlayout"
   }

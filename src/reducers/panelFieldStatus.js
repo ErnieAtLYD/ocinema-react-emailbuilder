@@ -7,6 +7,7 @@ const initialState = {
   htmlquotes: true,
   posterurl: true,
   bannerurl: true,
+  hascta: true,
   ctalabel: true,
   ctaurl: true
 };
@@ -24,7 +25,7 @@ export default function panelFieldStatus(
             htmlquotes: false,
             bannerurl: false,
             posterurl: false,
-            ctalabel: false
+            hascta: false
           };
         case ItemTypes.LAYOUT_TYPE.FOOTER:
           return state;
@@ -36,6 +37,7 @@ export default function panelFieldStatus(
             htmlquotes: false,
             bannerurl: false,
             posterurl: false,
+            hascta: false,
             ctalabel: false,
             ctaurl: false
           };
@@ -44,7 +46,10 @@ export default function panelFieldStatus(
             ...initialState,
             content: false,
             htmlquotes: false,
-            posterurl: false
+            posterurl: false,
+            hascta: false,
+            ctalabel: false,
+            ctaurl: false
           };
         case ItemTypes.LAYOUT_TYPE.SECTION_HEADER:
           return {

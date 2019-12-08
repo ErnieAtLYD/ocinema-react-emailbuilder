@@ -1,7 +1,6 @@
 // @flow
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
-import FileCopyIcon from "@material-ui/icons/FileCopy";
 
 import React, { useRef } from "react";
 import { useDrop, useDrag } from "react-dnd";
@@ -22,12 +21,7 @@ const LayoutItem = ({
   item,
   actions
 }: LayoutType): React$Element<"div"> => {
-  const {
-    deleteLayoutItem,
-    duplicateLayoutItem,
-    editLayoutItem,
-    moveLayoutItem
-  } = actions;
+  const { deleteLayoutItem, editLayoutItem, moveLayoutItem } = actions;
   const ref = useRef(null);
   const [, drop] = useDrop({
     accept: ItemTypes.LAYOUTITEM,
@@ -102,10 +96,6 @@ const LayoutItem = ({
         <DeleteIcon
           className="layoutitem__delete"
           onClick={() => deleteLayoutItem(index)}
-        />
-        <FileCopyIcon
-          className="layoutitem__duplicate"
-          onClick={() => duplicateLayoutItem(index)}
         />
       </div>
     </div>

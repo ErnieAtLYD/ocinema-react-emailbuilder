@@ -13,10 +13,14 @@ const TemplateMembership = (
           Support O Cinema <small>Become a member</small>
         </h2>
         <div dangerouslySetInnerHTML={{ __html: item.htmldescription }} />
-        <Spacer size="16"></Spacer>
-        <Center>
-          <Button href={item.ctaurl}>{item.ctalabel}</Button>
-        </Center>
+        {item.hascta && (
+          <>
+            <Spacer size="16"></Spacer>
+            <Center>
+              <Button href={item.ctaurl}>{item.ctalabel}</Button>
+            </Center>
+          </>
+        )}
       </Callout>
     </Container>
   );

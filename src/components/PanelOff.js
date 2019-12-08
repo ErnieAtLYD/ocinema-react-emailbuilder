@@ -56,6 +56,8 @@ const PanelOff = ({
       htmlquotes: searchedfilm.event_reviews,
       posterurl: searchedfilm["image"]["sizes"]["poster-full"]["url"],
       showtimes: searchedfilm.event_showtimes,
+      hascta: true,
+      ctalabel: "Purchase tickets",
       ctaurl: searchedfilm.url,
       bannerurl: ""
     };

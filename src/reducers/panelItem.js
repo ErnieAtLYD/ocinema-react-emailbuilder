@@ -6,6 +6,7 @@ const initialState = {
   htmldescription: "",
   htmlquotes: "",
   posterurl: "",
+  hascta: true,
   ctaurl: "",
   ctalabel: "",
   bannerurl: ""

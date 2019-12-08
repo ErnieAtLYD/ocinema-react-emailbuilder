@@ -37,11 +37,17 @@ const PanelOn = ({ panelItem, panelFieldStatus, actions }: PanelType) => {
   const { editPanelField, editPanelQuill, hidePanel } = actions;
   const inputLabel = useRef(null);
   const [labelWidth, setLabelWidth] = useState(0);
+  const [hasCTA, setCTA] = useState(true);
 
   useEffect((): void => {
     const refWidth = inputLabel.current ? inputLabel.current.offsetWidth : 0;
     setLabelWidth(refWidth);
   }, []);
+
+  const handleSwitch = event => {
+    editPanelField(event, "hascta");
+    setCTA(event.target.checked);
+  };
 
   return (
     <Container>
@@ -65,13 +71,19 @@ const PanelOn = ({ panelItem, panelFieldStatus, actions }: PanelType) => {
               Email Header
             </MenuItem>
             <MenuItem value="footer">Email Footer</MenuItem>
-            <MenuItem value="membership-drive">Membership Drive</MenuItem>
+            <MenuItem value={ItemTypes.LAYOUT_TYPE.TEMPLATE_MEMBERSHIP}>
+              Membership Drive
+            </MenuItem>
             <MenuItem value="full-bleed-wrapper">Section Header</MenuItem>
-            <MenuItem value="full-bleed-wrapper-2">
+            <MenuItem value={ItemTypes.LAYOUT_TYPE.TEMPLATE_GENERIC}>
               Content: Full width
             </MenuItem>
-            <MenuItem value="filmlayout">Content: Film Layout #1</MenuItem>
-            <MenuItem value="section-break">Section break</MenuItem>
+            <MenuItem value={ItemTypes.LAYOUT_TYPE.TEMPLATE_EVENT}>
+              Content: Film Layout #1
+            </MenuItem>
+            <MenuItem value={ItemTypes.LAYOUT_TYPE.SECTION_BREAK}>
+              Section break
+            </MenuItem>
           </Select>
         </Grid>
         {panelFieldStatus.content && (
@@ -152,16 +164,39 @@ const PanelOn = ({ panelItem, panelFieldStatus, actions }: PanelType) => {
           <>
             <Grid item xs={12}>
               <FormControlLabel
-                control={<Switch value="checkedC" color="primary" />}
+                control={
+                  <Switch
+                    onChange={handleSwitch}
+                    checked={hasCTA}
+                    color="primary"
+                    value="hasCTA"
+                  />
+                }
                 label="Show CTA Button?"
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField label="CTA button label" />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField label="CTA URL" />
-            </Grid>
+            {hasCTA && (
+              <>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    label="CTA button label"
+                    value={panelItem && panelItem.ctalabel}
+                    onChange={(
+                      event: SyntheticInputEvent<HTMLInputElement>
+                    ): void => editPanelField(event, "ctalabel")}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    label="CTA URL"
+                    value={panelItem && panelItem.ctaurl}
+                    onChange={(
+                      event: SyntheticInputEvent<HTMLInputElement>
+                    ): void => editPanelField(event, "ctaurl")}
+                  />
+                </Grid>
+              </>
+            )}
           </>
         )}
 

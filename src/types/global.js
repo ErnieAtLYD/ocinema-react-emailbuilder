@@ -54,6 +54,7 @@ type NewsletterLayoutItemType = {
   htmlquotes?: string,
   posterurl?: string,
   bannerurl?: string,
+  hascta?: boolean,
   ctaurl?: string,
   ctalabel?: string,
   showtimes?: ShowtimesType

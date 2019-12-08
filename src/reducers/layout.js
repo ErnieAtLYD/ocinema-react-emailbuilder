@@ -13,18 +13,18 @@ const initialState = [
   },
   {
     id: 11,
-    layout: "full-bleed-wrapper",
+    layout: ItemTypes.LAYOUT_TYPE.SECTION_HEADER,
     content: "Around town",
     htmldescription: "Check out these cool events around Miami"
   },
   {
     id: 6,
-    layout: "full-bleed-wrapper",
+    layout: ItemTypes.LAYOUT_TYPE.SECTION_HEADER,
     content: "Next week"
   },
   {
     id: 7,
-    layout: "membership-drive",
+    layout: ItemTypes.LAYOUT_TYPE.TEMPLATE_MEMBERSHIP,
     content: "bar",
     htmldescription:
       "As a nonprofit cinema, the proceeds from our membership program go right back into increasing the diversity of our film presentations and events. An O Cinema membership supports a cornerstone of the cultural life of our community- so you can both feel good and do good by joining. Become a member today!",
@@ -33,13 +33,13 @@ const initialState = [
   },
   {
     id: 9,
-    layout: "full-bleed-wrapper-2",
+    layout: ItemTypes.LAYOUT_TYPE.TEMPLATE_GENERIC,
     bannerurl:
       "https://mangrove-labs-o-cinema.s3.amazonaws.com/email-assets/sponsors.jpg"
   },
   {
     id: 12,
-    layout: "full-bleed-wrapper-2",
+    layout: ItemTypes.LAYOUT_TYPE.TEMPLATE_GENERIC,
     bannerurl:
       "https://mangrove-labs-o-cinema.s3.amazonaws.com/email-assets/nextweek.jpg"
   },

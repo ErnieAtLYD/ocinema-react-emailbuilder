@@ -1,6 +1,5 @@
 // @flow
 import React from "react";
-import { Spacer } from "react-inky";
 import ItemTypes from "./ItemTypes";
 
 import Footer from "./layouts/Footer";
