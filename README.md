@@ -28,3 +28,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 yarn install
 yarn run start
 ```
+
+We're starting to use Cypress to run integration tests. To run that after installation, do the following:
+
+```
+yarn run cypress:open
+```
