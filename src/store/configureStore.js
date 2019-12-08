@@ -4,16 +4,14 @@ import rootReducer from "../reducers";
 
 // A bunch of middleware, all because we want to get the layout state when
 // getting the panelItem. *shakes fist at world*
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 export default function configureStore(initialState) {
   const store = createStore(
     rootReducer,
     initialState,
-    compose(
-      applyMiddleware(thunk),
-      window.__REDUX_DEVTOOLS_EXTENSION__
-        ? window.__REDUX_DEVTOOLS_EXTENSION__()
-        : undefined
-    )
+    composeEnhancers(applyMiddleware(thunk))
   );
 
   if (module.hot) {
