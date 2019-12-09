@@ -35,10 +35,10 @@ const App = ({ layout, panel, actions }: AppType): React$Element<any> => {
       <Grid container component="main" className={classes.root}>
         <CssBaseline />
         <Grid container className={classes.container}>
-          <Grid item md={8} className={classes.render}>
+          <Grid item md={8} className={classes.render} data-test-id="render">
             <RenderedNewsletter layout={layout} />
           </Grid>
-          <Grid item md={4} className={classes.panel}>
+          <Grid item md={4} className={classes.panel} data-test-id="panel">
             {panel.visibility && <PanelOnContainer />}
             {!panel.visibility && <PanelOffContainer />}
           </Grid>

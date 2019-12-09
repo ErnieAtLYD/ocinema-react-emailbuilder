@@ -1,6 +1,6 @@
 # O Cinema React Email Builder
 
-![image](https://user-images.githubusercontent.com/33945/69481102-1edd3080-0ddc-11ea-8c98-96eac3792c63.png)
+![screenshot](<![image](https://user-images.githubusercontent.com/33945/70460983-9621ee00-1a85-11ea-9a30-b520727d0a2a.png)>)
 
 ## Synopsis
 

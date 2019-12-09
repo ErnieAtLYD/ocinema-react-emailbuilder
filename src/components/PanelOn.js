@@ -50,7 +50,7 @@ const PanelOn = ({ panelItem, panelFieldStatus, actions }: PanelType) => {
   };
 
   return (
-    <Container>
+    <Container data-test-id="panel-on">
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <InputLabel shrink ref={inputLabel} htmlFor="layouttype-label">

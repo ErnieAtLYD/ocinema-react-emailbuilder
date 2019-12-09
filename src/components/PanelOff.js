@@ -65,7 +65,7 @@ const PanelOff = ({
   };
 
   return (
-    <Container>
+    <Container data-test-id="panel-off">
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Typography component="h2" variant="h6">
