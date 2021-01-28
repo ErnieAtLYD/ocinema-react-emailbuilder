@@ -12,7 +12,7 @@
     "juice": "^5.2.0",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
-    "node-sass": "^4.13.0",
+    "node-sass": "^4.13.1",
     "quill-blot-formatter": "^1.0.5",
     "react": "^16.9.0",
     "react-api-cache": "^1.1.0",
